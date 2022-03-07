@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import Axios from 'axios';
 import Header from "./components/Header";
 //import Input from "./components/Input";
+//command click on network 
 
 function App() {
 
