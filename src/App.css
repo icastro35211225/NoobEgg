@@ -66,9 +66,3 @@ a {
   border: none;
   background: #f1f1f1;
 }
-
-footer {
-  position: fixed;
-  width: 100%;
-  bottom: 0;
-}

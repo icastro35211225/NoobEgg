@@ -6,7 +6,7 @@ export default function Home(props) {
     const [itemName, setItemName] = useState('');
     const [itemDescription, setItemDescription] = useState('');
     const [itemList, setItemlist] = useState([]);
-    const [newDescription, setNewDescription] = useState("");
+    const [newDescription, setNewDescription] = useState('');
 
     useEffect(()=> {
         Axios.get('http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/get').then((response)=> {
