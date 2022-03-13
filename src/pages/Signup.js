@@ -12,7 +12,7 @@ export default function Signup(props) {
     //FIXME: SHOULD ADD EMAIL VALIDATION (is email in right format?)
     //FIXME: CHECK IF EMAIL IS ALREADY USED WHEN CLICKING CREATE ACCOUNT
 
-    const displayInfo = () => {
+    const submitInfo = () => {
         
         //FOR TESTING
         console.log(fName);
@@ -20,13 +20,23 @@ export default function Signup(props) {
         console.log(email);
         console.log(password);
 
-        Axios.post('http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/signup', {
-          fName: fName,
-          lName: lName,
-          email: email,
-          password: password
-        });
+        // Axios.post('http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/signup', {
+        //   fName: fName,
+        //   lName: lName,
+        //   email: email,
+        //   password: password
+        // });
+
+        //clearFields();
+
     };
+    
+    const clearFields = () => {
+        setFirstName("");
+        setLastName("");
+        setEmail("");
+        setPassword("");
+    }
     
     return (
         <signup>
@@ -53,7 +63,7 @@ export default function Signup(props) {
                 setPassword(e.target.value)
             }}></input>
 
-            <button onClick={displayInfo}>Create Account</button>
+            <button onClick={submitInfo}>Create Account</button>
 
         </signup>
     )
