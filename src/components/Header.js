@@ -12,7 +12,8 @@ export default function Header(props) {
             <div>
                 <Link to="/signup">Sign Up </Link>
                 <Link to="/login">Log In </Link>
-                <a href="#/cart">Shopping Cart</a>
+                <Link to="/admin/additem">Add Item </Link>
+                <Link to="/cart">Shopping Cart</Link>
             </div>
         </header>
     )

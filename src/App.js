@@ -7,6 +7,8 @@ import Home from "./components/Home";
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 import Footer from './components/Footer';
+import AddItem from './pages/AddItem';
+import ShoppingCart from './pages/ShoppingCart';
 
 
 function App() {
@@ -19,6 +21,8 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/signup" element={<Signup />}/>  
           <Route path="/login" element={<Login />}/>
+          <Route path="/admin/additem" element={<AddItem />}/>
+          <Route path="/cart" element={<ShoppingCart />}/>
         </Routes>      
       </div>
       <Footer />
