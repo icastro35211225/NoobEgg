@@ -1,4 +1,4 @@
-//import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import './App.css';
 import { Route, Routes, Link } from "react-router-dom";
 //import Axios from 'axios';
@@ -12,6 +12,9 @@ import ShoppingCart from './pages/ShoppingCart';
 
 
 function App() {
+
+  const [token, setToken] = useState();
+
   return (
     <div className="App">
       <Header></Header>
@@ -23,7 +26,7 @@ function App() {
           <Route path="/login" element={<Login />}/>
           <Route path="/admin/additem" element={<AddItem />}/>
           <Route path="/cart" element={<ShoppingCart />}/>
-        </Routes>      
+        </Routes>
       </div>
       <Footer />
     </div>
