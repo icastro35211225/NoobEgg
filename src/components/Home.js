@@ -3,6 +3,28 @@ import Axios from 'axios';
 
 export default function Home(props) {
 
+  async function addToCart(proID) {
+    let cartIDs = [];
+    if (localStorage.getItem("cartIDs")) {
+      cartIDs = JSON.parse(localStorage.getItem("cartIDs"));
+    }
+    var index = cartIDs.findIndex(id => id.ProductID === proID);
+    if(index != -1){
+      const qty = cartIDs[index]["QTY"];
+      cartIDs[index].QTY = qty + 1;
+      localStorage.setItem("cartIDs", JSON.stringify(cartIDs));
+    } else{
+      cartIDs.push({ "ProductID": proID, "QTY": 1});
+      localStorage.setItem("cartIDs", JSON.stringify(cartIDs));
+    }
+    console.log(cartIDs);
+  }
+
+  async function emptyCart(){
+    localStorage.removeItem("cartIDs");
+  }
+
+    const [itemID, setItemID] = useState('');
     const [itemName, setItemName] = useState('');
     const [itemDescription, setItemDescription] = useState('');
     const [itemList, setItemlist] = useState([]);
@@ -25,11 +47,12 @@ export default function Home(props) {
     const submitItem = () => {
         Axios.post('http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/insert', {
           itemName: itemName, 
-          itemDescription: itemDescription
+          itemDescription: itemDescription,
+          itemID: itemID
         });
     
           setItemlist([...itemList, 
-            {itemName: itemName, itemDescription: itemDescription},
+            {itemName: itemName, itemDescription: itemDescription, itemID: itemID},
           ])
       };
 
@@ -55,6 +78,10 @@ export default function Home(props) {
     return (
         <home>
           <h1>{greeting}</h1>
+            <label>Item ID</label>
+            <input type="text" name="itemID" onChange={(e)=> {
+              setItemID(e.target.value)
+            }}></input>
             <label>Item Name</label>
         <input type="text" name="itemName" onChange={(e)=> {
           setItemName(e.target.value)
@@ -78,10 +105,13 @@ export default function Home(props) {
               setNewDescription(e.target.value)
             }}></input>
             <button onClick={()=> {updateItem(val.itemName)}}>Update</button>
-            <button>Add to Cart</button>
+            <button onClick={() => {addToCart(val.itemID)}}>Add to Cart</button>
           </div>
           );
         })}
+        <div>
+          <button onClick={()=> emptyCart()}>Empty Cart</button>
+        </div>
         </home>
     )
 }
