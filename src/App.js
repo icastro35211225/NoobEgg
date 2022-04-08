@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import './App.css';
-import { Route, Routes, Link } from "react-router-dom";
+import { Route, Routes, Link, useNavigate } from "react-router-dom";
 //import Axios from 'axios';
 //import Header from "./components/Header";
 import Home from "./components/Home";
@@ -16,15 +16,45 @@ function App() {
 
   const [token, setToken] = useState();
 
+  let navigate = useNavigate();
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [isAdmin, setIsAdmin] = useState('');
+
+  useEffect ( () => {
+      if(localStorage.getItem("userInfo") != null){
+        setLoggedIn(true);
+        const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+        setIsAdmin(userInfo.isAdmin);
+      }
+  }, []);
+
+  const logout = () => {
+    localStorage.clear();
+    navigate('/login');
+    window.location.reload(false);
+  }
+
   return (
     <div className="App">
       <header className="row">
                 <div>
-                    <a className="brand" href="/">UthrifTSA</a>
+                  <a className="brand" href="/">UthrifTSA</a>
                 </div>
                 <div>
-                  <Link to="/cart">SHOPPING CART</Link>
-                  <Link to="/login">LOG IN </Link>
+                { loggedIn ?
+                <div>
+                  {isAdmin ? 
+                  <Link to="/admin/additem">Add Item </Link>
+                  : <Link to="/cart">Shopping Cart</Link>
+                  }
+                  <Link to="/login" onClick={logout}>Log Out </Link>
+                  </div>
+                  :
+                  <div>
+                  <Link to="/signup">Sign Up </Link>
+                  <Link to="/login">Log In </Link>
+                  </div>
+                }
                 </div>
             </header>
       <div className="form">
