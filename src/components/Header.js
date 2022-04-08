@@ -1,4 +1,4 @@
-import React from "react";
+/*import React from "react";
 import { Route, Routes, Link } from "react-router-dom";
 
 export default function Header(props) {
@@ -18,3 +18,4 @@ export default function Header(props) {
         </header>
     )
 }
+*/

@@ -33,7 +33,7 @@ export default function Login(setToken) {
     return (
         <login>
             <div className="login-wrapper">
-                <h2>Log in</h2>
+                <h2>LOG IN</h2>
                 {/* <button onClick={displayInfo}>Log In</button> */}
                 <label>
                     <p>Email</p>

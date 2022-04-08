@@ -1,4 +1,4 @@
-import React from "react";
+/*import React from "react";
 import { Route, Routes, Link } from "react-router-dom";
 
 export default function Footer(props) {
@@ -12,3 +12,4 @@ export default function Footer(props) {
         </footer>
     )
 }
+*/
