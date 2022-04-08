@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import '../App.css';
 import Axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 export default function Signup(props) {
+
+    const navigate = useNavigate();
 
     const [fName, setFirstName] = useState('');
     const [lName, setLastName] = useState('');
@@ -15,17 +18,19 @@ export default function Signup(props) {
     const submitInfo = () => {
         
         //FOR TESTING
-        console.log(fName);
-        console.log(lName);
-        console.log(email);
-        console.log(password);
+        // console.log(fName);
+        // console.log(lName);
+        // console.log(email);
+        // console.log(password);
 
-        // Axios.post('http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/signup', {
-        //   fName: fName,
-        //   lName: lName,
-        //   email: email,
-        //   password: password
-        // });
+        Axios.post('http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/signup', {
+          fName: fName,
+          lName: lName,
+          email: email,
+          password: password
+        });
+
+        navigate('/login');
 
         //clearFields();
 

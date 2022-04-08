@@ -1,31 +1,45 @@
 import React, { useState, useEffect } from "react";
 import '../App.css';
 import Axios from 'axios';
+import { useNavigate } from "react-router-dom";
+
 
 export default function AddItem(props) {
+
+    let navigate = useNavigate();
 
     const [name, setName] = useState('');
     const [desc, setDesc] = useState('');
     const [price, setPrice] = useState('');
     const [quantity, setQuantity] = useState('');
     const [imgPath, setImgPath] = useState('');
+    const [errMsg, setErrMsg] = useState('');
 
-    const displayInfo = () => {
+    const addProduct = () => {
         
         //FOR TESTING
-        console.log(name);
-        console.log(desc);
-        console.log(price);
-        console.log(quantity);
-        console.log(imgPath);
+        // console.log(name);
+        // console.log(desc);
+        // console.log(price);
+        // console.log(quantity);
+        // console.log(imgPath);
 
-        // Axios.post('http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/additem', {
-        //   name: name,
-        //   desc: desc,
-        //   price: price,
-        //   quantity: quantity,
-        //   imgPath: imgPath
-        // });
+        //HAVE TO CHECK INPUT HERE BC SQL DEFAUTS WRONG VALUES
+
+        Axios.post('http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/additem', {
+          name: name,
+          desc: desc,
+          price: price,
+          quantity: quantity,
+          imgPath: imgPath
+        }).then((response) => {
+            //never returs error message for input, only for syntax. This breaks page 
+            // if(response.data.err){
+            //     setErrMsg(response.data.err);
+            // }
+        });
+
+        //navigate('/');
     };
     
     return (
@@ -57,7 +71,8 @@ export default function AddItem(props) {
                 setImgPath(e.target.value)
             }}></input>
 
-            <button onClick={displayInfo}>Add Item</button>
+            <button onClick={addProduct}>Add Item</button>
+            <h3>{errMsg}</h3>
 
         </additem>
     )

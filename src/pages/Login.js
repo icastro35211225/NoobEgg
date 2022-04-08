@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import './Login.css';
 import Axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function Login(setToken) {
+
+    const navigate = useNavigate();
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -26,6 +29,9 @@ export default function Login(setToken) {
             }
             else{
                 setLoginStatus("Greetings, " + response.data[0].fName);
+                localStorage.setItem("userInfo", JSON.stringify(response.data[0]));
+                navigate('/');
+                window.location.reload(false);
             }
         });
     };

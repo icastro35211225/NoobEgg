@@ -138,3 +138,7 @@ a.brand{
   border: none;
   background: #f1f1f1;
 }
+
+a {
+  text-decoration: none;
+}

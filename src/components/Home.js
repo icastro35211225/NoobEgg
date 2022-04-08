@@ -7,31 +7,37 @@ export default function Home(props) {
     const [itemDescription, setItemDescription] = useState('');
     const [itemList, setItemlist] = useState([]);
     const [newDescription, setNewDescription] = useState('');
+    const [greeting, setGreeting] = useState('');
+    const [isAdmin, setIsAdmin] = useState('');
 
     useEffect(()=> {
         Axios.get('http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/get').then((response)=> {
           setItemlist(response.data);
           //console.log(response.data);
         })
+        const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+        if(userInfo){
+          setGreeting("Hello, " + userInfo.fName);
+          setIsAdmin(userInfo.isAdmin);
+        }
       }, [])
 
     const submitItem = () => {
         Axios.post('http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/insert', {
-          itemName: itemName, 
+          itemName: itemName,
           itemDescription: itemDescription
         });
     
           setItemlist([...itemList, 
             {itemName: itemName, itemDescription: itemDescription},
           ])
+          //window.location.reload(false);
       };
 
       const deleteReview = (item) => {
         Axios.delete(`http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/delete/${item}`);
-    
-        // setItemlist([...itemList, 
-        //   {itemName: itemName, itemDescription: itemDescription},
-        // ]); TRYING TO UPDATE THE LIST WITHOUT HAVING TO REFRESH PAGE
+
+        //window.location.reload(false);
         
       }
     
@@ -47,6 +53,7 @@ export default function Home(props) {
 
     return (
         <home>
+          <h1>{greeting}</h1>
             <label>Item Name</label>
         <input type="text" name="itemName" onChange={(e)=> {
           setItemName(e.target.value)
