@@ -33,9 +33,10 @@ export default function AddItem(props) {
           quantity: quantity,
           imgPath: imgPath
         }).then((response) => {
-            if(response.data.err){
-                setErrMsg(response.data.err);
-            }
+            //never returs error message for input, only for syntax. This breaks page 
+            // if(response.data.err){
+            //     setErrMsg(response.data.err);
+            // }
         });
 
         //navigate('/');
