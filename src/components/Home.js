@@ -24,21 +24,20 @@ export default function Home(props) {
 
     const submitItem = () => {
         Axios.post('http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/insert', {
-          itemName: itemName, 
+          itemName: itemName,
           itemDescription: itemDescription
         });
     
           setItemlist([...itemList, 
             {itemName: itemName, itemDescription: itemDescription},
           ])
+          //window.location.reload(false);
       };
 
       const deleteReview = (item) => {
         Axios.delete(`http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/delete/${item}`);
-    
-        // setItemlist([...itemList, 
-        //   {itemName: itemName, itemDescription: itemDescription},
-        // ]); TRYING TO UPDATE THE LIST WITHOUT HAVING TO REFRESH PAGE
+
+        //window.location.reload(false);
         
       }
     
