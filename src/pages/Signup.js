@@ -22,8 +22,8 @@ export default function Signup(props) {
         // console.log(lName);
         // console.log(email);
         // console.log(password);
-
-        Axios.post('http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/signup', {
+        //http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/signup
+        Axios.post('http://localhost:3000/api/signup', {
           fName: fName,
           lName: lName,
           email: email,

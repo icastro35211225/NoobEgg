@@ -33,7 +33,8 @@ export default function Home(props) {
     const [isAdmin, setIsAdmin] = useState('');
 
     useEffect(()=> {
-        Axios.get('http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/get').then((response)=> {
+        //http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/get
+        Axios.get('http://localhost:3000/api/get').then((response)=> {
           setItemlist(response.data);
           //console.log(response.data);
         })
@@ -45,7 +46,8 @@ export default function Home(props) {
       }, [])
 
     const submitItem = () => {
-        Axios.post('http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/insert', {
+        //http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/insert
+        Axios.post('http://localhost:3000/api/insert', {
           itemName: itemName, 
           itemDescription: itemDescription,
           itemID: itemID
