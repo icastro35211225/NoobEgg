@@ -9,6 +9,7 @@ import Login from './pages/Login';
 //import Footer from './components/Footer';
 import AddItem from './pages/AddItem';
 import ShoppingCart from './pages/ShoppingCart';
+import Product from "./components/Product";
 
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
           <Route path="/login" element={<Login />}/>
           <Route path="/admin/additem" element={<AddItem />}/>
           <Route path="/cart" element={<ShoppingCart />}/>
+          <Route path="/product" element={<Product />}/>
         </Routes>
       </div>
       <footer className="row center">ALL RIGHTS RESERVED (LMAAO)</footer>
