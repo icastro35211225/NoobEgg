@@ -49,19 +49,19 @@ export default function Home(props) {
           itemName: itemName, 
           itemDescription: itemDescription,
           itemID: itemID
+
         });
     
           setItemlist([...itemList, 
             {itemName: itemName, itemDescription: itemDescription, itemID: itemID},
           ])
+          //window.location.reload(false);
       };
 
       const deleteReview = (item) => {
         Axios.delete(`http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/delete/${item}`);
-    
-        // setItemlist([...itemList, 
-        //   {itemName: itemName, itemDescription: itemDescription},
-        // ]); TRYING TO UPDATE THE LIST WITHOUT HAVING TO REFRESH PAGE
+
+        //window.location.reload(false);
         
       }
     

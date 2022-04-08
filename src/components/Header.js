@@ -8,23 +8,18 @@ export default function Header(props) {
     const [loggedIn, setLoggedIn] = useState(false);
     const [isAdmin, setIsAdmin] = useState('');
 
-    const reloadPage = () => {
-        window.location.reload(false);
-    }
-
     useEffect ( () => {
         if(localStorage.getItem("userInfo") != null){
             setLoggedIn(true);
             const userInfo = JSON.parse(localStorage.getItem("userInfo"));
             setIsAdmin(userInfo.isAdmin);
         }
-        //reloadPage();
     }, []);
 
     const logout = () => {
         localStorage.clear();
         navigate('/login');
-        reloadPage();
+        window.location.reload(false);
     }
     
     return (
@@ -39,9 +34,8 @@ export default function Header(props) {
                 <div>
                     { isAdmin ?
                     <Link to="/admin/additem">Add Item </Link>
-                    : null
+                    : <Link to="/cart">Shopping Cart</Link>
                     }
-                <Link to="/cart">Shopping Cart</Link>
                 <button onClick={logout}>Log Out</button>
                 </div>
                 : 
