@@ -7,7 +7,7 @@ export default function Product(props) {
 
     const navigate = useNavigate();
 
-    const {product} = props;
+    const {product} = props; 
 
     return (
             // <div key={product.productID} className="card">

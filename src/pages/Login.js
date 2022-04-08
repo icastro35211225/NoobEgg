@@ -16,7 +16,7 @@ export default function Login(setToken) {
         console.log(password);
         setEmail("");
         setPassword("");
-    };
+    }; 
 
     const login = () => {
         Axios.post("http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/login", {
