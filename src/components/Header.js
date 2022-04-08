@@ -1,3 +1,5 @@
+/*import React from "react";
+import { Route, Routes, Link } from "react-router-dom";
 import React, { useState, useEffect} from "react";
 import { Route, Routes, Link, Navigate, useNavigate } from "react-router-dom";
 import "../App.css";
@@ -26,7 +28,7 @@ export default function Header(props) {
         <header className="row block center">
             <div>
                 <a href="/"><h1>UTHRIFTSA</h1></a>
-                {/* <Link to="/">Home </Link> */}
+                {/* <Link to="/">Home </Link> }
             </div>
             <div>
                 <div>
@@ -49,3 +51,4 @@ export default function Header(props) {
         </header>
     )
 }
+*/

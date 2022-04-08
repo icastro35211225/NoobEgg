@@ -16,7 +16,7 @@ export default function Login(setToken) {
         console.log(password);
         setEmail("");
         setPassword("");
-    };
+    }; 
 
     const login = () => {
         Axios.post("http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/login", {
@@ -39,7 +39,7 @@ export default function Login(setToken) {
     return (
         <login>
             <div className="login-wrapper">
-                <h2>Log in</h2>
+                <h2>LOG IN</h2>
                 {/* <button onClick={displayInfo}>Log In</button> */}
                 <label>
                     <p>Email</p>
