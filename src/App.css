@@ -1,6 +1,55 @@
 .App {
   text-align: center;
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-family: 'Archivo Black', sans-serif;
+}
+
+/* Layout */
+.grid-container {
+  display: grid;
+  grid-template-areas:
+  'header'
+  'main'
+  'footer';
+ grid-template-columns: 1fr;
+ grid-template-rows: 5rem 1fr 5rem;
+ height: 100%;
+}
+header{
+  grid-area: header;
+  background-color: #ffdef2;
+  border: red;
+  border-style:solid;
+  border-width: 1.3pt;
+}
+main{
+  grid-area: main;
+  padding: 1rem;
+}
+footer{
+  grid-area: footer;
+  background-color: #ffdef2;
+  color: red;
+  border: red;
+  border-style:solid; 
+  border-width: 1.3pt;
+}
+
+/* Common */
+h1{
+  font-size: 1.8rem;
+  padding: 1rem 0;
+  font-family: 'Archivo Black', sans-serif
+}
+h2{
+  font-size: 1.6rem;
+  padding: 1rem 0;
+  font-family: 'Archivo Black', sans-serif
+}
+a{
+  text-decoration: none;
+}
+a:hover{
+  color:saddlebrown;
 }
 
 .form {
@@ -23,6 +72,9 @@
   border: 2px solid black;
   border-radius: 15px;
   margin: 10px;
+  margin: 0 auto;
+  float: none; 
+  margin-bottom: 10px; 
 }
 
 #updateInput {
@@ -56,6 +108,26 @@ a {
 }
 
 * {box-sizing: border-box}
+
+/*header*/
+header a{
+  color: red;
+  padding: 1rem;
+}
+a.brand{
+  color: red;
+  font-size: 3rem;
+  font-weight: bold;
+}
+.row{
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: space-between;
+   align-items: center;
+}
+.row.center{
+    justify-content: center;
+}
 
 /* Full-width input fields */
   input[type=text], input[type=password] {
