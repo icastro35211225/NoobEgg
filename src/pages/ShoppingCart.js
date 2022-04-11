@@ -30,8 +30,8 @@ export default function ShoppingCart(props) {
                 return(
                     <div className="cart_card">
                     <h1>{product.productName}</h1>
+                    <p>IMAGE {product.productImage}</p>
                     <p>${product.productPrice}</p>
-                    <p>${product.productImage}</p>
                     <p>Amount: {product.amount}</p>
                     </div>
                 )
