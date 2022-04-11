@@ -68,7 +68,22 @@ a:hover{
 
 .card {
   width: 500px;
-  height: 220px;
+  /* height: 210px; */
+  resize: vertical;
+  overflow: auto;
+  border: 2px solid black;
+  border-radius: 15px;
+  margin: 10px;
+  margin: 0 auto;
+  float: none; 
+  margin-bottom: 10px; 
+}
+
+.cart_card {
+  width: 500px;
+  /* height: 210px; */
+  resize: vertical;
+  overflow: auto;
   border: 2px solid black;
   border-radius: 15px;
   margin: 10px;
