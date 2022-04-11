@@ -15,7 +15,7 @@ export default function ShoppingCart(props) {
         }
 
         Axios.post('http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/getCart',
-            { userID: userInfo.id }
+            { userID: userInfo.UserID }
         ).then((response)=> {
           setItemlist(response.data);
         })
@@ -29,10 +29,10 @@ export default function ShoppingCart(props) {
             {itemList.map((product)=> {
                 return(
                     <div className="cart_card">
-                    <h1>{product.productName}</h1>
-                    <p>IMAGE {product.productImage}</p>
-                    <p>${product.productPrice}</p>
-                    <p>Amount: {product.amount}</p>
+                    <h1>{product.ProductName}</h1>
+                    <p>IMAGE {product.ProductImage}</p>
+                    <p>${product.ProductPrice}</p>
+                    <p>Amount: {product.qty}</p>
                     </div>
                 )
             }

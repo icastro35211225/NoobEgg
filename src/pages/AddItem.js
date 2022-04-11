@@ -39,7 +39,7 @@ export default function AddItem(props) {
             // }
         });
 
-        //navigate('/');
+        navigate('/');
     };
     
     return (

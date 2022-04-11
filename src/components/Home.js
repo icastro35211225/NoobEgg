@@ -23,7 +23,7 @@ export default function Home(props) {
         })
         const userInfo = JSON.parse(localStorage.getItem("userInfo"));
         if(userInfo){
-          setGreeting("Hello, " + userInfo.fName);
+          setGreeting("Hello, " + userInfo.FirstName);
           setIsAdmin(userInfo.isAdmin);
           setLoginStatus(true);
           setUser(userInfo);
@@ -48,19 +48,20 @@ export default function Home(props) {
         Axios.post('http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/getProduct',
             {id: id}
           ).then((response)=> {
-          console.log(user.id);
-          console.log(response.data[0].ProductID);
-          console.log(response.data[0].ProductName);
-          console.log(response.data[0].ProductPrice);
-          console.log(response.data[0].ProductImage);
-          console.log(count);
+          // console.log(user.id);
+          // console.log(response);
+          // console.log(response.data[0].ProductID);
+          // console.log(response.data[0].ProductName);
+          // console.log(response.data[0].ProductPrice);
+          // console.log(response.data[0].ProductImage);
+          // console.log(count);
           if(count > response.data[0].qty){
             setStockErrMsg("Sorry, we dont have that many " + response.data[0].ProductName + "(s) available.");
           } else { 
 
             Axios.post('http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/addToCart',
                 {
-                  userID: user.userID,
+                  userID: user.UserID,
                   productID: response.data[0].ProductID,
                   productName: response.data[0].ProductName,
                   productPrice: response.data[0].ProductPrice,
@@ -68,7 +69,6 @@ export default function Home(props) {
                   amount: count
                 }
             )
-
             setStockErrMsg("Added \"" + response.data[0].ProductName + "\" to cart!"); 
           }
           
@@ -113,22 +113,6 @@ export default function Home(props) {
     return (
         <home>
 
-          <h1>{greeting}</h1>
-            <label>Item ID</label>
-            <input type="text" name="itemID" onChange={(e)=> {
-              setItemID(e.target.value)
-            }}></input>
-            <label>Item Name</label>
-        <input type="text" name="itemName" onChange={(e)=> {
-          setItemName(e.target.value)
-        }}/>
-        <label>Item Description</label>
-        <input type="text" name="description" onChange={(e)=> {
-          setItemDescription(e.target.value)
-        }}/>
-
-          <label>Item Name</label>
-
           <h1>Products</h1>
           <h2>{greeting}</h2>
           {/* <label>Item Name</label>
@@ -158,14 +142,21 @@ export default function Home(props) {
           <p>{product.ProductDesc}</p>
           <p>${product.ProductPrice}</p>
           <p>Stock: {product.ProductStock}</p>
-
-
-            <button onClick={()=> {deleteReview(product.ProductName)}}>Delete</button>
+            {/* <button onClick={()=> {deleteReview(product.ProductName)}}>Delete</button>
             <input type="text" id="updateInput" onChange={(e)=> {
               setNewDescription(e.target.value)
             }}></input>
-            <button onClick={()=> {updateItem(product.ProductName)}}>Update</button>
-            <button onClick={() => {addToCart(product.ProductID)}}>Add to Cart</button>
+            <button onClick={()=> {updateItem(product.ProductName)}}>Update</button> */}
+          
+          { loginStatus ? 
+            <div>
+              <p>Amount: {count}</p>
+              <button onClick={handleSubOne}>-1</button>
+              <button onClick={handleAddOne}>+1</button>
+              <button onClick={function(){addToCart(product.ProductID);}}>Add To Cart</button> 
+            </div>
+            : null 
+          }
           </div>
           );
         })}
@@ -175,15 +166,6 @@ export default function Home(props) {
             setNewDescription(e.target.value)
           }}></input>
           <button onClick={()=> {updateItem(val.desc)}}>Update</button> */}
-          { loginStatus ? 
-            <div>
-              <p>Amount: {count}</p>
-              <button onClick={handleSubOne}>-1</button>
-              <button onClick={handleAddOne}>+1</button>
-              <button onClick={function(){addToCart(count.ProductID);}}>Add To Cart</button> 
-            </div>
-            : null 
-          }
           <p>{stockErrMsg}</p>
           </div>
         </home>
