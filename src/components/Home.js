@@ -3,28 +3,6 @@ import Axios from 'axios';
 import Product from "./Product";
 
 export default function Home(props) {
-
-  async function addToCart(proID) {
-    let cartIDs = [];
-    if (localStorage.getItem("cartIDs")) {
-      cartIDs = JSON.parse(localStorage.getItem("cartIDs"));
-    }
-    var index = cartIDs.findIndex(id => id.ProductID === proID);
-    if(index != -1){
-      const qty = cartIDs[index]["QTY"];
-      cartIDs[index].QTY = qty + 1;
-      localStorage.setItem("cartIDs", JSON.stringify(cartIDs));
-    } else{
-      cartIDs.push({ "ProductID": proID, "QTY": 1});
-      localStorage.setItem("cartIDs", JSON.stringify(cartIDs));
-    }
-    console.log(cartIDs);
-  }
-
-  async function emptyCart(){
-    localStorage.removeItem("cartIDs");
-  }
-
     const [itemID, setItemID] = useState('');
     const [itemName, setItemName] = useState('');
     const [itemDescription, setItemDescription] = useState('');
@@ -61,7 +39,7 @@ export default function Home(props) {
         });
     
           setItemlist([...itemList, 
-            {itemName: itemName, itemDescription: itemDescription, itemID: itemID},
+            {ProductName: itemName, itemDescription: itemDescription, itemID: itemID},
           ])
           //window.location.reload(false);
       };
@@ -71,27 +49,27 @@ export default function Home(props) {
             {id: id}
           ).then((response)=> {
           console.log(user.id);
-          console.log(response.data[0].productID);
-          console.log(response.data[0].name);
-          console.log(response.data[0].price);
-          console.log(response.data[0].imgPath);
+          console.log(response.data[0].ProductID);
+          console.log(response.data[0].ProductName);
+          console.log(response.data[0].ProductPrice);
+          console.log(response.data[0].ProductImage);
           console.log(count);
-          if(count > response.data[0].quantity){
-            setStockErrMsg("Sorry, we dont have that many " + response.data[0].name + "(s) available.");
+          if(count > response.data[0].qty){
+            setStockErrMsg("Sorry, we dont have that many " + response.data[0].ProductName + "(s) available.");
           } else { 
 
             Axios.post('http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/addToCart',
                 {
-                  userID: user.id,
-                  productID: response.data[0].productID,
-                  productName: response.data[0].name,
-                  productPrice: response.data[0].price,
-                  productImage: response.data[0].imgPath,
+                  userID: user.userID,
+                  productID: response.data[0].ProductID,
+                  productName: response.data[0].ProductName,
+                  productPrice: response.data[0].ProductPrice,
+                  productImage: response.data[0].ProductImage,
                   amount: count
                 }
             )
 
-            setStockErrMsg("Added " + response.data[0].name + " to cart!"); 
+            setStockErrMsg("Added \"" + response.data[0].ProductName + "\" to cart!"); 
           }
           
         })
@@ -176,24 +154,21 @@ export default function Home(props) {
             // })
             return(
           <div className="card">
-          <h1>{product.name}</h1>
-          <p>{product.desc}</p>
-          <p>${product.price}</p>
-          <p>Stock: {product.quantity}</p>
+          <h1>{product.ProductName}</h1>
+          <p>{product.ProductDesc}</p>
+          <p>${product.ProductPrice}</p>
+          <p>Stock: {product.ProductStock}</p>
 
 
-            <button onClick={()=> {deleteReview(val.itemName)}}>Delete</button>
+            <button onClick={()=> {deleteReview(product.ProductName)}}>Delete</button>
             <input type="text" id="updateInput" onChange={(e)=> {
               setNewDescription(e.target.value)
             }}></input>
-            <button onClick={()=> {updateItem(val.itemName)}}>Update</button>
-            <button onClick={() => {addToCart(val.itemID)}}>Add to Cart</button>
+            <button onClick={()=> {updateItem(product.ProductName)}}>Update</button>
+            <button onClick={() => {addToCart(product.ProductID)}}>Add to Cart</button>
           </div>
           );
         })}
-        <div>
-          <button onClick={()=> emptyCart()}>Empty Cart</button>
-        </div>
 
           {/* <button onClick={()=> {deleteReview(val.name)}}>Delete</button>
           <input type="text" id="updateInput" onChange={(e)=> {
@@ -205,7 +180,7 @@ export default function Home(props) {
               <p>Amount: {count}</p>
               <button onClick={handleSubOne}>-1</button>
               <button onClick={handleAddOne}>+1</button>
-              <button onClick={function(){addToCart(product.productID);}}>Add To Cart</button> 
+              <button onClick={function(){addToCart(count.ProductID);}}>Add To Cart</button> 
             </div>
             : null 
           }

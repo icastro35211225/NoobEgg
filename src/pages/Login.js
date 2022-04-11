@@ -26,6 +26,7 @@ export default function Login(setToken) {
             console.log(response);
             if(response.data.message) {
                 setLoginStatus(response.data.message);
+                console.log(response);
             }
             else{
                 setLoginStatus("Greetings, " + response.data[0].fName);
