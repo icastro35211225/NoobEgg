@@ -10,6 +10,7 @@ import Login from './pages/Login';
 import AddItem from './pages/AddItem';
 import ShoppingCart from './pages/ShoppingCart';
 import Product from "./components/Product";
+import Dashboard from "./pages/Dashboard";
 
 
 function App() {
@@ -42,12 +43,16 @@ function App() {
                 </div>
                 <div>
                 { loggedIn ?
-                <div>
-                  {isAdmin ? 
-                  <Link to="/admin/additem">Add Item </Link>
-                  : <Link to="/cart">Shopping Cart</Link>
-                  }
-                  <Link to="/login" onClick={logout}>Log Out </Link>
+                  <div>
+                    {isAdmin ? 
+                    <Link to="/admin/additem">Add Item </Link>
+                    : 
+                      <div>
+                        <Link to="/cart">Shopping Cart</Link>
+                        <Link to="/dashboard">Account Dashboard</Link>
+                      </div>
+                    }
+                    <Link to="/login" onClick={logout}>Log Out</Link>
                   </div>
                   :
                   <div>
@@ -65,6 +70,7 @@ function App() {
           <Route path="/admin/additem" element={<AddItem />}/>
           <Route path="/cart" element={<ShoppingCart />}/>
           <Route path="/product" element={<Product />}/>
+          <Route path="/dashboard" element={<Dashboard />}/>
         </Routes>
       </div>
       <footer className="row center">ALL RIGHTS RESERVED (LMAAO)</footer>

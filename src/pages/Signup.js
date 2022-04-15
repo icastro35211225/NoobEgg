@@ -11,6 +11,7 @@ export default function Signup(props) {
     const [lName, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [address, setAddress] = useState('');
 
     //FIXME: SHOULD ADD EMAIL VALIDATION (is email in right format?)
     //FIXME: CHECK IF EMAIL IS ALREADY USED WHEN CLICKING CREATE ACCOUNT
@@ -27,7 +28,8 @@ export default function Signup(props) {
           fName: fName,
           lName: lName,
           email: email,
-          password: password
+          password: password,
+          address: address
         });
 
         navigate('/login');
@@ -66,6 +68,11 @@ export default function Signup(props) {
             <label for="psw"><b>Password</b></label>
             <input type="password" placeholder="Enter Password" name="psw" required onChange={(e)=> {
                 setPassword(e.target.value)
+            }}></input>
+
+            <label for="psw"><b>Shipping Address</b></label>
+            <input type="text" placeholder="Street, City, State, Zip Code" required onChange={(e)=> {
+                setAddress(e.target.value)
             }}></input>
 
             <button onClick={submitInfo}>Create Account</button>
