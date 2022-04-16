@@ -14,9 +14,38 @@ export default function ShoppingCart(props) {
     const [tax, setTax] = useState(0);
     const [stockErrMsg, setStockErrMsg] = useState("");
     const [pS, setpS] = useState("");
-    const [orderID, setOrderID] = useState();
+    const [order, setOrder] = useState(null);
     var pStr = "";
     let navigate = useNavigate();
+
+    const postOrder = async () => {
+        let tempOrder = await Axios.post('http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/addToOrders',
+            {
+                userID: user.UserID,
+                shipping: user.shipAddress,
+                products: pS,
+                subtotal: subtotal,
+                tax: tax,
+                total: total
+            }
+        );
+        //console.log(tempOrder.data);
+        (async () => await getUserOrders(user.UserID))()
+        
+        //await setOrder(tempOrder.data[tempOrder.data.length - 1]);
+        
+    }
+
+    const getUserOrders = async (uID) => {
+        let orders = await Axios.get(`http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/getUserOrders/${uID}`);
+        console.log(orders.data)
+        await setOrder(orders.data[orders.data.length - 1]);
+    }
+
+    const goBack = () => {
+        setCheckout(false);
+        window.location.reload(false);
+    }
 
     useEffect(()=> {
 
@@ -64,7 +93,7 @@ export default function ShoppingCart(props) {
 
     //Make remove from cart function
 
-    const checkout = () => {
+    const checkout = async () => {
         //For debugging: checking if info beign send to database is correct
         console.log(itemList.length)
         console.log(user.UserID);
@@ -92,19 +121,7 @@ export default function ShoppingCart(props) {
         }
 
         //Post to orders table WORKS-------
-        Axios.post('http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/addToOrders',
-            {
-                userID: user.UserID,
-                shipping: user.shipAddress,
-                products: pS,
-                subtotal: subtotal,
-                tax: tax,
-                total: total
-            }
-        ).then((response) => {
-            //setOrderID(response.data[0].OrderID);
-            console.log(response);
-        });
+        (async () => await postOrder())()
 
         //Update product stock
         for(let i = 0; i < itemList.length; i++){
@@ -121,19 +138,28 @@ export default function ShoppingCart(props) {
 
         //Send them to order summary page w/ order id, ONLY RELOADING PAGE NOW
         //navigate('/');
-        setCheckout(true);
+        //setCheckout(true);
         //return navigate('/');
     }
+
+    useEffect(() => {
+        console.log("in order useEffect")
+        if(order === null) return;
+        setCheckout(true);
+    }, [order])
 
     return (
         <shoppingcart>
             {checkoutComplete ?
-                    <OrderSummary orderID={19} />
+                    <div>
+                        <button onClick={goBack}>Back to Cart</button>
+                        <OrderSummary orderID={order.OrderID} />
+                    </div>
                 : 
                 <div>
                     <h2>Shopping Cart</h2>
                     <p>{stockErrMsg}</p>
-                    {itemList.length != 0 ?
+                    {itemList.length !== 0 ?
                         <div>
                         {itemList.map((product)=> {
                             return(

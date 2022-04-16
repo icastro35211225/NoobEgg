@@ -33,7 +33,7 @@ export default function OrderSummary(props) {
         let prodArr = order.Products.split(",");
         for(let i = 0; i < prodArr.length; i++){
             let currProd = prodArr[i].split(":");
-            console.log("Product ID: " + currProd[0] + " Product Amount: " + currProd[1]);
+            //console.log("Product ID: " + currProd[0] + " Product Amount: " + currProd[1]);
             let currProdObj = await Axios.post('http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/getProduct', {id: currProd[0]});
             //console.log(response.data[0]);
             orderProds.push(currProdObj.data[0]);
@@ -66,7 +66,7 @@ export default function OrderSummary(props) {
     useEffect(() => {
         if(order === null) return;
         (async () => await getProducts(order.OrderUserID))()
-        console.log(orderProducts);
+        //console.log(orderProducts);
     }, [order]);
 
     useEffect(() => {
