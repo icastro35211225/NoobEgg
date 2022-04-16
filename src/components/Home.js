@@ -134,11 +134,13 @@ export default function Home(props) {
         
           <div>
           {itemList.map((product)=> {
+            <Product key={product._id}product={product}></Product>
             //<Product key={product.productID} product={product} />
             // })
             return(
           <div className="card">
-          <h1>{product.ProductName}</h1>
+          <a href="/product">
+          <h1>{product.ProductName}</h1></a>
           <p>{product.ProductDesc}</p>
           <p>${product.ProductPrice}</p>
           <p>Stock: {product.ProductStock}</p>
