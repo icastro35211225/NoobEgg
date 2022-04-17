@@ -44,6 +44,7 @@ export default function Header(props) {
                 <div>
                 <Link to="/signup">Sign Up </Link>
                 <Link to="/login">Log In </Link>
+                <link to="/upload">Image Upload</link>
                 </div>
                 }
                 </div>

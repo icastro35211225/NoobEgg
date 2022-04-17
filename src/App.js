@@ -10,6 +10,7 @@ import Login from './pages/Login';
 import AddItem from './pages/AddItem';
 import ShoppingCart from './pages/ShoppingCart';
 import Product from "./components/Product";
+import Upload from "./pages/Upload"
 
 
 function App() {
@@ -45,7 +46,8 @@ function App() {
                 <div>
                   {isAdmin ? 
                   <Link to="/admin/additem">Add Item </Link>
-                  : <Link to="/cart">Shopping Cart</Link>
+                  :<Link to="/cart">Shopping Cart</Link>
+                  
                   }
                   <Link to="/login" onClick={logout}>Log Out </Link>
                   </div>
@@ -53,6 +55,7 @@ function App() {
                   <div>
                   <Link to="/signup">Sign Up </Link>
                   <Link to="/login">Log In </Link>
+                  <Link to="/upload">Image Upload</Link>
                   </div>
                 }
                 </div>
@@ -65,6 +68,7 @@ function App() {
           <Route path="/admin/additem" element={<AddItem />}/>
           <Route path="/cart" element={<ShoppingCart />}/>
           <Route path="/product" element={<Product />}/>
+          <Route path="/upload" element={<Upload />}/>
         </Routes>
       </div>
       <footer className="row center">ALL RIGHTS RESERVED (LMAAO)</footer>

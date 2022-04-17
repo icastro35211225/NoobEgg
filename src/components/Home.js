@@ -167,7 +167,12 @@ export default function Home(props) {
           }}></input>
           <button onClick={()=> {updateItem(val.desc)}}>Update</button> */}
           <p>{stockErrMsg}</p>
+
           </div>
+          
+          {/* <div className="upload test">
+            
+          </div> */}
         </home>
     )
 }//onClick={addToCart(product.id)}
