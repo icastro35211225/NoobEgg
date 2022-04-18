@@ -70,7 +70,9 @@ function App() {
           }
         </div>
       </header>
-      <SearchBar placeholder="Search items..." /> 
+      <div> 
+        <SearchBar placeholder="Search items..." /> 
+      </div> 
       <div className="form">
         <Routes>
           <Route path="/" element={<Home />} />
