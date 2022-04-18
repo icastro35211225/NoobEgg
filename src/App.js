@@ -11,6 +11,7 @@ import AddItem from './pages/AddItem';
 import ShoppingCart from './pages/ShoppingCart';
 import Product from "./components/Product";
 import Upload from "./pages/Upload"
+import Dashboard from "./pages/Dashboard";
 
 
 function App() {
@@ -21,12 +22,12 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [isAdmin, setIsAdmin] = useState('');
 
-  useEffect ( () => {
-      if(localStorage.getItem("userInfo") != null){
-        setLoggedIn(true);
-        const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-        setIsAdmin(userInfo.isAdmin);
-      }
+  useEffect(() => {
+    if (localStorage.getItem("userInfo") != null) {
+      setLoggedIn(true);
+      const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+      setIsAdmin(userInfo.isAdmin);
+    }
   }, []);
 
   const logout = () => {
@@ -38,37 +39,53 @@ function App() {
   return (
     <div className="App">
       <header className="row">
-                <div>
-                  <a className="brand" href="/">UthrifTSA</a>
-                </div>
-                <div>
-                { loggedIn ?
-                <div>
-                  {isAdmin ? 
+        <div>
+          <a className="brand" href="/">UthrifTSA</a>
+        </div>
+        <div>
+          {loggedIn ?
+            <div>
+              {isAdmin ?
+                <Link to="/admin/additem">Add Item </Link>
+                : <Link to="/cart">Shopping Cart</Link>
+
+              }
+              <Link to="/login" onClick={logout}>Log Out </Link>
+              <div>
+                {isAdmin ?
                   <Link to="/admin/additem">Add Item </Link>
-                  :<Link to="/cart">Shopping Cart</Link>
-                  
-                  }
-                  <Link to="/login" onClick={logout}>Log Out </Link>
-                  </div>
                   :
                   <div>
-                  <Link to="/signup">Sign Up </Link>
-                  <Link to="/login">Log In </Link>
-                  <Link to="/upload">Image Upload</Link>
+                    <Link to="/cart">Shopping Cart</Link>
+                    <Link to="/dashboard">Account Dashboard</Link>
                   </div>
                 }
-                </div>
-            </header>
+                <Link to="/login" onClick={logout}>Log Out</Link>
+              </div>
+              :
+              <div>
+                <Link to="/signup">Sign Up </Link>
+                <Link to="/login">Log In </Link>
+                <Link to="/upload">Image Upload</Link>
+              </div>
+            </div>
+            : <Link></Link>
+          }
+        </div>
+      </header>
       <div className="form">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/signup" element={<Signup />}/>  
-          <Route path="/login" element={<Login />}/>
-          <Route path="/admin/additem" element={<AddItem />}/>
-          <Route path="/cart" element={<ShoppingCart />}/>
-          <Route path="/product" element={<Product />}/>
-          <Route path="/upload" element={<Upload />}/>
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/admin/additem" element={<AddItem />} />
+          <Route path="/cart" element={<ShoppingCart />} />
+
+          <Route path="/product" element={<Product />} />
+          <Route path="/upload" element={<Upload />} />
+
+          <Route path="/product/:id" element={<Product />} />
+          <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
       </div>
       <footer className="row center">ALL RIGHTS RESERVED (LMAAO)</footer>
