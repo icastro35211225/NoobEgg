@@ -161,3 +161,12 @@ a.brand{
 a {
   text-decoration: none;
 }
+
+/* SearchBar */ 
+.input { 
+  display: flex; 
+}
+
+.search input { 
+  background-color: white; 
+}
