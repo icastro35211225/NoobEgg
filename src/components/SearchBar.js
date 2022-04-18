@@ -17,7 +17,15 @@ function SearchBar({placeholder}) {
             <div className="input">
                 <input type="text" placeholder={placeholder} /> 
             </div> 
-            <div className="output"></div> 
+            <div className="output">
+                {itemList.map((product) => { 
+                    return ( 
+                        <a className="product" target="_blank"> 
+                            <p>{product.ProductName}</p> 
+                        </a> 
+                    ); 
+                })}
+            </div> 
         </div>
     )
 } 
