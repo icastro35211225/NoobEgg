@@ -44,7 +44,6 @@ function App() {
         <div>
           <a className="brand" href="/">UthrifTSA</a>
         </div>
-        <SearchBar placeholder="Search items..." /> 
         <div>
           {loggedIn ?
             <div>
