@@ -161,3 +161,7 @@ a.brand{
 a {
   text-decoration: none;
 }
+
+#discountwrapper {
+  display: flex;
+}
