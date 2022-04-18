@@ -162,7 +162,11 @@ a {
   text-decoration: none;
 }
 
+#discountwrapper {
+  display: flex;
+}
 /* SearchBar */ 
+
 .input { 
   display: flex; 
 }
