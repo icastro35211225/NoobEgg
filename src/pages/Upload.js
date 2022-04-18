@@ -30,24 +30,29 @@ export default function UploadImage(props) {
             [].forEach.call(files, readAndPreview);  
         }
         setImageList(files);
-        console.log(files);
+        console.log(imageList);
+        //console.log(files);
         
     }
 
-    const uploadButton = () =>{
-        for(var i = 0; i < imageList.length; i++){
-            console.log(imageList[i]['name']);
-        }
+    async function uploadFiles(){
+        const data = new FormData();
+        const file = document.querySelector('input[type=file]').files[0];
+        data.append("file", file);
+        Axios.post('http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/upload', data)
+            .then((res) => {
+                console.log(res);
+            });
     }
 
 
     return (
         <upload>
             <h2>Testing</h2>
-                {/* <form action="/upload" method="POST" encType="multipart/form-data"> */}
-                    <input type="file" id="browse" onChange={() => previewFile()} multiple/>
+                {/* <form action="/api/upload" method="POST" encType="multipart/form-data"> */}
+                    <input name="files" type="file" onChange={() => previewFile()}/>
                     <div id="preview"></div>
-                    <button onClick={uploadButton}>Upload</button>
+                    <button type="submit" onClick={() => uploadFiles()}>Upload</button>
                 {/* </form> */}
         </upload>
     )
