@@ -12,6 +12,7 @@ import ShoppingCart from './pages/ShoppingCart';
 import Product from "./components/Product";
 import Upload from "./pages/Upload"
 import Dashboard from "./pages/Dashboard";
+import AdminDashboard from "./pages/AdminDashboard";
 
 
 function App() {
@@ -45,15 +46,12 @@ function App() {
         <div>
           {loggedIn ?
             <div>
-              {isAdmin ?
-                <Link to="/admin/additem">Add Item </Link>
-                : <Link to="/cart">Shopping Cart</Link>
-
-              }
-              <Link to="/login" onClick={logout}>Log Out </Link>
               <div>
                 {isAdmin ?
-                  <Link to="/admin/additem">Add Item </Link>
+                  <div>
+                    <Link to="/admindashboard">Admin Dashboard</Link>
+                    <Link to="/upload">Image Upload</Link>
+                  </div>
                   :
                   <div>
                     <Link to="/cart">Shopping Cart</Link>
@@ -62,14 +60,12 @@ function App() {
                 }
                 <Link to="/login" onClick={logout}>Log Out</Link>
               </div>
+            </div>
               :
               <div>
                 <Link to="/signup">Sign Up </Link>
                 <Link to="/login">Log In </Link>
-                <Link to="/upload">Image Upload</Link>
               </div>
-            </div>
-            : <Link></Link>
           }
         </div>
       </header>
@@ -80,12 +76,11 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/admin/additem" element={<AddItem />} />
           <Route path="/cart" element={<ShoppingCart />} />
-
           <Route path="/product" element={<Product />} />
           <Route path="/upload" element={<Upload />} />
-
           <Route path="/product/:id" element={<Product />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/admindashboard" element={<AdminDashboard />} />
         </Routes>
       </div>
       <footer className="row center">ALL RIGHTS RESERVED (LMAAO)</footer>
