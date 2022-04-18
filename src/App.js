@@ -12,6 +12,7 @@ import ShoppingCart from './pages/ShoppingCart';
 import Product from "./components/Product";
 import Upload from "./pages/Upload"
 import Dashboard from "./pages/Dashboard";
+import SearchBar from "./components/SearchBar"; 
 import AdminDashboard from "./pages/AdminDashboard";
 
 
@@ -69,6 +70,7 @@ function App() {
           }
         </div>
       </header>
+      <SearchBar placeholder="Search items..." /> 
       <div className="form">
         <Routes>
           <Route path="/" element={<Home />} />
