@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Axios from 'axios';
 import Product from "./Product";
+import SearchBar from "./SearchBar"; 
 
 export default function Home(props) {
     const [itemID, setItemID] = useState('');
@@ -112,7 +113,7 @@ export default function Home(props) {
 
     return (
         <home>
-
+          <SearchBar placeholder="Search items..." /> 
           <h1>Products</h1>
           <h2>{greeting}</h2>
           {/* <label>Item Name</label>

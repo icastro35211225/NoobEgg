@@ -12,6 +12,7 @@ import ShoppingCart from './pages/ShoppingCart';
 import Product from "./components/Product";
 import Upload from "./pages/Upload"
 import Dashboard from "./pages/Dashboard";
+import SearchBar from "./components/SearchBar"; 
 import AdminDashboard from "./pages/AdminDashboard";
 
 
