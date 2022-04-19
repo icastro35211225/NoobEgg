@@ -2,14 +2,24 @@ import React, { useState } from "react";
 import './Login.css';
 import Axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye,faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+const visible = <FontAwesomeIcon icon={faEye} />;
+const notVisible = <FontAwesomeIcon icon={faEyeSlash} />
+
 
 export default function Login(setToken) {
 
     const navigate = useNavigate();
 
+    const [passwordShown, setPasswordShown] = useState(false);
+    const togglePasswordVisiblity = () => {
+        setPasswordShown(passwordShown ? false : true);
+    };
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loginStatus, setLoginStatus] = useState('');
+    
 
     const displayInfo = () => {
         console.log(email);
@@ -44,12 +54,13 @@ export default function Login(setToken) {
                 {/* <button onClick={displayInfo}>Log In</button> */}
                 <label>
                     <p>Email</p>
-                    <input type="text" placeholder="Enter Email" onChange={(e)=> {setEmail(e.target.value);}}/>
-                </label>
-                <label>
+                    <input type= "text" placeholder="Enter Email" onChange={(e)=> {setEmail(e.target.value);}}/>
                     <p>Password</p>
-                    <input type="password" placeholder="Enter Password" onChange={(e)=> {setPassword(e.target.value);}}/>
                 </label>
+                <div className="pass-wrapper">
+                    <input type={passwordShown ? "text" : "password"} placeholder="Enter Password" onChange={(e)=> {setPassword(e.target.value);}}/>
+                    <i onClick={togglePasswordVisiblity}>{passwordShown ? notVisible : visible}</i>{" "}
+                </div>
                     <button type="submit" onClick={login}>Submit</button>
             </div>
             <h1> {loginStatus}</h1>

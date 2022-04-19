@@ -13,3 +13,17 @@ p {
 h2{
     font-family: 'Archivo Black', sans-serif
 }
+.pass-wrapper {
+    position: relative;
+    display: flex;
+    margin-bottom: 14px;
+}
+i {
+    position: absolute;
+    top: 38%;
+    right: 16%;
+}
+i:hover {
+    color: red;
+    cursor: pointer;
+}
