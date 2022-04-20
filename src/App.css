@@ -17,7 +17,7 @@
 header{
   grid-area: header;
   background-color: #ffdef2;
-  border: red;
+  border: #f7022a;
   border-style:solid;
   border-width: 1.3pt;
 }
@@ -28,8 +28,8 @@ main{
 footer{
   grid-area: footer;
   background-color: #ffdef2;
-  color: red;
-  border: red;
+  color: #f7022a;
+  border: #f7022a;
   border-style:solid; 
   border-width: 1.3pt;
 }
@@ -50,7 +50,7 @@ a{
   text-decoration: none;
 }
 a:hover{
-  color:red;
+  color:#f7022a;
 }
 
 .form {
@@ -76,7 +76,19 @@ a:hover{
   margin: 10px;
   margin: 0 auto;
   float: none; 
-  margin-bottom: 10px; 
+  margin-bottom: 10px;
+}
+.products{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; 
+}
+.product{
+  border: 1.5px solid rgb(228, 228, 228);
+  margin: 1rem;
+}
+.product-info{
+  padding: 1rem;
 }
 
 .cart_card {
@@ -129,11 +141,11 @@ a {
 
 /*header*/
 header a{
-  color: red;
+  color: #f7022a;
   padding: 1rem;
 }
 a.brand{
-  color: red;
+  color: #f7022a;
   font-size: 3rem;
   font-weight: bold;
 }
@@ -189,4 +201,73 @@ a {
 
 .output a:hover { 
   background-color: lightgrey; 
+}
+/* Navbar container */
+.navbar {
+  overflow: hidden;
+  background-color: #333;
+  font-family: Arial;
+}
+
+/* Links inside the navbar */
+.navbar a {
+  float: left;
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+/* The dropdown container */
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+/* Dropdown button */
+.dropdown .dropbtn {
+  font-size: 16px;
+  border: none;
+  outline: none;
+  color: #f7022a;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit; /* Important for vertical align on mobile phones */
+  margin: 0; /* Important for vertical align on mobile phones */
+}
+
+/* Add a red background color to navbar links on hover */
+.navbar a:hover, .dropdown:hover .dropbtn {
+  background-color: white;
+}
+
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  float: left;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+/* Add a grey background color to dropdown links on hover */
+.dropdown-content a:hover {
+  background-color: #ffedf8;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
 }

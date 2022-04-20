@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Axios from 'axios';
 import Product from "./Product";
 import SearchBar from "./SearchBar"; 
+import { Link } from "react-router-dom";
 
 export default function Home(props) {
     const [itemID, setItemID] = useState('');
@@ -28,7 +29,7 @@ export default function Home(props) {
           setIsAdmin(userInfo.isAdmin);
           setLoginStatus(true);
           setUser(userInfo);
-        }
+        }  
       }, [])
 
     const submitItem = () => {
@@ -133,36 +134,40 @@ export default function Home(props) {
           <button onClick={submitItem}>Submit</button> */}
 
         
-          <div>
-          {itemList.map((product)=> {
-            <Product key={product._id}product={product}></Product>
-            //<Product key={product.productID} product={product} />
-            // })
-            return(
-          <div className="card">
-          <a href="/product">
-          <h1>{product.ProductName}</h1></a>
-          <p>{product.ProductDesc}</p>
-          <p>${product.ProductPrice}</p>
-          <p>Stock: {product.ProductStock}</p>
-            {/* <button onClick={()=> {deleteReview(product.ProductName)}}>Delete</button>
-            <input type="text" id="updateInput" onChange={(e)=> {
-              setNewDescription(e.target.value)
-            }}></input>
-            <button onClick={()=> {updateItem(product.ProductName)}}>Update</button> */}
+          <main>
+            <div className="products">
+            {itemList.map((product)=> {
+              <Product key={product._id}product={product}></Product>
+              return(
+                <div className="card">
+                  <div class="product-info">  
+                    <Link to={`/product/${product._id}`}>
+                      {/* <img src={product.image} alt={product.name} /> */}
+                      <h1>{product.ProductName}</h1>
+                    </Link>
+                    <p>{product.ProductDesc}</p>
+                    <p><strong>${product.ProductPrice}</strong> </p>
+                    <p>Stock: {product.ProductStock}</p>
+              {/* <button onClick={()=> {deleteReview(product.ProductName)}}>Delete</button>
+              <input type="text" id="updateInput" onChange={(e)=> {
+                setNewDescription(e.target.value)
+              }}></input>
+              <button onClick={()=> {updateItem(product.ProductName)}}>Update</button> */}
+                  </div>
+                { loginStatus ? 
+              <div>
+                <p>Amount: {count}</p>
+                <button onClick={handleSubOne}>-1</button>
+                <button onClick={handleAddOne}>+1</button>
+                <button onClick={function(){addToCart(product.ProductID);}}>Add To Cart</button> 
+              </div>
+                : null 
+                }
+                </div>
+              );
           
-          { loginStatus ? 
-            <div>
-              <p>Amount: {count}</p>
-              <button onClick={handleSubOne}>-1</button>
-              <button onClick={handleAddOne}>+1</button>
-              <button onClick={function(){addToCart(product.ProductID);}}>Add To Cart</button> 
-            </div>
-            : null 
-          }
+            })}
           </div>
-          );
-        })}
 
           {/* <button onClick={()=> {deleteReview(val.name)}}>Delete</button>
           <input type="text" id="updateInput" onChange={(e)=> {
@@ -171,7 +176,7 @@ export default function Home(props) {
           <button onClick={()=> {updateItem(val.desc)}}>Update</button> */}
           <p>{stockErrMsg}</p>
 
-          </div>
+          </main>
           
           {/* <div className="upload test">
             

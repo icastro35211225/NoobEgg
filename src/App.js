@@ -14,6 +14,10 @@ import Upload from "./pages/Upload"
 import Dashboard from "./pages/Dashboard";
 import SearchBar from "./components/SearchBar"; 
 import AdminDashboard from "./pages/AdminDashboard";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser, faCartShopping } from "@fortawesome/free-solid-svg-icons";
+const user = <FontAwesomeIcon icon={faUser} />;
+const cart = <FontAwesomeIcon icon={faCartShopping} />;
 
 
 function App() {
@@ -55,7 +59,7 @@ function App() {
                   </div>
                   :
                   <div>
-                    <Link to="/cart">Shopping Cart</Link>
+                    <Link to="/cart">{cart}</Link>
                     <Link to="/dashboard">Account Dashboard</Link>
                   </div>
                 }
@@ -63,9 +67,12 @@ function App() {
               </div>
             </div>
               :
-              <div>
-                <Link to="/signup">Sign Up </Link>
-                <Link to="/login">Log In </Link>
+              <div class = "dropdown">
+                <button class="dropbtn">{user}</button>
+                <div class="dropdown-content">
+                  <Link to="/login">Log in</Link>
+                  <Link to="/signup">Sign Up </Link>
+                </div>
               </div>
           } 
         </div>

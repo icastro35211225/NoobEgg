@@ -5,67 +5,63 @@ import '../App.css';
 
 export default function Product(props) {
 
-    const product = product.find((x) => {
-        return x._id === props.match.params.id;
-    }); 
-    const navigate = useNavigate();
+    //const product = product.find((x) => {
+       // return x._id === props.match.params.id;
+    //}); 
 
-    //const {product} = props; 
+    const navigate = useNavigate();
+    const [isAdmin, setIsAdmin] = useState('');
+    const [loginStatus, setLoginStatus] = useState('');
+    const [count, setCount] = useState(1);
+    const {product} = props; 
+    const handleSubOne = () => {
+        if(count > 1){
+          setCount(count - 1);
+        }
+      };
+    
+      const handleAddOne = () => {
+        setCount(count + 1);
+      };
+      const addToCart = (id) => {
+        Axios.post('http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/getProduct',
+            {id: id}
+          ).then((response)=> {
+          // console.log(user.id);
+          // console.log(response);
+          // console.log(response.data[0].ProductID);
+          // console.log(response.data[0].ProductName);
+          // console.log(response.data[0].ProductPrice);
+          // console.log(response.data[0].ProductImage);
+          // console.log(count);
+          if(count > response.data[0].qty){
+            setStockErrMsg("Sorry, we dont have that many " + response.data[0].ProductName + "(s) available.");
+          } else { 
+
+            Axios.post('http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/addToCart',
+                {
+                  userID: user.UserID,
+                  productID: response.data[0].ProductID,
+                  productName: response.data[0].ProductName,
+                  productPrice: response.data[0].ProductPrice,
+                  productImage: response.data[0].ProductImage,
+                  amount: count
+                }
+            )
+            setStockErrMsg("Added \"" + response.data[0].ProductName + "\" to cart!"); 
+          }
+          
+        })
+
+        // Axios.post('http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/insert', {
+        //   itemName: itemName,
+        //   itemDescription: itemDescription
+        // });
+      }
+     const [user, setUser] = useState();
+    const [stockErrMsg, setStockErrMsg] = useState("");
     
     return (
-        //productid 
-            // <div key={product.productID} className="card">
-            //   <h1>{product.name}</h1>
-            //   <p>{product.desc}</p>
-            //   <p>{product.price}</p>
-            //   <p>Stock: {product.quantity}</p>
-
-            //   {/* <button onClick={()=> {deleteReview(val.name)}}>Delete</button>
-            //   <input type="text" id="updateInput" onChange={(e)=> {
-            //     setNewDescription(e.target.value)
-            //   }}></input>
-            //   <button onClick={()=> {updateItem(val.desc)}}>Update</button> */}
-            //   <button>Go to Page</button>
-            // </div>
-            <div>
-        <Link to="/">Back to results</Link>
-        <div className='row top'>
-            <div className='col-1'>
-                <ul>
-                    <li>
-                    <h1>{product.name}</h1>
-                    </li>
-                    <li>Price: ${product.price}</li>
-                    <li> Description: 
-                        <p>{product.description}</p>
-                    </li>
-                </ul>
-            </div>
-            <div className='col-1'>
-                <div className='card card-body'>
-                    <ul>
-                        <li>
-                            <div className='row'>
-                                <div>Price: </div>
-                                <div className='price'>${product.price}</div>
-                            </div>
-                        </li>
-                        <li>
-                            <div className='row'>
-                                <div>Status: </div>
-                                <div> 
-                                    {product.countInStock>0? <span className='success'>In Stock</span>:
-                                    <span className='error'>Unavailable</span>}
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                          <button className='primary block'>Add to Cart</button>  
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-    );
+        <p>hey</p>
+    )
 }
