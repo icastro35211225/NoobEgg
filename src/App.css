@@ -1,3 +1,7 @@
+/* html, body {
+  min-height: 100vh;
+} */
+
 .App {
   text-align: center;
   font-family: 'Archivo Black', sans-serif;
@@ -20,6 +24,7 @@ header{
   border: #f7022a;
   border-style:solid;
   border-width: 1.3pt;
+  border-radius: 10px;
 }
 main{
   grid-area: main;
@@ -32,6 +37,8 @@ footer{
   border: #f7022a;
   border-style:solid; 
   border-width: 1.3pt;
+  border-radius: 5px;
+  /* position: absolute; bottom: 0; */
 }
 
 /* Common */
@@ -58,13 +65,14 @@ a:hover{
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: 100%;
 }
 
 .form input {
-  width: 300px;
-  height: 60px;
+  width: 200px;
+  height: 40px;
   margin: 10px;
-  font-size: 25px;
+  font-size: 15px;
 }
 
 .card {
@@ -191,6 +199,8 @@ a {
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; 
   overflow: hidden; 
   overflow-y: auto; 
+  position: fixed;
+  width: 35%;
 }
 
 .output .product { 
@@ -270,4 +280,22 @@ a {
 /* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {
   display: block;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+td, th {
+  text-align: left;
+  border: 1px solid red;
+  padding: .5em;
+}
+
+.tableButton {
+  text-decoration: underline;
+  border: none;
+  background-color: white;
+  width: 100%;
+  text-align: left;
 }

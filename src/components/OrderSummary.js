@@ -52,7 +52,7 @@ export default function OrderSummary(props) {
           setUser(userInfo);
         }
         //get order 
-        (async () => await getOrder())() 
+        (async () => await getOrder())()
     }, [])
 
     useEffect(() => {
