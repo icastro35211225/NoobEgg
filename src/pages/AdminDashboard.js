@@ -102,7 +102,7 @@ export default function AdminDashboard(props) {
                             </tr>
                             {orders.map((order) => {
                                 return (
-                                    <tr key={order.orderID}>
+                                    <tr key={order.OrderID}>
 
                                         <td><button className="tableButton" onClick={() => showOrder(order.OrderID)}>{order.OrderID}</button></td>
                                         <td><button className="tableButton" onClick={() => showOrder(order.OrderID)}>{order.OrderUserID}</button></td>

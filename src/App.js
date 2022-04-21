@@ -10,7 +10,7 @@ import Login from './pages/Login';
 import AddItem from './pages/AddItem';
 import ShoppingCart from './pages/ShoppingCart';
 import Product from "./components/Product";
-import Upload from "./pages/Upload"
+//import Upload from "./pages/Upload"
 import Dashboard from "./pages/Dashboard";
 import SearchBar from "./components/SearchBar"; 
 import AdminDashboard from "./pages/AdminDashboard";
@@ -55,7 +55,7 @@ function App() {
                 {isAdmin ?
                   <div>
                     <Link to="/admindashboard">Admin Dashboard</Link>
-                    <Link to="/upload">Image Upload</Link>
+                    {/* <Link to="/upload">Image Upload</Link> */}
                   </div>
                   :
                   <div>
@@ -68,8 +68,8 @@ function App() {
             </div>
               :
               <div class = "dropdown">
-                <button class="dropbtn">{user}</button>
-                <div class="dropdown-content">
+                <button className="dropbtn">{user}</button>
+                <div className="dropdown-content">
                   <Link to="/login">Log in</Link>
                   <Link to="/signup">Sign Up </Link>
                 </div>

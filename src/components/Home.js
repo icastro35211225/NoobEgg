@@ -137,14 +137,15 @@ export default function Home(props) {
           <main>
             <div className="products">
             {itemList.map((product)=> {
-              <Product key={product._id}product={product}></Product>
+              <Product key={product.ProductID}product={product}></Product>
               return(
                 <div className="card">
-                  <div class="product-info">  
+                  <div className="product-info">  
                     <Link to={`/product/${product._id}`}>
                       {/* <img src={product.image} alt={product.name} /> */}
                       <h1>{product.ProductName}</h1>
                     </Link>
+                    <img id="proImg" src={product.ProductImage}></img>
                     <p>{product.ProductDesc}</p>
                     <p><strong>${product.ProductPrice}</strong> </p>
                     <p>Stock: {product.ProductStock}</p>
