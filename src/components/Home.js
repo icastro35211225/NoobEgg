@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Axios from 'axios';
 import Product from "./Product";
 import SearchBar from "./SearchBar"; 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Home(props) {
     const [itemID, setItemID] = useState('');
@@ -16,6 +16,7 @@ export default function Home(props) {
     const [count, setCount] = useState(1);
     const [user, setUser] = useState();
     const [stockErrMsg, setStockErrMsg] = useState("");
+    let navigate = useNavigate();
 
 
     useEffect(()=> {
@@ -137,14 +138,14 @@ export default function Home(props) {
           <main>
             <div className="products">
             {itemList.map((product)=> {
-              <Product key={product._id}product={product}></Product>
               return(
                 <div className="card">
                   <div class="product-info">  
-                    <Link to={`/product/${product._id}`}>
-                      {/* <img src={product.image} alt={product.name} /> */}
+                    {/* <Link to={`/product/${product._id}`}>
+                      <img src={product.image} alt={product.name} />
                       <h1>{product.ProductName}</h1>
-                    </Link>
+                    </Link> */}
+                    <button className="productButton" onClick={() => navigate("/productscreen", { state: { id: product.ProductID }})}><h1>{product.ProductName}</h1></button>
                     <p>{product.ProductDesc}</p>
                     <p><strong>${product.ProductPrice}</strong> </p>
                     <p>Stock: {product.ProductStock}</p>

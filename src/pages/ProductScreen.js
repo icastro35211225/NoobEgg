@@ -3,10 +3,12 @@ import Axios from "axios";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import '../App.css';
 
-export default function Product(props) { 
+export default function ProductScreen(props) { 
 
-  const productID = props.productID;
   const navigate = useNavigate();
+  const [isAdmin, setIsAdmin] = useState('');
+  const [loginStatus, setLoginStatus] = useState('');
+  const [count, setCount] = useState(1);
   const location = useLocation();
   console.log(location);
   const [user, setUser] = useState();
@@ -25,8 +27,12 @@ export default function Product(props) {
 
 
   return (
-    <product>
-      <p>hello</p>
-    </product>
+    <productscreen>
+      {product === null ?
+        <h1>Loading Product...</h1>
+        :
+        <h1>Product Name: {product.ProductName}</h1>
+      }
+    </productscreen>
   )
 }

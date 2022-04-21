@@ -16,6 +16,7 @@ import SearchBar from "./components/SearchBar";
 import AdminDashboard from "./pages/AdminDashboard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faCartShopping } from "@fortawesome/free-solid-svg-icons";
+import ProductScreen from "./pages/ProductScreen";
 const user = <FontAwesomeIcon icon={faUser} />;
 const cart = <FontAwesomeIcon icon={faCartShopping} />;
 
@@ -84,9 +85,9 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/admin/additem" element={<AddItem />} />
           <Route path="/cart" element={<ShoppingCart />} />
-          <Route path="/product" element={<Product />} />
+          <Route path="/productscreen" element={<ProductScreen />} />
           <Route path="/upload" element={<Upload />} />
-          <Route path="/product/:id" element={<Product />} />
+          <Route path="/product" element={<Product />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/admindashboard" element={<AdminDashboard />} />
         </Routes>
