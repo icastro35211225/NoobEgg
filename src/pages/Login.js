@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import './Login.css';
 import Axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye,faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 const visible = <FontAwesomeIcon icon={faEye} />;
@@ -41,7 +41,7 @@ export default function Login(setToken) {
             else{
                 setLoginStatus("Greetings, " + response.data[0].fName);
                 localStorage.setItem("userInfo", JSON.stringify(response.data[0]));
-                navigate('/');
+                navigate("/");
                 window.location.reload(false);
             }
         });

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Axios from 'axios';
 import Product from "./Product";
 import SearchBar from "./SearchBar"; 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Home(props) {
     const [itemID, setItemID] = useState('');
@@ -16,6 +16,7 @@ export default function Home(props) {
     const [count, setCount] = useState(1);
     const [user, setUser] = useState();
     const [stockErrMsg, setStockErrMsg] = useState("");
+    let navigate = useNavigate();
 
 
     useEffect(()=> {

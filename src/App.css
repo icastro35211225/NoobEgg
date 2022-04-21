@@ -299,3 +299,14 @@ td, th {
   width: 100%;
   text-align: left;
 }
+
+.productButton {
+  text-decoration: underline;
+  border: none;
+  background-color: white;
+  width: 100%;
+}
+
+.productButton:hover {
+  color: grey;
+}
