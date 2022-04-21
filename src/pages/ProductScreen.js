@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import Axios from "axios";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import '../App.css';
+import { Badge, Button, Card, Col, ListGroup, Row } from "react-bootstrap";
+
 
 export default function ProductScreen(props) { 
 
@@ -31,7 +33,65 @@ export default function ProductScreen(props) {
       {product === null ?
         <h1>Loading Product...</h1>
         :
-        <h1>Product Name: {product.ProductName}</h1>
+        <div>
+          {/* <h1>Product Name: {product.ProductName}</h1> */}
+          <Row>
+            <Col md={6}><img className="img-large"
+            src="./template/images/spunchbob.png"></img></Col>
+            <Col md={3}>
+              <ListGroup variant="flush">
+                <ListGroup.Item>
+                  <h1>{product.ProductName}</h1>
+                </ListGroup.Item>
+                <ListGroup.Item>Price: ${product.ProductPrice}</ListGroup.Item>
+                <ListGroup.Item>
+                  Description:
+                  <p>{product.ProductDesc}</p>
+                </ListGroup.Item>
+              </ListGroup>
+            </Col>
+            <Col md={3}>
+              <Card>
+                <Card.Body>
+                  <ListGroup variant="flush">
+                    <ListGroup.Item>
+                    <Row>
+                      <Col>Price:</Col>
+                      <Col>${product.ProductPrice}</Col>
+                    </Row>
+                    </ListGroup.Item>
+                    
+                    <ListGroup.Item>
+                    <Row>
+                      <Col>Status: </Col>
+                      <Col>
+                        {product.ProductStock > 0 ? (
+                          <Badge bg="success">In Stock</Badge>
+                          ) : (
+                          <Badge bg="danger"></Badge>
+                        )}
+                      </Col>
+                    </Row>
+                    </ListGroup.Item>
+                    {product.ProductStock > 0 && (
+                      <ListGroup.Item>
+                        <div className="d-grid">
+                          <Button variant="primary">
+                            Add to Cart
+                          </Button>
+                        </div>
+
+                      </ListGroup.Item>
+                    )}
+                    
+
+                  </ListGroup>
+                </Card.Body>
+              </Card>
+            </Col>
+          </Row>
+        </div>
+        
       }
     </productscreen>
   )

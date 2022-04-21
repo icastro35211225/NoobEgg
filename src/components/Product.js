@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Axios from "axios";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import '../App.css';
+import { Card } from "react-bootstrap";
 
 export default function Product(props) { 
 
@@ -25,8 +26,16 @@ export default function Product(props) {
 
 
   return (
-    <product>
-      <p>hello</p>
-    </product>
+    <Card>
+      <Link to={`/product/${product.productID}`}>
+        {/* img */}
+      </Link>
+      <Card.Body>
+      <Link to={`/product/${product.productID}`}>
+        <Card.Title>{product.ProductName}</Card.Title>
+      </Link>
+      <Card.Text>${product.ProductPrice}</Card.Text>  
+      </Card.Body>
+    </Card>
   )
 }
