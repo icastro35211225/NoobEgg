@@ -102,7 +102,7 @@ export default function AddItem(props) {
             <div>
                 <input name="files" type="file" onChange={show}/>
                         <button type="submit" onClick={() => uploadFiles()}>Upload</button>
-                        <p>Make sure to upload image first before adding item. (someone PLZ center this or some message like this) Also that the file should be <= to 100KB</p>
+                        <p>Make sure to upload image first before adding item. (someone PLZ center this or some message like this) Also that the file should be less than equal to 100KB</p>
                         <div>
                             <img id="preview" src={previewFile}></img>
                             <p id="message" hidden>{message}</p>
