@@ -86,7 +86,7 @@ function App() {
           <Route path="/admin/additem" element={<AddItem />} />
           <Route path="/cart" element={<ShoppingCart />} />
           <Route path="/productscreen" element={<ProductScreen />} />
-          <Route path="/upload" element={<Upload />} />
+          {/* <Route path="/upload" element={<Upload />} /> */}
           <Route path="/product" element={<Product />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/admindashboard" element={<AdminDashboard />} />
