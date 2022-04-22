@@ -163,6 +163,14 @@ a {
 }
 /* SearchBar */ 
 
+.searchbar input { 
+	display: flex; 
+	background-color: white; 
+	margin-top: 20px; 
+	height: 40px; 
+	font-size: 20px; 
+} 
+
 .input { 
   display: flex; 
 }
@@ -261,6 +269,10 @@ a {
 
 table {
   border-collapse: collapse;
+  height: 200px;
+  overflow-y: scroll;
+  display: block;
+  width: fit-content;
 }
 
 td, th {
@@ -272,7 +284,7 @@ td, th {
 .tableButton {
   text-decoration: underline;
   border: none;
-  background-color: white;
+  background-color: transparent;
   width: 100%;
   text-align: left;
 }
