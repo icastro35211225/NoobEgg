@@ -29,7 +29,6 @@ export default function AddItem(props) {
 
         //HAVE TO CHECK INPUT HERE BC SQL DEFAUTS WRONG VALUES
         async function addProduct() {
-            const res = uploadFiles();
             Axios.post('http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/additem', {
                 name: name,
                 desc: desc, 
@@ -42,7 +41,7 @@ export default function AddItem(props) {
                     //     setErrMsg(response.data.err);
                     // }
                 });
-                //navigate('/');  
+                //navigate('/');    
                 console.log("DONE");            
         }
     
