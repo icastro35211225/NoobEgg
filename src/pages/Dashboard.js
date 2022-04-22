@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { Table } from "react-bootstrap";
+import OrderSummary from "../components/OrderSummary";
+
 import Axios from 'axios';
 import '../App.css';
 
@@ -12,6 +15,10 @@ export default function Dashboard(props) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [address, setAddress] = useState('');
+    //Order summary
+    const [orders, setOrders] = useState(null);
+    const [orderID, setOrderID] = useState(null);
+    const [viewingOrder, setViewingOrder] = useState(false);
 
     const getUser = async () => {
         const userInfo = JSON.parse(await localStorage.getItem("userInfo"));
@@ -26,22 +33,32 @@ export default function Dashboard(props) {
             setAddress(userInfo.shipAddress);
         }
     }
-    
+
     const updateAccount = async () => {
         let response = await Axios.put('http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/updateAccount',
-        {
-            userID: user.UserID,
-            fName: fName,
-            lName: lName,
-            email: email,
-            password: password,
-            address: address
-        });
+            {
+                userID: user.UserID,
+                fName: fName,
+                lName: lName,
+                email: email,
+                password: password,
+                address: address
+            });
         //get user from database w userID
         let tempUser = await Axios.get(`http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/getUser/${user.UserID}`);
         //upload that user to local storage
         localStorage.setItem("userInfo", JSON.stringify(tempUser.data[0]));
         getUser()
+    }
+
+    const getUserOrders = async () => {
+        let tempOrders = await Axios.get(`http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/getUserOrders/${user.UserID}`);
+        await setOrders(tempOrders.data);
+    }
+
+    const showOrder = (id) => {
+        setOrderID(id);
+        setViewingOrder(true);
     }
 
     const clickedApply = () => {
@@ -50,17 +67,33 @@ export default function Dashboard(props) {
         setEditingAccount(false);
     }
 
-    useEffect(()=> {
+    const goBack = () => {
+        setViewingOrder(false);
+        //window.location.reload(false);
+    }
+
+    useEffect(() => {
         getUser();
-        
-      }, [])
+    }, [])
+
+    useEffect(() => {
+        getUserOrders();
+    }, [user])
 
     return (
         <dashboard>
-            {user ? 
-            <div>
-                <h2>Account Dashboard</h2>
-                {editingAccount ?
+            {viewingOrder ?
+                <div>
+                    <button onClick={goBack}>Back to Dashboard</button>
+                    <OrderSummary orderID={orderID} />
+                </div>
+                :
+                <div>
+                    <h2>Account Dashboard</h2>
+                    {user ?
+                        <div>
+                            <h3>Account Details</h3>
+                            {editingAccount ?
                                 <div>
                                     <button onClick={() => setEditingAccount(false)}>Cancel</button>
                                     <label><b>First Name</b></label>
@@ -93,8 +126,37 @@ export default function Dashboard(props) {
                                     <p>Shipping Address: {user.shipAddress}</p>
                                 </div>
                             }
-            </div>
-            : null }
+                        </div>
+                        : null}
+                    <h3>My Orders</h3>
+                    {orders === null ?
+                        <p>No orders</p>
+                        :
+                        <Table striped bordered hover size="sm">
+                            <thead>
+                                <tr>
+                                    <th>Order ID</th>
+                                    <th>User ID</th>
+                                    <th>Order Date</th>
+                                    <th>Order Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {orders.map((order) => {
+                                    return (
+                                        <tr key={order.OrderID}>
+                                            <td><button className="tableButton" onClick={() => showOrder(order.OrderID)}>{order.OrderID}</button></td>
+                                            <td><button className="tableButton" onClick={() => showOrder(order.OrderID)}>{order.OrderUserID}</button></td>
+                                            <td><button className="tableButton" onClick={() => showOrder(order.OrderID)}>{order.OrderDate}</button></td>
+                                            <td><button className="tableButton" onClick={() => showOrder(order.OrderID)}>${order.OrderTotal}</button></td>
+                                        </tr>
+                                    );
+                                })}
+                            </tbody>
+                        </Table>
+                    }
+                </div>
+            }
         </dashboard>
     )
 }
