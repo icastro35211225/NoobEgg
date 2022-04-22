@@ -31,11 +31,7 @@ main{
   padding: 1rem;
 }
 footer{
-  grid-area: footer;
-  background-color: #ffdef2;
-  color: #f7022a;
-  border: #f7022a;
-  border-style:solid; 
+  grid-area: footer; 
   border-width: 1.3pt;
   border-radius: 5px;
   /* position: absolute; bottom: 0; */
@@ -147,25 +143,6 @@ a {
 
 * {box-sizing: border-box}
 
-/*header*/
-header a{
-  color: #f7022a;
-  padding: 1rem;
-}
-a.brand{
-  color: #f7022a;
-  font-size: 3rem;
-  font-weight: bold;
-}
-.row{
-   display: flex;
-   flex-wrap: wrap;
-   justify-content: space-between;
-   align-items: center;
-}
-.row.center{
-    justify-content: center;
-}
 
 /* Full-width input fields */
   input[type=text], input[type=password] {

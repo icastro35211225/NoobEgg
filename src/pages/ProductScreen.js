@@ -36,8 +36,7 @@ export default function ProductScreen(props) {
         <div>
           {/* <h1>Product Name: {product.ProductName}</h1> */}
           <Row>
-            <Col md={6}><img className="img-large"
-            src="./template/images/spunchbob.png"></img></Col>
+            <Col md={6}>{product.ProductImage}</Col>
             <Col md={3}>
               <ListGroup variant="flush">
                 <ListGroup.Item>

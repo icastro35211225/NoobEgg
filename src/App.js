@@ -17,6 +17,8 @@ import AdminDashboard from "./pages/AdminDashboard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import ProductScreen from "./pages/ProductScreen";
+import { Navbar, Container, Dropdown, DropdownButton } from "react-bootstrap";
+import DropdownMenu from "react-bootstrap/esm/DropdownMenu";
 const user = <FontAwesomeIcon icon={faUser} />;
 const cart = <FontAwesomeIcon icon={faCartShopping} />;
 
@@ -45,11 +47,11 @@ function App() {
 
   return (
     <div className="App">
-      <header className="row">
-        <div>
-          <a className="brand" href="/">UthrifTSA</a>
-        </div>
-        <div>
+      <Navbar bg="primary" variant="dark">
+        <Container>
+          <Navbar.Brand href="/">UthrifTSA</Navbar.Brand>
+        </Container>
+        <Container>
           {loggedIn ?
             <div>
               <div>
@@ -57,6 +59,7 @@ function App() {
                   <div>
                     <Link to="/admindashboard">Admin Dashboard</Link>
                     {/* <Link to="/upload">Image Upload</Link> */}
+                    <Link to="/login" onClick={logout}>Log Out</Link>
                   </div>
                   :
                   <div>
@@ -73,17 +76,25 @@ function App() {
               </div>
             </div>
               :
-              <div class = "dropdown">
-                <button className="dropbtn">{user}</button>
-                <div className="dropdown-content">
-                  <Link to="/login">Log in</Link>
-                  <Link to="/signup">Sign Up </Link>
-                </div>
+
+              <div>
+                <Link to="/login">Login</Link>
+                <Link to="/signup">Sign Up</Link>
+              
+
+              <Dropdown>
+                <Dropdown.Toggle variant="light" id="dropdown-basic">{user}</Dropdown.Toggle>
+                <Dropdown.Menu>
+                  <Dropdown.Item href="#/login">Log in</Dropdown.Item>
+                  <Dropdown.Item href="/signup">Sign Up </Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
               </div>
+
           } 
-        </div>
-      </header>
-      <div className="form">
+        </Container>
+        </Navbar>
+      <Container>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/signup" element={<Signup />} />
@@ -96,7 +107,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/admindashboard" element={<AdminDashboard />} />
         </Routes>
-      </div>
+      </Container>
       <footer className="row center">ALL RIGHTS RESERVED (LMAAO)</footer>
     </div>
   );

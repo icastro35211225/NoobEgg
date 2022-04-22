@@ -3,6 +3,7 @@ import Axios from 'axios';
 import Product from "./Product";
 import SearchBar from "./SearchBar"; 
 import { Link, useNavigate } from "react-router-dom";
+import { Col, Row } from "react-bootstrap";
 
 export default function Home(props) {
     const [itemID, setItemID] = useState('');
@@ -136,41 +137,45 @@ export default function Home(props) {
 
         
           <main>
+            <Row>
             <div className="products">
             {itemList.map((product)=> {
               <Product key={product.ProductID}product={product}></Product>
               return(
-                <div className="card">
-                  <div className="product-info"> 
-                  <button className="productButton" onClick={() => navigate("/productscreen", { state: { id: product.ProductID }})}><h1>{product.ProductName}</h1></button>
-                    {/* <Link to={`/product/${product._id}`}>
-                      <img src={product.image} alt={product.name} />
-                      <h1>{product.ProductName}</h1>
-                    </Link> */}
-                    <img id="proImg" src={product.ProductImage}></img>
-                    <p>{product.ProductDesc}</p>
-                    <p><strong>${product.ProductPrice}</strong> </p>
-                    <p>Stock: {product.ProductStock}</p>
-              {/* <button onClick={()=> {deleteReview(product.ProductName)}}>Delete</button>
-              <input type="text" id="updateInput" onChange={(e)=> {
-                setNewDescription(e.target.value)
-              }}></input>
-              <button onClick={()=> {updateItem(product.ProductName)}}>Update</button> */}
-                  </div>
-                { loginStatus ? 
-              <div>
-                <p>Amount: {count}</p>
-                <button onClick={handleSubOne}>-1</button>
-                <button onClick={handleAddOne}>+1</button>
-                <button onClick={function(){addToCart(product.ProductID);}}>Add To Cart</button> 
-              </div>
-                : null 
-                }
+                <Col>
+                  <div className="card">
+                    <div className="product-info"> 
+                    <button className="productButton" onClick={() => navigate("/productscreen", { state: { id: product.ProductID }})}><h1>{product.ProductName}</h1></button>
+                      {/* <Link to={`/product/${product._id}`}>
+                        <img src={product.image} alt={product.name} />
+                        <h1>{product.ProductName}</h1>
+                      </Link> */}
+                      <img id="proImg" src={product.ProductImage}></img>
+                      <p>{product.ProductDesc}</p>
+                      <p><strong>${product.ProductPrice}</strong> </p>
+                      <p>Stock: {product.ProductStock}</p>
+                      {/* <button onClick={()=> {deleteReview(product.ProductName)}}>Delete</button>
+                      <input type="text" id="updateInput" onChange={(e)=> {
+                        setNewDescription(e.target.value)
+                      }}></input>
+                      <button onClick={()=> {updateItem(product.ProductName)}}>Update</button> */}
+                      </div>
+                    { loginStatus ? 
+                    <div>
+                      <p>Amount: {count}</p>
+                      <button onClick={handleSubOne}>-1</button>
+                      <button onClick={handleAddOne}>+1</button>
+                      <button onClick={function(){addToCart(product.ProductID);}}>Add To Cart</button> 
+                    </div>
+                    : null 
+                    }
                 </div>
+                </Col>
               );
           
             })}
           </div>
+          </Row>
 
           {/* <button onClick={()=> {deleteReview(val.name)}}>Delete</button>
           <input type="text" id="updateInput" onChange={(e)=> {
