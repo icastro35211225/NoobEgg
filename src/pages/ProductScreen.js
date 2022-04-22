@@ -116,6 +116,12 @@ export default function ProductScreen(props) {
                             </Card>
                         </Col>
                     </Row>
+                  </ListGroup.Item>
+                </ListGroup>
+                </Card.Body>
+                </Card>
+                </Col>
+                </Row>    
                 </div>
 
             }
