@@ -85,6 +85,7 @@ export default function OrderSummary(props) {
                         <div>
                             <p>Name: {orderUser.FirstName} {orderUser.LastName}</p>
                             <p>Shipping Address: {orderUser.shipAddress}</p>
+                            <p>Order Date: {order.OrderDate}</p>
                         </div>
                         <div>
                         {orderProducts ? 

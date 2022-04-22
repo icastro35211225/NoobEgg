@@ -129,7 +129,7 @@ export default function AdminDashboard(props) {
                         </table>
                     }
                     <p>____________________________________________________________</p>
-                    <div id="discountwrapper">
+                    <div >
                         <h3>Discount Codes</h3>
                     </div>
                     {addingCode ?

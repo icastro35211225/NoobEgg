@@ -284,6 +284,10 @@ a {
 
 table {
   border-collapse: collapse;
+  height: 200px;
+  overflow-y: scroll;
+  display: block;
+  width: fit-content;
 }
 
 td, th {

@@ -4,7 +4,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import '../App.css';
 import { Card } from "react-bootstrap";
 
-export default function Product(props) { 
+export default function Product(props) {
 
   const productID = props.productID;
   const navigate = useNavigate();
@@ -15,10 +15,10 @@ export default function Product(props) {
 
 
   const getProduct = async (ID) => {
-    let tempProd = await Axios.post('http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/getProduct', {id: ID});
+    let tempProd = await Axios.post('http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/getProduct', { id: ID });
     //console.log(oUser.data[0]);
     await setProduct(tempProd.data[0]);
-}
+  }
 
   useEffect(() => {
     (async () => await getProduct(location.state.id))()
@@ -26,16 +26,18 @@ export default function Product(props) {
 
 
   return (
-    <Card>
-      <Link to={`/product/${product.productID}`}>
-        {/* img */}
-      </Link>
-      <Card.Body>
-      <Link to={`/product/${product.productID}`}>
-        <Card.Title>{product.ProductName}</Card.Title>
-      </Link>
-      <Card.Text>${product.ProductPrice}</Card.Text>  
-      </Card.Body>
-    </Card>
+    <product>
+      <Card>
+        <Link to={`/product/${product.productID}`}>
+          {/* img */}
+        </Link>
+        <Card.Body>
+          <Link to={`/product/${product.productID}`}>
+            <Card.Title>{product.ProductName}</Card.Title>
+          </Link>
+          <Card.Text>${product.ProductPrice}</Card.Text>
+        </Card.Body>
+      </Card>
+    </product>
   )
 }
