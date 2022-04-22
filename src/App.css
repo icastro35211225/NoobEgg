@@ -186,6 +186,14 @@ a {
 }
 /* SearchBar */ 
 
+.searchbar input { 
+	display: flex; 
+	background-color: white; 
+	margin-top: 20px; 
+	height: 40px; 
+	font-size: 20px; 
+} 
+
 .input { 
   display: flex; 
 }
