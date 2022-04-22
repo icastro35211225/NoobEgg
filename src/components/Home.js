@@ -23,6 +23,7 @@ export default function Home(props) {
     useEffect(()=> {
         Axios.get('http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/get').then((response)=> {
           setItemlist(response.data);
+		  setFilteredItemList(response.data); 
           //console.log(itemList);
         })
         const userInfo = JSON.parse(localStorage.getItem("userInfo"));
