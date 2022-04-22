@@ -66,6 +66,8 @@ function App() {
                     <div class = "dropdown">
                     <Link to="/cart">{cart}</Link>
                       <button className="dropbtn">{user}</button>
+                      <Link to="/dashboard">User Dashboard</Link>
+                        <Link to="/login" onClick={logout}>Log Out</Link>
                       <div className="dropdown-content">
                         <Link to="/dashboard">User Dashboard</Link>
                         <Link to="/login" onClick={logout}>Log Out</Link>

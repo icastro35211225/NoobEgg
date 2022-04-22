@@ -38,6 +38,11 @@ export default function AdminDashboard(props) {
         if (userInfo) {
             //console.log(userInfo) 
             await setUser(userInfo);
+            setFirstName(userInfo.FirstName);
+            setLastName(userInfo.LastName);
+            setEmail(userInfo.Email);
+            setPassword(userInfo.Pass);
+            setAddress(userInfo.shipAddress);
         }
     }
 
@@ -142,13 +147,15 @@ export default function AdminDashboard(props) {
                                 <div>
                                     <button onClick={() => setEditingAccount(false)}>Cancel</button>
                                     <label><b>First Name</b></label>
-                                    <input type="text" placeholder="First Name" value={user.FirstName} onChange={(e) => {
+                                    <input type="text" placeholder="First Name" value={fName} onChange={(e) => {
                                         setFirstName(e.target.value)
                                     }}></input>
                                     <label><b>Last Name</b></label>
-                                    <input type="text" placeholder="Last Name" value="New Lastname" ></input>
+                                    <input type="text" placeholder="Last Name" value={lName} onChange={(e) => {
+                                        setLastName(e.target.value)
+                                    }}></input>
                                     <label><b>Email</b></label>
-                                    <input type="text" placeholder="Email" value={user.Email} onChange={(e) => {
+                                    <input type="text" placeholder="Email" value={email} onChange={(e) => {
                                         setEmail(e.target.value)
                                     }}></input>
                                     <label><b>Password</b></label>
@@ -156,7 +163,7 @@ export default function AdminDashboard(props) {
                                         setPassword(e.target.value)
                                     }}></input>
                                     <label><b>Shipping Address</b></label>
-                                    <input type="text" placeholder="Shipping Address" value={user.shipAddress} onChange={(e) => {
+                                    <input type="text" placeholder="Shipping Address" value={address} onChange={(e) => {
                                         setAddress(e.target.value)
                                     }}></input>
                                     <button onClick={() => clickedApply()}>Apply Changes</button>
