@@ -60,11 +60,16 @@ function App() {
                   </div>
                   :
                   <div>
+                    <div class = "dropdown">
                     <Link to="/cart">{cart}</Link>
-                    <Link to="/dashboard">Account Dashboard</Link>
+                      <button className="dropbtn">{user}</button>
+                      <div className="dropdown-content">
+                        <Link to="/dashboard">User Dashboard</Link>
+                        <Link to="/login" onClick={logout}>Log Out</Link>
+                      </div>
+                    </div>
                   </div>
                 }
-                <Link to="/login" onClick={logout}>Log Out</Link>
               </div>
             </div>
               :

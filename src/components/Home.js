@@ -141,11 +141,12 @@ export default function Home(props) {
               <Product key={product.ProductID}product={product}></Product>
               return(
                 <div className="card">
-                  <div className="product-info">  
-                    <Link to={`/product/${product._id}`}>
-                      {/* <img src={product.image} alt={product.name} /> */}
+                  <div className="product-info"> 
+                  <button className="productButton" onClick={() => navigate("/productscreen", { state: { id: product.ProductID }})}><h1>{product.ProductName}</h1></button>
+                    {/* <Link to={`/product/${product._id}`}>
+                      <img src={product.image} alt={product.name} />
                       <h1>{product.ProductName}</h1>
-                    </Link>
+                    </Link> */}
                     <img id="proImg" src={product.ProductImage}></img>
                     <p>{product.ProductDesc}</p>
                     <p><strong>${product.ProductPrice}</strong> </p>
