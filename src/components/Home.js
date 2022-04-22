@@ -132,7 +132,10 @@ export default function Home(props) {
 
     return (
         <home>
-          <SearchBar placeholder="Search items..." /> 
+          //<SearchBar placeholder="Search items..." /> 
+		  <div className="searchbar"> 
+		  	<input type="text" placeholder="Search items..." onChange={Filter} /> 
+		  </div> 
           <h1>Products</h1>
           <h2>{greeting}</h2>
           {/* <label>Item Name</label>
@@ -154,7 +157,7 @@ export default function Home(props) {
         
           <main>
             <div className="products">
-            {itemList.map((product)=> {
+            {filteredItemList.map((product)=> {
               <Product key={product.ProductID}product={product}></Product>
               return(
                 <div className="card">
