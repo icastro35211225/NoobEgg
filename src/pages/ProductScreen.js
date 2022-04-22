@@ -35,32 +35,7 @@ export default function ProductScreen(props) {
         :
         <div>
           {/* <h1>Product Name: {product.ProductName}</h1> */}
-          <Row>
-            <Col md={6}>{product.ProductImage}</Col>
-            <Col md={3}>
-              <ListGroup variant="flush">
-                <ListGroup.Item>
-                  <h1>{product.ProductName}</h1>
-                </ListGroup.Item>
-                <ListGroup.Item>Price: ${product.ProductPrice}</ListGroup.Item>
-                <ListGroup.Item>
-                  Description:
-                  <p>{product.ProductDesc}</p>
-                </ListGroup.Item>
-              </ListGroup>
-            </Col>
-            <Col md={3}>
-              <Card>
-                <Card.Body>
-                  <ListGroup variant="flush">
-                    <ListGroup.Item>
-                    <Row>
-                      <Col>Price:</Col>
-                      <Col>${product.ProductPrice}</Col>
-                    </Row>
-                    </ListGroup.Item>
-                    
-                    <ListGroup.Item>
+
                     <Row>
                         <Col md={6}><img className="img-large"
                             src="https://i.pinimg.com/originals/c4/96/9a/c4969aaedbc096c09b35e31abd11e2ec.png"></img></Col>
@@ -116,14 +91,7 @@ export default function ProductScreen(props) {
                             </Card>
                         </Col>
                     </Row>
-                  </ListGroup.Item>
-                </ListGroup>
-                </Card.Body>
-                </Card>
-                </Col>
-                </Row>    
                 </div>
-
             }
         </productscreen>
     )
