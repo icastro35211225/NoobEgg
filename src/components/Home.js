@@ -9,6 +9,7 @@ export default function Home(props) {
     const [itemName, setItemName] = useState('');
     const [itemDescription, setItemDescription] = useState('');
     const [itemList, setItemlist] = useState([]);
+    const [filteredList, setFilteredList] = useState([]); 
     const [newDescription, setNewDescription] = useState('');
     const [greeting, setGreeting] = useState('');
     const [isAdmin, setIsAdmin] = useState('');
@@ -32,6 +33,22 @@ export default function Home(props) {
           setUser(userInfo);
         }  
       }, [])
+
+    const Filter = (event) => { 
+		const targetVal = event.target.value; 
+
+		if (targetVal === "") { 
+			setFilteredList(itemList); 
+		} 
+
+		else { 
+			const filterNew = itemList.filter((product) => { 
+				return product.ProductName.toUpperCase().includes(targetVal.toUpperCase()); 
+			}); 
+
+			setFilteredList(filterNew); 
+		} 
+	}; 
 
     const submitItem = () => {
         Axios.post('http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/insert', {
