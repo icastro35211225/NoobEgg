@@ -160,10 +160,11 @@ export default function Home(props) {
           <main>
             <div className="products">
             {itemList.filter((product) => {
-				if (searchWord == "") 
+				if (searchWord == "") { 
 					return product
-				else if (product.ProductName.toUpperCase().includes(searchWord.toUpperCase())) 
+				} else if (product.ProductName.toUpperCase().includes(searchWord.toUpperCase())) { 
 					return product 
+				} 
 			}.map((product)=> {
               <Product key={product.ProductID}product={product}></Product>
               return(
