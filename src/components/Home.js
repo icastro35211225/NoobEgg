@@ -10,6 +10,7 @@ export default function Home(props) {
     const [itemDescription, setItemDescription] = useState('');
     const [itemList, setItemlist] = useState([]);
     const [filteredList, setFilteredList] = useState([]); 
+	const [searchWord, setSearchWord] = useState(""); 
     const [newDescription, setNewDescription] = useState('');
     const [greeting, setGreeting] = useState('');
     const [isAdmin, setIsAdmin] = useState('');
@@ -35,7 +36,7 @@ export default function Home(props) {
         }  
       }, [])
 
-    const Filter = (event) => { 
+/*    const Filter = (event) => { 
 		const targetVal = event.target.value; 
 
 		if (targetVal === "") { 
@@ -49,7 +50,7 @@ export default function Home(props) {
 
 			setFilteredList(filterNew); 
 		} 
-	}; 
+	}; */
 
     const submitItem = () => {
         Axios.post('http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/insert', {
@@ -135,7 +136,7 @@ export default function Home(props) {
         <home>
           //<SearchBar placeholder="Search items..." /> 
 		  <div className="searchbar"> 
-		  	<input type="text" placeholder="Search items..." onChange={Filter} /> 
+		  	<input type="text" placeholder="Search items..." onChange={(event) => {setSearchWord(event.target.value);}} /> 
 		  </div> 
           <h1>Products</h1>
           <h2>{greeting}</h2>
@@ -158,7 +159,12 @@ export default function Home(props) {
         
           <main>
             <div className="products">
-            {filteredItemList.map((product)=> {
+            {itemList.filter((product) => {
+				if (searchWord == "") 
+					return product
+				else if (product.ProductName.toUpperCase().includes(searchWord.toUpperCase())) 
+					return product 
+			}.map((product)=> {
               <Product key={product.ProductID}product={product}></Product>
               return(
                 <div className="card">
