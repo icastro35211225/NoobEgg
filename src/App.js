@@ -57,6 +57,7 @@ function App() {
                   <div>
                     <Link to="/admindashboard">Admin Dashboard</Link>
                     {/* <Link to="/upload">Image Upload</Link> */}
+                    <Link to="/login" onClick={logout}>Log Out</Link>
                   </div>
                   :
                   <div>

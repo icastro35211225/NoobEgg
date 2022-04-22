@@ -307,7 +307,7 @@ td, th {
 .tableButton {
   text-decoration: underline;
   border: none;
-  background-color: white;
+  background-color: transparent;
   width: 100%;
   text-align: left;
 }

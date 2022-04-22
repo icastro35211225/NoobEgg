@@ -4,23 +4,41 @@ import Axios from 'axios';
 import '../App.css';
 import OrderSummary from "../components/OrderSummary";
 import { click } from "@testing-library/user-event/dist/click";
+import { Table } from "react-bootstrap";
 
 
 export default function AdminDashboard(props) {
 
-    const [user, setUser] = useState();
-    const [acctInfo, setAcctInfo] = useState("");
-    const [codes, setCodes] = useState(null);
-    const [addingCode, setAddingCode] = useState(false);
+    //Order summary
     const [orders, setOrders] = useState(null);
     const [orderID, setOrderID] = useState(null);
     const [viewingOrder, setViewingOrder] = useState(false);
+    //Discount code
+    const [addingCode, setAddingCode] = useState(false);
+    const [codes, setCodes] = useState(null);
     const [disCode, setDisCode] = useState("");
     const [mult, setMult] = useState();
+    //Account details
+    const [user, setUser] = useState(null);
+    const [editingAccount, setEditingAccount] = useState(false);
+    const [fName, setFirstName] = useState('');
+    const [lName, setLastName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [address, setAddress] = useState('');
 
     const goBack = () => {
         setViewingOrder(false);
         //window.location.reload(false);
+    }
+
+    const getUser = async () => {
+        const userInfo = JSON.parse(await localStorage.getItem("userInfo"));
+        console.log(userInfo)
+        if (userInfo) {
+            //console.log(userInfo) 
+            await setUser(userInfo);
+        }
     }
 
     const getCodes = async () => {
@@ -29,7 +47,7 @@ export default function AdminDashboard(props) {
     }
 
     const postCodes = async () => {
-        await Axios.post('http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/addCode', 
+        await Axios.post('http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/addCode',
             {
                 code: disCode,
                 mult: mult
@@ -41,6 +59,23 @@ export default function AdminDashboard(props) {
     const deleteCode = async (codeID) => {
         await Axios.delete(`http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/deleteCode/${codeID}`);
         //await setCodes(null);
+    }
+
+    const updateAccount = async () => {
+        let response = await Axios.put('http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/updateAccount',
+        {
+            userID: user.UserID,
+            fName: fName,
+            lName: lName,
+            email: email,
+            password: password,
+            address: address
+        });
+        //get user from database w userID
+        let tempUser = await Axios.get(`http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/getUser/${user.UserID}`);
+        //upload that user to local storage
+        localStorage.setItem("userInfo", JSON.stringify(tempUser.data[0]));
+        getUser()
     }
 
     const showOrder = (id) => {
@@ -59,19 +94,21 @@ export default function AdminDashboard(props) {
         setCodes(null);
     }
 
+    const clickedApply = () => {
+        (async () => await updateAccount())();
+        localStorage.clear();
+        setEditingAccount(false);
+    }
+
     const getOrders = async () => {
         let tempOrders = await Axios.get('http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/getAllOrders');
         await setOrders(tempOrders.data);
     }
 
     useEffect(() => {
-        const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-        if (userInfo) {
-            setUser(userInfo);
-            //console.log(user);
-        }
-        (async () => await getOrders())();
-        (async () => await getCodes())();
+        getUser()
+        getOrders()
+        getCodes()
     }, [])
 
     useEffect(() => {
@@ -82,6 +119,11 @@ export default function AdminDashboard(props) {
     useEffect(() => {
 
     }, [viewingOrder])
+
+    useEffect(() => {
+        //getUser()
+        //(async () => await getUser())()
+    }, [user])
 
     return (
         <admindashboard>
@@ -95,10 +137,38 @@ export default function AdminDashboard(props) {
                     <h2>Admin Dashboard</h2>
                     {user ?
                         <div>
-                            <h3>Account Details</h3> <button>Edit Account</button>
-                            <p>Name: {user.FirstName} {user.LastName}</p>
-                            <p>Email: {user.Email}</p>
-                            <p>Shipping Address: {user.shipAddress}</p>
+                            <h3>Account Details</h3> 
+                            {editingAccount ?
+                                <div>
+                                    <button onClick={() => setEditingAccount(false)}>Cancel</button>
+                                    <label><b>First Name</b></label>
+                                    <input type="text" placeholder="First Name" value={user.FirstName} onChange={(e) => {
+                                        setFirstName(e.target.value)
+                                    }}></input>
+                                    <label><b>Last Name</b></label>
+                                    <input type="text" placeholder="Last Name" value="New Lastname" ></input>
+                                    <label><b>Email</b></label>
+                                    <input type="text" placeholder="Email" value={user.Email} onChange={(e) => {
+                                        setEmail(e.target.value)
+                                    }}></input>
+                                    <label><b>Password</b></label>
+                                    <input type="password" placeholder="Password" value={user.Pass} onChange={(e) => {
+                                        setPassword(e.target.value)
+                                    }}></input>
+                                    <label><b>Shipping Address</b></label>
+                                    <input type="text" placeholder="Shipping Address" value={user.shipAddress} onChange={(e) => {
+                                        setAddress(e.target.value)
+                                    }}></input>
+                                    <button onClick={() => clickedApply()}>Apply Changes</button>
+                                </div>
+                                :
+                                <div>
+                                    <button onClick={() => setEditingAccount(true)}>Edit Account</button>
+                                    <p>Name: {user.FirstName} {user.LastName}</p>
+                                    <p>Email: {user.Email}</p>
+                                    <p>Shipping Address: {user.shipAddress}</p>
+                                </div>
+                            }
                         </div>
                         : null}
                     <p>____________________________________________________________</p>
@@ -108,25 +178,28 @@ export default function AdminDashboard(props) {
                     {orders === null ?
                         <p>No orders</p>
                         :
-                        <table>
-                            <tr>
-                                <th>Order ID</th>
-                                <th>User ID</th>
-                                <th>Order Date</th>
-                                <th>Order Total</th>
-                            </tr>
-                            {orders.map((order) => {
-                                return (
-                                    <tr key={order.OrderID}>
-
-                                        <td><button className="tableButton" onClick={() => showOrder(order.OrderID)}>{order.OrderID}</button></td>
-                                        <td><button className="tableButton" onClick={() => showOrder(order.OrderID)}>{order.OrderUserID}</button></td>
-                                        <td><button className="tableButton" onClick={() => showOrder(order.OrderID)}>{order.OrderDate}</button></td>
-                                        <td><button className="tableButton" onClick={() => showOrder(order.OrderID)}>${order.OrderTotal}</button></td>
-                                    </tr>
-                                );
-                            })}
-                        </table>
+                        <Table striped bordered hover size="sm">
+                            <thead>
+                                <tr>
+                                    <th>Order ID</th>
+                                    <th>User ID</th>
+                                    <th>Order Date</th>
+                                    <th>Order Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {orders.map((order) => {
+                                    return (
+                                        <tr key={order.OrderID}>
+                                            <td><button className="tableButton" onClick={() => showOrder(order.OrderID)}>{order.OrderID}</button></td>
+                                            <td><button className="tableButton" onClick={() => showOrder(order.OrderID)}>{order.OrderUserID}</button></td>
+                                            <td><button className="tableButton" onClick={() => showOrder(order.OrderID)}>{order.OrderDate}</button></td>
+                                            <td><button className="tableButton" onClick={() => showOrder(order.OrderID)}>${order.OrderTotal}</button></td>
+                                        </tr>
+                                    );
+                                })}
+                            </tbody>
+                        </Table>
                     }
                     <p>____________________________________________________________</p>
                     <div >
@@ -135,34 +208,38 @@ export default function AdminDashboard(props) {
                     {addingCode ?
                         <div>
                             <div>
-                                <input placeholder="Code" onChange={(e)=> {setDisCode(e.target.value)}}></input>
-                                <input placeholder="Multiplier" onChange={(e)=> {setMult(e.target.value)}}></input>
+                                <input placeholder="Code" onChange={(e) => { setDisCode(e.target.value) }}></input>
+                                <input placeholder="Multiplier" onChange={(e) => { setMult(e.target.value) }}></input>
                             </div>
                             <button onClick={addCode}>Add Code</button>
                         </div>
                         :
                         <div>
-                        {codes === null ?
-                            <p>Loading Codes...</p>
-                            :
-                            <table>
-                            <tr>
-                                <th>Code</th>
-                                <th>Mult</th>
-                                <th>Delete</th>
-                            </tr>
-                            {codes.map((code) => {
-                                return (
-                                    <tr key={code.dCode}>
-                                        <td>{code.dCode}</td>
-                                        <td>{code.mul}</td>
-                                        <td><button onClick={() => clickedDelete(code.dCode)}>Delete</button></td>
-                                    </tr>
-                                );
-                            })}
-                        </table>
-                        }
-                        <button onClick={function () { setAddingCode(true); }}>Add discount code</button>
+                            {codes === null ?
+                                <p>Loading Codes...</p>
+                                :
+                                <Table striped bordered hover size="sm">
+                                    <thead>
+                                        <tr>
+                                            <th>Code</th>
+                                            <th>Mult</th>
+                                            <th>Delete</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {codes.map((code) => {
+                                            return (
+                                                <tr key={code.dCode}>
+                                                    <td>{code.dCode}</td>
+                                                    <td>{code.mul}</td>
+                                                    <td><button onClick={() => clickedDelete(code.dCode)}>Delete</button></td>
+                                                </tr>
+                                            );
+                                        })}
+                                    </tbody>
+                                </Table>
+                            }
+                            <button onClick={function () { setAddingCode(true); }}>Add discount code</button>
                         </div>
                     }
                 </div>
