@@ -3,7 +3,7 @@ import Axios from 'axios';
 import Product from "./Product";
 import SearchBar from "./SearchBar";
 import { Link, useNavigate } from "react-router-dom";
-import { Col, Row } from "react-bootstrap";
+import { Col, Row, Button } from "react-bootstrap";
 
 export default function Home(props) {
   const [itemID, setItemID] = useState('');
@@ -94,11 +94,11 @@ export default function Home(props) {
             amount: count
           }
         ).then((response) => {
-        setStockErrMsg("Added \"" + response.data[0].ProductName + "\" to cart!");
+          setStockErrMsg("Added \"" + response.data[0].ProductName + "\" to cart!");
         })
       }
-  })
-}
+    })
+  }
 
 
   // Axios.post('http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/insert', {
@@ -107,45 +107,69 @@ export default function Home(props) {
   // });
 
 
-const deleteReview = (item) => {
-  Axios.delete(`http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/delete/${item}`);
+  const deleteReview = (item) => {
+    Axios.delete(`http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/delete/${item}`);
 
-  //window.location.reload(false);
+    //window.location.reload(false);
 
-}
-
-const updateItem = (item) => {
-  Axios.put("http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/update", {
-    itemName: item,
-    itemDescription: newDescription
-  });
-
-  setNewDescription("");
-
-}
-
-//ALL NUMS ARE CHANGED BC I ONLY HAVE ONE COUNT AT THE TOP OF THIS CODE
-//THIS WONT BE AN ISSUE WHEN WE HAVE A PRODUCT PAGE SINCE THERE WILL ONLY BE ONE PRODUCT
-//SAME WITH ERROR MESSAGE
-const handleSubOne = () => {
-  if (count > 1) {
-    setCount(count - 1);
   }
-};
 
-const handleAddOne = () => {
-  setCount(count + 1);
-};
+  const updateItem = (item) => {
+    Axios.put("http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/update", {
+      itemName: item,
+      itemDescription: newDescription
+    });
 
-return (
-  <home>
-    {/* <SearchBar placeholder="Search items..." />  */}
-    <div className="searchbar">
-      <input type="text" placeholder="Search items..." onChange={Filter} />
-    </div>
-    <h1>Products</h1>
-    <h2>{greeting}</h2>
-    {/* <label>Item Name</label>
+    setNewDescription("");
+
+  }
+
+  //ALL NUMS ARE CHANGED BC I ONLY HAVE ONE COUNT AT THE TOP OF THIS CODE
+  //THIS WONT BE AN ISSUE WHEN WE HAVE A PRODUCT PAGE SINCE THERE WILL ONLY BE ONE PRODUCT
+  //SAME WITH ERROR MESSAGE
+  const handleSubOne = () => {
+    if (count > 1) {
+      setCount(count - 1);
+    }
+  };
+
+  const handleAddOne = () => {
+    setCount(count + 1);
+  };
+
+  const sortHighToLow = () => {
+    const sortedProducts = [...itemList].sort((a, b) => {
+      return b.ProductPrice - a.ProductPrice
+    })
+    setItemlist(sortedProducts);
+  }
+
+  const sortLowToHigh = () => {
+    const sortedProducts = [...itemList].sort((a, b) => {
+      return a.ProductPrice - b.ProductPrice
+    })
+    setItemlist(sortedProducts);
+  }
+
+  const sortQuantity = () => {
+    const sortedProducts = [...itemList].sort((a, b) => {
+      return b.ProductStock - a.ProductStock
+    })
+    setItemlist(sortedProducts);
+  }
+
+  return (
+    <home>
+      {/* <SearchBar placeholder="Search items..." />  */}
+      <div className="searchbar">
+        <input type="text" placeholder="Search items..." onChange={Filter} />
+      </div>
+      <h1>Products</h1>
+      <h2>{greeting}</h2>
+      <Button onClick={() => sortQuantity()}>Sort by Availability</Button>
+      <Button onClick={() => sortHighToLow()}>Sort $$$</Button>
+      <Button onClick={() => sortLowToHigh()}>Sort $</Button>
+      {/* <label>Item Name</label>
 
           <input type="text" name="itemName" onChange={(e)=> {
             setItemName(e.target.value)
@@ -162,63 +186,63 @@ return (
           <button onClick={submitItem}>Submit</button> */}
 
 
-    <main>
-      <div className="products">
-        {/* {itemList.filter((product) => {
+      <main>
+        <div className="products">
+          {/* {itemList.filter((product) => {
           if (searchWord == "") {
             return product
           } else if (product.ProductName.toUpperCase().includes(searchWord.toUpperCase())) {
             return product
           }
         }.map((product) => { */}
-        {itemList.map((product) => {
-          <Product key={product.ProductID} product={product}></Product>
-          return (
-            <div className="card">
-              <div className="product-info">
-                <img id="proImg" src={product.ProductImage}></img>
-                <button className="productButton" onClick={() => navigate("/productscreen", { state: { id: product.ProductID } })}><h1>{product.ProductName}</h1></button>
-                {/* <Link to={`/product/${product._id}`}>
+          {itemList.map((product) => {
+            <Product key={product.ProductID} product={product}></Product>
+            return (
+              <div className="card">
+                <div className="product-info">
+                  <img id="proImg" src={product.ProductImage}></img>
+                  <button className="productButton" onClick={() => navigate("/productscreen", { state: { id: product.ProductID } })}><h1>{product.ProductName}</h1></button>
+                  {/* <Link to={`/product/${product._id}`}>
                       <img src={product.image} alt={product.name} />
                       <h1>{product.ProductName}</h1>
                     </Link> */}
-                <p>{product.ProductDesc}</p>
-                <p><strong>${product.ProductPrice}</strong> </p>
-                <p>Stock: {product.ProductStock}</p>
-                {/* <button onClick={()=> {deleteReview(product.ProductName)}}>Delete</button>
+                  <p>{product.ProductDesc}</p>
+                  <p><strong>${product.ProductPrice}</strong> </p>
+                  <p>Stock: {product.ProductStock}</p>
+                  {/* <button onClick={()=> {deleteReview(product.ProductName)}}>Delete</button>
               <input type="text" id="updateInput" onChange={(e)=> {
                 setNewDescription(e.target.value)
               }}></input>
               <button onClick={()=> {updateItem(product.ProductName)}}>Update</button> */}
-              </div>
-              {loginStatus ?
-                <div>
-                  <p>Amount: {count}</p>
-                  <button onClick={handleSubOne}>-1</button>
-                  <button onClick={handleAddOne}>+1</button>
-                  <button onClick={function () { addToCart(product.ProductID); }}>Add To Cart</button>
                 </div>
-                : null
-              }
-            </div>
-          );
+                {loginStatus ?
+                  <div>
+                    <p>Amount: {count}</p>
+                    <button onClick={handleSubOne}>-1</button>
+                    <button onClick={handleAddOne}>+1</button>
+                    <button onClick={function () { addToCart(product.ProductID); }}>Add To Cart</button>
+                  </div>
+                  : null
+                }
+              </div>
+            );
 
-        })}
-      </div>
+          })}
+        </div>
 
-      {/* <button onClick={()=> {deleteReview(val.name)}}>Delete</button>
+        {/* <button onClick={()=> {deleteReview(val.name)}}>Delete</button>
           <input type="text" id="updateInput" onChange={(e)=> {
             setNewDescription(e.target.value)
           }}></input>
           <button onClick={()=> {updateItem(val.desc)}}>Update</button> */}
-      <p>{stockErrMsg}</p>
+        <p>{stockErrMsg}</p>
 
-    </main>
+      </main>
 
-    {/* <div className="upload test">
+      {/* <div className="upload test">
             
           </div> */}
-  </home>
-)
-        }
+    </home>
+  )
+}
 

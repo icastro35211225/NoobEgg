@@ -4,7 +4,7 @@ import Axios from 'axios';
 import '../App.css';
 import OrderSummary from "../components/OrderSummary";
 import { click } from "@testing-library/user-event/dist/click";
-import { Table } from "react-bootstrap";
+import { Table, Col } from "react-bootstrap";
 import { Button } from "bootstrap";
 
 
@@ -69,14 +69,14 @@ export default function AdminDashboard(props) {
 
     const updateAccount = async () => {
         let response = await Axios.put('http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/updateAccount',
-        {
-            userID: user.UserID,
-            fName: fName,
-            lName: lName,
-            email: email,
-            password: password,
-            address: address
-        });
+            {
+                userID: user.UserID,
+                fName: fName,
+                lName: lName,
+                email: email,
+                password: password,
+                address: address
+            });
         //get user from database w userID
         let tempUser = await Axios.get(`http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/getUser/${user.UserID}`);
         //upload that user to local storage
@@ -87,6 +87,36 @@ export default function AdminDashboard(props) {
     const showOrder = (id) => {
         setOrderID(id);
         setViewingOrder(true);
+    }
+
+    const sortHighToLow = () => {
+        function highToLow(a, b) {
+            return b.OrderTotal - a.OrderTotal
+        }
+        orders.sort(highToLow)
+    }
+
+    const sortLowToHigh = () => {
+        function lowToHigh(a, b) {
+            return a.OrderTotal - b.OrderTotal
+        }
+        orders.sort(lowToHigh)
+    }
+
+    const sortByDate = () => {
+        function dates(a, b) {
+            var dateA = new Date(a.OrderDate);
+            var dateB = new Date(b.OrderDate);
+            return dateA - dateB
+        }
+        orders.sort(dates)
+    }
+
+    const sortByCustomer = () => {
+        function byCust(a, b) {
+            return a.OrderUserID - b.OrderUserID
+        }
+        orders.sort(byCust)
     }
 
     const addCode = async () => {
@@ -123,19 +153,13 @@ export default function AdminDashboard(props) {
     }, [codes])
 
     useEffect(() => {
-
     }, [viewingOrder])
-
-    useEffect(() => {
-        //getUser()
-        //(async () => await getUser())()
-    }, [user])
 
     return (
         <admindashboard>
             {viewingOrder ?
                 <div>
-                    <Button onClick={goBack}>Back to Dashboard</Button>
+                    <button onClick={goBack}>Back to Dashboard</button>
                     <OrderSummary orderID={orderID} />
                 </div>
                 :
@@ -143,10 +167,10 @@ export default function AdminDashboard(props) {
                     <h2>Admin Dashboard</h2>
                     {user ?
                         <div>
-                            <h3>Account Details</h3> 
+                            <h3>Account Details</h3>
                             {editingAccount ?
                                 <div>
-                                    <Button onClick={() => setEditingAccount(false)}>Cancel</Button>
+                                    <button onClick={() => setEditingAccount(false)}>Cancel</button>
                                     <label><b>First Name</b></label>
                                     <input type="text" placeholder="First Name" value={fName} onChange={(e) => {
                                         setFirstName(e.target.value)
@@ -167,7 +191,7 @@ export default function AdminDashboard(props) {
                                     <input type="text" placeholder="Shipping Address" value={address} onChange={(e) => {
                                         setAddress(e.target.value)
                                     }}></input>
-                                    <Button onClick={() => clickedApply()}>Apply Changes</Button>
+                                    <button onClick={() => clickedApply()}>Apply Changes</button>
                                 </div>
                                 :
                                 <div>
@@ -183,9 +207,14 @@ export default function AdminDashboard(props) {
                     <Link to="/admin/additem">Add Item </Link>
                     <p>____________________________________________________________</p>
                     <h3>Orders</h3>
+                    <button onClick={() => sortHighToLow()}>Sort $$$</button>
+                    <button onClick={() => sortLowToHigh()}>Sort $</button>
+                    <button onClick={() => sortByDate()}>Sort By Date</button>
+                    <button onClick={() => sortByCustomer()}>Sort by Customer</button>
                     {orders === null ?
                         <p>No orders</p>
                         :
+                        <Col>
                         <Table striped bordered hover size="sm">
                             <thead>
                                 <tr>
@@ -208,6 +237,7 @@ export default function AdminDashboard(props) {
                                 })}
                             </tbody>
                         </Table>
+                        </Col>
                     }
                     <p>____________________________________________________________</p>
                     <div >
