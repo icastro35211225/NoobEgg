@@ -174,12 +174,12 @@ return (
           return (
             <div className="card">
               <div className="product-info">
+                <img id="proImg" src={product.ProductImage}></img>
                 <button className="productButton" onClick={() => navigate("/productscreen", { state: { id: product.ProductID } })}><h1>{product.ProductName}</h1></button>
                 {/* <Link to={`/product/${product._id}`}>
                       <img src={product.image} alt={product.name} />
                       <h1>{product.ProductName}</h1>
                     </Link> */}
-                <img id="proImg" src={product.ProductImage}></img>
                 <p>{product.ProductDesc}</p>
                 <p><strong>${product.ProductPrice}</strong> </p>
                 <p>Stock: {product.ProductStock}</p>

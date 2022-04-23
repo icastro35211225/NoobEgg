@@ -5,6 +5,7 @@ import '../App.css';
 import OrderSummary from "../components/OrderSummary";
 import { click } from "@testing-library/user-event/dist/click";
 import { Table } from "react-bootstrap";
+import { Button } from "bootstrap";
 
 
 export default function AdminDashboard(props) {
@@ -134,7 +135,7 @@ export default function AdminDashboard(props) {
         <admindashboard>
             {viewingOrder ?
                 <div>
-                    <button onClick={goBack}>Back to Dashboard</button>
+                    <Button onClick={goBack}>Back to Dashboard</Button>
                     <OrderSummary orderID={orderID} />
                 </div>
                 :
@@ -145,7 +146,7 @@ export default function AdminDashboard(props) {
                             <h3>Account Details</h3> 
                             {editingAccount ?
                                 <div>
-                                    <button onClick={() => setEditingAccount(false)}>Cancel</button>
+                                    <Button onClick={() => setEditingAccount(false)}>Cancel</Button>
                                     <label><b>First Name</b></label>
                                     <input type="text" placeholder="First Name" value={fName} onChange={(e) => {
                                         setFirstName(e.target.value)
@@ -166,7 +167,7 @@ export default function AdminDashboard(props) {
                                     <input type="text" placeholder="Shipping Address" value={address} onChange={(e) => {
                                         setAddress(e.target.value)
                                     }}></input>
-                                    <button onClick={() => clickedApply()}>Apply Changes</button>
+                                    <Button onClick={() => clickedApply()}>Apply Changes</Button>
                                 </div>
                                 :
                                 <div>

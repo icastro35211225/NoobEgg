@@ -20,12 +20,10 @@
 }
 header{
   grid-area: header;
-  background-color: #ffdef2;
-  border: #f7022a;
-  border-style:solid;
   border-width: 1.3pt;
   border-radius: 10px;
 }
+
 main{
   grid-area: main;
   padding: 1rem;
@@ -198,46 +196,46 @@ a {
   background-color: lightgrey; 
 }
 /* Navbar container */
-.navbar {
+/* .navbar {
   overflow: hidden;
   background-color: #333;
   font-family: Arial;
-}
+} */
 
 /* Links inside the navbar */
 .navbar a {
   float: left;
   font-size: 16px;
-  color: white;
+  color: black;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
 }
 
 /* The dropdown container */
-.dropdown {
+/* .dropdown {
   float: left;
   overflow: hidden;
-}
+} 
 
 /* Dropdown button */
-.dropdown .dropbtn {
+ .dropdown .dropbtn {
   font-size: 16px;
   border: none;
   outline: none;
-  color: #f7022a;
+  color: black;
   padding: 14px 16px;
   background-color: inherit;
   font-family: inherit; /* Important for vertical align on mobile phones */
-  margin: 0; /* Important for vertical align on mobile phones */
-}
+  margin: 0; 
+ }
 
 /* Add a red background color to navbar links on hover */
-.navbar a:hover, .dropdown:hover .dropbtn {
+/* .navbar a:hover, .dropdown:hover .dropbtn {
   background-color: white;
-}
+} */
 
-/* Dropdown content (hidden by default) */
+ /*Dropdown content (hidden by default)
 .dropdown-content {
   display: none;
   position: absolute;
@@ -248,7 +246,7 @@ a {
 }
 
 /* Links inside the dropdown */
-.dropdown-content a {
+/* .dropdown-content a {
   float: left;
   color: black;
   padding: 12px 16px;
@@ -258,14 +256,14 @@ a {
 }
 
 /* Add a grey background color to dropdown links on hover */
-.dropdown-content a:hover {
+/* .dropdown-content a:hover {
   background-color: #ffedf8;
 }
 
 /* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {
+/* /* .dropdown:hover .dropdown-content {
   display: block;
-}
+} */  
 
 table {
   border-collapse: collapse;
@@ -290,7 +288,7 @@ td, th {
 }
 
 .productButton {
-  text-decoration: underline;
+  text-decoration: none;
   border: none;
   background-color: white;
   width: 100%;

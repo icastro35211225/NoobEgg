@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Table } from "react-bootstrap";
+import { Button, Col, Row, Table } from "react-bootstrap";
 import OrderSummary from "../components/OrderSummary";
 
 import Axios from 'axios';
@@ -94,8 +94,8 @@ export default function Dashboard(props) {
                         <div>
                             <h3>Account Details</h3>
                             {editingAccount ?
-                                <div>
-                                    <button onClick={() => setEditingAccount(false)}>Cancel</button>
+                                <Row>
+                                    <Col><Button onClick={() => setEditingAccount(false)}>Cancel</Button></Col>
                                     <label><b>First Name</b></label>
                                     <input type="text" placeholder="First Name" value={fName} onChange={(e) => {
                                         setFirstName(e.target.value)
@@ -116,11 +116,11 @@ export default function Dashboard(props) {
                                     <input type="text" placeholder="Shipping Address" value={address} onChange={(e) => {
                                         setAddress(e.target.value)
                                     }}></input>
-                                    <button onClick={() => clickedApply()}>Apply Changes</button>
-                                </div>
+                                    <Col><Button onClick={() => clickedApply()}>Apply Changes</Button></Col>
+                                </Row>
                                 :
                                 <div>
-                                    <button onClick={() => setEditingAccount(true)}>Edit Account</button>
+                                    <Button onClick={() => setEditingAccount(true)}>Edit Account</Button>
                                     <p>Name: {user.FirstName} {user.LastName}</p>
                                     <p>Email: {user.Email}</p>
                                     <p>Shipping Address: {user.shipAddress}</p>
@@ -128,10 +128,12 @@ export default function Dashboard(props) {
                             }
                         </div>
                         : null}
+                        <Row>
                     <h3>My Orders</h3>
                     {orders === null ?
                         <p>No orders</p>
                         :
+                        <Col>
                         <Table striped bordered hover size="sm">
                             <thead>
                                 <tr>
@@ -154,7 +156,9 @@ export default function Dashboard(props) {
                                 })}
                             </tbody>
                         </Table>
+                        </Col>
                     }
+                    </Row>
                 </div>
             }
         </dashboard>

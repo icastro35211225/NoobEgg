@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { Route, Routes, Link, useNavigate } from "react-router-dom";
 //import Axios from 'axios';
 //import Header from "./components/Header";
@@ -17,8 +18,9 @@ import AdminDashboard from "./pages/AdminDashboard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import ProductScreen from "./pages/ProductScreen";
-import { Navbar, Container, Dropdown, DropdownButton } from "react-bootstrap";
+import { Navbar, Container, Dropdown, DropdownButton, Nav, NavDropdown, Card } from "react-bootstrap";
 import DropdownMenu from "react-bootstrap/esm/DropdownMenu";
+import NavbarToggle from "react-bootstrap/esm/NavbarToggle";
 const user = <FontAwesomeIcon icon={faUser} />;
 const cart = <FontAwesomeIcon icon={faCartShopping} />;
 
@@ -47,11 +49,22 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar bg="primary" variant="dark">
+      <style type="text/css">
+    {`
+    .Navbar-yeah {
+      background-color: #ffdef2;
+      color: white;
+    }
+    `}
+  </style>
+      <div className="d-flex flex-column site-container">
+      <Navbar className="Navbar-yeah" variant="light">
         <Container>
-          <Navbar.Brand href="/">UthrifTSA</Navbar.Brand>
-        </Container>
-        <Container>
+          <Navbar.Brand href="/"><strong>UthrifTSA</strong></Navbar.Brand>
+          <Navbar.Toggle id="basic-navbar-nav"/>
+        
+        <Navbar.Collapse id="basic-navbar-nav">
+        <Nav className="ms-auto">
           {loggedIn ?
             <div>
               <div>
@@ -62,40 +75,31 @@ function App() {
                     <Link to="/login" onClick={logout}>Log Out</Link>
                   </div>
                   :
-                  <div>
-                    <div class = "dropdown">
+                  <Nav>
                     <Link to="/cart">{cart}</Link>
-                      <button className="dropbtn">{user}</button>
-                      <Link to="/dashboard">User Dashboard</Link>
-                        <Link to="/login" onClick={logout}>Log Out</Link>
-                      <div className="dropdown-content">
-                        <Link to="/dashboard">User Dashboard</Link>
-                        <Link to="/login" onClick={logout}>Log Out</Link>
-                      </div>
-                    </div>
-                  </div>
+                    <NavDropdown title={user} id="basic-nav-dropdown">
+                      <NavDropdown.Item href="/dashboard">User Dashboard</NavDropdown.Item>
+                      <NavDropdown.Item href="/login" onClick={logout}>Log Out</NavDropdown.Item>
+                    </NavDropdown>
+                  </Nav>
                 }
               </div>
             </div>
               :
 
-              <div>
-                <Link to="/login">Login</Link>
-                <Link to="/signup">Sign Up</Link>
-              
-
-              <Dropdown>
-                <Dropdown.Toggle variant="light" id="dropdown-basic">{user}</Dropdown.Toggle>
-                <Dropdown.Menu>
-                  <Dropdown.Item href="#/login">Log in</Dropdown.Item>
-                  <Dropdown.Item href="/signup">Sign Up </Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
-              </div>
+              <Nav>
+                <NavDropdown title={user} id="basic-nav-dropdown">
+                    <NavDropdown.Item href="/login">Log in</NavDropdown.Item>
+                    <NavDropdown.Item href="/signup">Sign Up </NavDropdown.Item>
+                </NavDropdown>
+              </Nav>
 
           } 
+        </Nav>
+        </Navbar.Collapse>
         </Container>
         </Navbar>
+        </div>
       <Container>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -110,7 +114,7 @@ function App() {
           <Route path="/admindashboard" element={<AdminDashboard />} />
         </Routes>
       </Container>
-      <footer className="row center">ALL RIGHTS RESERVED (LMAAO)</footer>
+      <Card.Footer className="row center">ALL RIGHTS RESERVED (LMAAO)</Card.Footer>
     </div>
   );
 }
