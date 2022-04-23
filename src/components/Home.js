@@ -69,49 +69,8 @@ export default function Home(props) {
     //window.location.reload(false);
   };
 
-  const addToCart = (id) => {
-    Axios.post('http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/getProduct',
-      { id: id }
-    ).then((response) => {
-      // console.log(user.id);
-      // console.log(response);
-      // console.log(response.data[0].ProductID);
-      // console.log(response.data[0].ProductName);
-      // console.log(response.data[0].ProductPrice);
-      // console.log(response.data[0].ProductImage);
-      // console.log(count);
-      if (count > response.data[0].qty) {
-        setStockErrMsg("Sorry, we dont have that many " + response.data[0].ProductName + "(s) available.");
-      } else {
-
-        Axios.post('http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/addToCart',
-          {
-            userID: user.UserID,
-            productID: response.data[0].ProductID,
-            productName: response.data[0].ProductName,
-            productPrice: response.data[0].ProductPrice,
-            productImage: response.data[0].ProductImage,
-            amount: count
-          }
-        ).then((response) => {
-          setStockErrMsg("Added \"" + response.data[0].ProductName + "\" to cart!");
-        })
-      }
-    })
-  }
-
-
-  // Axios.post('http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/insert', {
-  //   itemName: itemName,
-  //   itemDescription: itemDescription
-  // });
-
-
   const deleteReview = (item) => {
     Axios.delete(`http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/delete/${item}`);
-
-    //window.location.reload(false);
-
   }
 
   const updateItem = (item) => {
@@ -121,21 +80,7 @@ export default function Home(props) {
     });
 
     setNewDescription("");
-
   }
-
-  //ALL NUMS ARE CHANGED BC I ONLY HAVE ONE COUNT AT THE TOP OF THIS CODE
-  //THIS WONT BE AN ISSUE WHEN WE HAVE A PRODUCT PAGE SINCE THERE WILL ONLY BE ONE PRODUCT
-  //SAME WITH ERROR MESSAGE
-  const handleSubOne = () => {
-    if (count > 1) {
-      setCount(count - 1);
-    }
-  };
-
-  const handleAddOne = () => {
-    setCount(count + 1);
-  };
 
   const sortHighToLow = () => {
     const sortedProducts = [...itemList].sort((a, b) => {
@@ -215,15 +160,6 @@ export default function Home(props) {
               }}></input>
               <button onClick={()=> {updateItem(product.ProductName)}}>Update</button> */}
                 </div>
-                {loginStatus ?
-                  <div>
-                    <p>Amount: {count}</p>
-                    <button onClick={handleSubOne}>-1</button>
-                    <button onClick={handleAddOne}>+1</button>
-                    <button onClick={function () { addToCart(product.ProductID); }}>Add To Cart</button>
-                  </div>
-                  : null
-                }
               </div>
             );
 
