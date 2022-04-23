@@ -37,10 +37,12 @@ export default function Home(props) {
     }
   }, [])
 
-  /*    const Filter = (event) => { 
+      const Filter = (event) => { 
       const targetVal = event.target.value; 
+
+      setSearchWord(targetVal); 
   
-      if (targetVal === "") { 
+      /* if (targetVal === "") { 
         setFilteredList(itemList); 
       } 
   
@@ -50,8 +52,8 @@ export default function Home(props) {
         }); 
   
         setFilteredList(filterNew); 
-      } 
-    }; */
+      } */ 
+    }; 
 
   const submitItem = () => {
     Axios.post('http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/insert', {
@@ -139,7 +141,7 @@ return (
   <home>
     {/* <SearchBar placeholder="Search items..." />  */}
     <div className="searchbar">
-      <input type="text" placeholder="Search items..." onChange={(event) => { setSearchWord(event.target.value); }} />
+      <input type="text" placeholder="Search items..." onChange={Filter} />
     </div>
     <h1>Products</h1>
     <h2>{greeting}</h2>
