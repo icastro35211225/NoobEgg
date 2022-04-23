@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button, Col, Row, Table } from "react-bootstrap";
 import OrderSummary from "../components/OrderSummary";
-
 import Axios from 'axios';
 import '../App.css';
 
@@ -22,7 +21,7 @@ export default function Dashboard(props) {
 
     const getUser = async () => {
         const userInfo = JSON.parse(await localStorage.getItem("userInfo"));
-        console.log(userInfo)
+        //console.log(userInfo)
         if (userInfo) {
             //console.log(userInfo) 
             await setUser(userInfo);
@@ -54,6 +53,29 @@ export default function Dashboard(props) {
     const getUserOrders = async () => {
         let tempOrders = await Axios.get(`http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/getUserOrders/${user.UserID}`);
         await setOrders(tempOrders.data);
+    }
+
+    const sortHighToLow = () => {
+        const sortedOrders = [...orders].sort((a, b) => {
+            return b.OrderTotal - a.OrderTotal;
+        })
+        setOrders(sortedOrders);
+    }
+
+    const sortLowToHigh = () => {
+        const sortedOrders = [...orders].sort((a, b) => {
+            return a.OrderTotal - b.OrderTotal
+        })
+        setOrders(sortedOrders);
+    }
+
+    const sortByDate = () => {
+        const sortedOrders = [...orders].sort((a, b) => {
+            var dateA = new Date(a.OrderDate);
+            var dateB = new Date(b.OrderDate);
+            return dateA - dateB
+        })
+        setOrders(sortedOrders);
     }
 
     const showOrder = (id) => {
@@ -130,6 +152,9 @@ export default function Dashboard(props) {
                         : null}
                         <Row>
                     <h3>My Orders</h3>
+                    <Button onClick={() => sortHighToLow()}>Sort $$$</Button>
+                    <Button onClick={() => sortLowToHigh()}>Sort $</Button>
+                    <Button onClick={() => sortByDate()}>Sort By Date</Button>
                     {orders === null ?
                         <p>No orders</p>
                         :
@@ -138,7 +163,6 @@ export default function Dashboard(props) {
                             <thead>
                                 <tr>
                                     <th>Order ID</th>
-                                    <th>User ID</th>
                                     <th>Order Date</th>
                                     <th>Order Total</th>
                                 </tr>
@@ -148,7 +172,6 @@ export default function Dashboard(props) {
                                     return (
                                         <tr key={order.OrderID}>
                                             <td><button className="tableButton" onClick={() => showOrder(order.OrderID)}>{order.OrderID}</button></td>
-                                            <td><button className="tableButton" onClick={() => showOrder(order.OrderID)}>{order.OrderUserID}</button></td>
                                             <td><button className="tableButton" onClick={() => showOrder(order.OrderID)}>{order.OrderDate}</button></td>
                                             <td><button className="tableButton" onClick={() => showOrder(order.OrderID)}>${order.OrderTotal}</button></td>
                                         </tr>
