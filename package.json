@@ -1,6 +1,6 @@
 {
   "name": "client",
-  "proxy": "http://3.93.234.9",
+  "proxy": "http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

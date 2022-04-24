@@ -55,25 +55,19 @@ export default function AddItem(props) {
         const data = new FormData();
         const file = document.querySelector('input[type=file]').files[0];
         data.append("file", file);
-        var result;
-            try{
-                Axios.post('http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/upload', data)
-                    .then((res) => {
-                        if(res.statusText == "OK"){
-                            setMessage("Yay! Image Uploaded!");
-                            //console.log("mssg: " + message);
-                        } else if (res.status == 500) {
-                        setMessage("OOF! Something went wrong");
-                        return res;
-                        }
-                        setImgPath("http://ec2-3-93-234-9.compute-1.amazonaws.com:8888/" + res.data.filename);
-                        document.getElementById('message').hidden = false;
-                        console.log(res);
-                    });
-            }
-            catch (e) {
-                console.error(e);
-            }
+        await Axios.post('http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/upload', data)
+            .then((res) => {
+                if(res.statusText == "OK"){
+                    setMessage("Yay! Image Uploaded!");
+                    //console.log("mssg: " + message);
+                } else if (res.status == 500) {
+                setMessage("OOF! Something went wrong");
+                return res;
+                }
+                setImgPath("http://ec2-3-93-234-9.compute-1.amazonaws.com:8888/" + file.name);
+                document.getElementById('message').hidden = false;
+                console.log(res);
+            });
         }
 
     return (

@@ -105,10 +105,7 @@ export default function Home(props) {
 
   return (
     <home>
-      {/* <SearchBar placeholder="Search items..." />  */}
-      <div className="searchbar">
-        <input type="text" placeholder="Search items..." onChange={Filter} />
-      </div>
+      <SearchBar placeholder="Search items..." currentList={itemList}/> 
       <h1>Products</h1>
       <h2>{greeting}</h2>
       <Row>
