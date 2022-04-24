@@ -8,11 +8,10 @@ import { Badge, Button, Card, Col, ListGroup, Row, ButtonGroup, InputGroup, Toas
 export default function ProductScreen(props) {
 
     const navigate = useNavigate();
-    const [isAdmin, setIsAdmin] = useState('');
+    const [isAdmin, setIsAdmin] = useState();
     const [loginStatus, setLoginStatus] = useState('');
     const [count, setCount] = useState(1);
     const location = useLocation();
-    //console.log(location);
     const [user, setUser] = useState(null);
     const [product, setProduct] = useState(null);
     const [stockErrMsg, setStockErrMsg] = useState("");
@@ -20,21 +19,42 @@ export default function ProductScreen(props) {
     const [errShow, setErrShow] = useState(false);
     const [target, setTarget] = useState(null);
     const ref = useRef(null);
+    //Editing product
+    const [name, setName] = useState('');
+    const [desc, setDesc] = useState('');
+    const [price, setPrice] = useState('');
+    const [quantity, setQuantity] = useState('');
+    const [editingProduct, setEditingProduct] = useState(false);
 
     const getUser = async () => {
         const userInfo = JSON.parse(await localStorage.getItem("userInfo"));
-        //console.log(userInfo)
         if (userInfo) {
+            setIsAdmin(userInfo.isAdmin);
             setUser(userInfo);
             setLoginStatus(true);
         }
-        //console.log(user);
     }
 
     const getProduct = async (ID) => {
         let tempProd = await Axios.post('http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/getProduct', { id: ID });
         //console.log(oUser.data[0]);
         setProduct(tempProd.data[0]);
+        setName(tempProd.data[0].ProductName);
+        setDesc(tempProd.data[0].ProductDesc);
+        setPrice(tempProd.data[0].ProductPrice);
+        setQuantity(tempProd.data[0].ProductStock);
+    }
+
+    const updateProduct = async () => {
+        let response = await Axios.put('http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/updateProduct',
+            {
+                id: product.ProductID,
+                name: name,
+                desc: desc,
+                price: price,
+                stock: quantity
+            });
+        getProduct(location.state.id)
     }
 
     useEffect(() => {
@@ -67,6 +87,11 @@ export default function ProductScreen(props) {
         }
     }
 
+    const clickedApply = () => {
+        (async () => await updateProduct())();
+        setEditingProduct(false);
+    }
+
     const handleSubOne = () => {
         if (count > 1) {
             setCount(count - 1);
@@ -95,89 +120,125 @@ export default function ProductScreen(props) {
                     <Toast.Body className="text-white">{stockErrMsg}</Toast.Body>
                 </Toast>
             </ToastContainer>
-            {product === null ?
-                <h1>Loading Product...</h1>
-                :
+            {!editingProduct ?
                 <div>
                     {/* <h1>Product Name: {product.ProductName}</h1> */}
-
-                    <Row>
-                        <Col md={4}><img className="img-large"
-                            src={product.ProductImage}></img></Col>
-                        <Col md={3}>
-                            <ListGroup variant="flush">
-                                <ListGroup.Item>
-                                    <h1>{product.ProductName}</h1>
-                                </ListGroup.Item>
-                                <ListGroup.Item>Price: ${product.ProductPrice}</ListGroup.Item>
-                                <ListGroup.Item>
-                                    Description:
-                                    <p>{product.ProductDesc}</p>
-                                </ListGroup.Item>
-                            </ListGroup>
-                        </Col>
-                        <Col md={4}>
-                            <Card>
-                                <Card.Body>
+                    {product === null ?
+                        <h1>Loading Product...</h1>
+                        :
+                        <div>
+                            {isAdmin ?
+                                <Button size="sm" onClick={() => { setEditingProduct(true) }}>Edit Product</Button>
+                                :
+                                null
+                            }
+                            <Row>
+                                <Col md={4}><img className="img-large"
+                                    src={product.ProductImage}></img></Col>
+                                <Col md={3}>
                                     <ListGroup variant="flush">
                                         <ListGroup.Item>
-                                            <Row>
-                                                <Col>Price:</Col>
-                                                <Col>${product.ProductPrice}</Col>
-                                            </Row>
+                                            <h1>{product.ProductName}</h1>
                                         </ListGroup.Item>
+                                        <ListGroup.Item>Price: ${product.ProductPrice}</ListGroup.Item>
                                         <ListGroup.Item>
-                                            <Row>
-                                                <Col>Status: </Col>
-                                                <Col>
-                                                    {product.ProductStock > 0 ? (
-                                                        <Badge bg="success">In Stock</Badge>
-                                                    ) : (
-                                                        <Badge bg="danger">Currently Out of Stock</Badge>
-                                                    )}
-                                                </Col>
-                                            </Row>
+                                            Description:
+                                            <p>{product.ProductDesc}</p>
                                         </ListGroup.Item>
-                                        {loginStatus ?
-                                            <ListGroup.Item>
-                                                <Row>
-                                                    <Col>Quantity:</Col>
-                                                    <Col>
-                                                        <ButtonGroup aria-label="Basic example">
-                                                            <Button variant="secondary" onClick={() => { handleSubOne() }}>-</Button>
-                                                            <InputGroup>
-                                                                <InputGroup.Text id="btnGroupAddon">{count}</InputGroup.Text>
-                                                            </InputGroup>
-                                                            <Button variant="secondary" onClick={() => { handleAddOne() }}>+</Button>
-                                                        </ButtonGroup>
-                                                    </Col>
-                                                </Row>
-                                            </ListGroup.Item>
-                                            :
-                                            null
-                                        }
-                                        {product.ProductStock > 0 && (
-                                            <ListGroup.Item>
-                                                <div className="d-grid" ref={ref}>
-                                                    {loginStatus ?
-                                                        <Button variant="primary" onClick={() => { addToCart() }}>
-                                                            Add to Cart
-                                                        </Button>
-                                                        :
-                                                        <Button variant="primary" onClick={() => { addToCart() }} disabled>
-                                                            Log In to Add to Cart
-                                                        </Button>
-                                                    }
-                                                </div>
-                                            </ListGroup.Item>
-                                        )}
                                     </ListGroup>
-                                </Card.Body>
-                            </Card>
-                        </Col>
-                    </Row>
+                                </Col>
+                                <Col md={3}>
+                                    <Card>
+                                        <Card.Body>
+                                            <ListGroup variant="flush">
+                                                <ListGroup.Item>
+                                                    <Row>
+                                                        <Col>Price:</Col>
+                                                        <Col>${product.ProductPrice}</Col>
+                                                    </Row>
+                                                </ListGroup.Item>
+                                                <ListGroup.Item>
+                                                    <Row>
+                                                        <Col>Status: </Col>
+                                                        <Col>
+                                                            {product.ProductStock > 0 ? (
+                                                                <Badge bg="success">In Stock</Badge>
+                                                            ) : (
+                                                                <Badge bg="danger">Currently Out of Stock</Badge>
+                                                            )}
+                                                        </Col>
+                                                    </Row>
+                                                </ListGroup.Item>
+                                                {loginStatus ?
+                                                    <ListGroup.Item>
+                                                        <Row>
+                                                            <Col>Quantity:</Col>
+                                                            <Col>
+                                                                <ButtonGroup aria-label="Basic example">
+                                                                    <Button variant="secondary" onClick={() => { handleSubOne() }}>-</Button>
+                                                                    <InputGroup>
+                                                                        <InputGroup.Text id="btnGroupAddon">{count}</InputGroup.Text>
+                                                                    </InputGroup>
+                                                                    <Button variant="secondary" onClick={() => { handleAddOne() }}>+</Button>
+                                                                </ButtonGroup>
+                                                            </Col>
+                                                        </Row>
+                                                    </ListGroup.Item>
+                                                    :
+                                                    null
+                                                }
+                                                {product.ProductStock > 0 && (
+                                                    <ListGroup.Item>
+                                                        <div className="d-grid" ref={ref}>
+                                                            {loginStatus ?
+                                                                <Button variant="primary" onClick={() => { addToCart() }}>
+                                                                    Add to Cart
+                                                                </Button>
+                                                                :
+                                                                <Button variant="primary" onClick={() => { addToCart() }} disabled>
+                                                                    Log In to Add to Cart
+                                                                </Button>
+                                                            }
+                                                        </div>
+                                                    </ListGroup.Item>
+                                                )}
+                                            </ListGroup>
+                                        </Card.Body>
+                                    </Card>
+                                </Col>
+                            </Row>
+                        </div>
+                    }
+                </div>
+                :
+                <div>
+                    <h2>Edit "{product.ProductName}"</h2>
+
+
+                    <label for="name"><b>Item Name</b></label>
+                    <input type="text" placeholder="Name" name="name" value={name} onChange={(e) => {
+                        setName(e.target.value)
+                    }}></input>
+
+                    <label for="desc"><b>Description</b></label>
+                    <input type="text" placeholder="Description" name="desc" value={desc} onChange={(e) => {
+                        setDesc(e.target.value)
+                    }}></input>
+
+                    <label for="price"><b>Price</b></label>
+                    <input type="text" placeholder="00.00" name="price" value={price} onChange={(e) => {
+                        setPrice(e.target.value)
+                    }}></input>
+
+                    <label for="quantity"><b>Item Quanity</b></label>
+                    <input type="text" placeholder="Item Quantity" name="quantity" value={quantity} onChange={(e) => {
+                        setQuantity(e.target.value)
+                    }}></input>
+
+                    <Button onClick={() => {setEditingProduct(false)}}>Cancel</Button>
+                    <Button onClick={() => {clickedApply()}}>Apply Changes</Button>
                 </div>
             }
-        </productscreen>
+        </productscreen >
     )
 }

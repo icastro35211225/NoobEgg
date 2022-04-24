@@ -217,7 +217,7 @@ export default function ShoppingCart(props) {
                 </div>
                 :
                 <div>
-                    <Button variant="outline-secondary" onClick={goBack}>Back to Cart</Button>
+                    {/* <Button variant="outline-secondary" onClick={goBack}>Back to Cart</Button> */}
                     <h2>Shopping Cart</h2>
                     <p>{stockErrMsg}</p>
                     {itemList !== null ?
