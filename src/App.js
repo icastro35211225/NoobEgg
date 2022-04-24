@@ -63,7 +63,7 @@ function App() {
       <div className="d-flex flex-column site-container">
       <Navbar className="Navbar" variant="light">
         <Container>
-          <Navbar.Brand href="/"><big>UthrifTSA</big></Navbar.Brand>
+          <Navbar.Brand href="/"><big>UThriftSA</big></Navbar.Brand>
           <Navbar.Toggle id="basic-navbar-nav"/>
           {/* <Form className="d-flex">
           {/* <SearchBar placeholder="Search items..." currentList={itemList}/>  */}

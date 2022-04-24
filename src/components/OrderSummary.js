@@ -97,8 +97,8 @@ export default function OrderSummary(props) {
                                     {orderProducts.map((product) => { 
                                         return(
                                             <div key={product}>
-                                                <p>Product Name: {product.ProductName}</p>
-                                                <p>IMAGE</p>
+                                                <h5>Product Name: {product.ProductName}</h5>
+                                                <img id="proImg" src={product.ProductImage}></img>
                                                 <p>Price: ${product.ProductPrice}</p>
                                             </div>
                                         );
