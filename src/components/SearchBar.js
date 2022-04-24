@@ -3,47 +3,53 @@ import Axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import '../App.css'; 
 
-function SearchBar({placeholder}) { 
-    const [itemList, setItemlist] = useState([]);
-    const [filteredList, setFilteredList] = useState([]); 
+function SearchBar({placeholder, currentList}) { 
+    const [allItems, setAllItems] = useState([]);
+    // const [filteredList, setFilteredList] = useState([]); 
 
     useEffect(()=> {
         Axios.get('http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/get').then((response)=> {
-          setItemlist(response.data);
+          setAllItems(response.data);
         }) 
     }, []) 
 
     const Filter = (event) => { 
-        const targetVal = event.target.value; 
+        const searchWord = event.target.value; 
+        const filteredList = []; 
 
-        if (targetVal === "") { 
-            setFilteredList([]); 
+        if (searchWord === "") { 
+            // setFilteredList([]); 
+            filteredList = allItems; 
         } 
         else { 
-            const filterNew = itemList.filter((product) => { 
-                return product.ProductName.toUpperCase().includes(targetVal.toUpperCase()); 
-            }); 
+            /* const filterNew = allItems.filter((product) => { 
+                return product.ProductName.toUpperCase().includes(searchWord.toUpperCase()); 
+            });  */
+            filteredList = allItems.filter((product) => { 
+                return product.ProductName.toUpperCase().includes(searchWord.toUpperCase()); 
+            })
 
-            setFilteredList(filterNew); 
+            // setFilteredList(filterNew); 
         } 
+
+        currentList = filteredList; 
     }; 
+
+    /* {filteredList.length > 0 && ( 
+        <div className="output">
+            {filteredList.slice(0, 10).map((product) => { 
+                return ( 
+                    <a className="product" target="_blank"> 
+                        <p>{product.ProductName}</p> 
+                    </a> 
+                ); 
+            })}
+        </div> 
+    )}  */
 
     return ( 
         <div className="searchbar"> 
-            <div className="input">
-                <input type="text" placeholder={placeholder} onChange={Filter} /> 
-            </div> 
-            {filteredList.length > 0 && ( 
-                <div className="output">
-                    {filteredList.slice(0, 10).map((product) => { 
-                        return ( 
-                            <a className="product" target="_blank"> 
-                                <p>{product.ProductName}</p> 
-                            </a> 
-                        ); 
-                    })}
-                </div> 
-            )} 
+            <input type="text" placeholder={placeholder} onChange={Filter} /> 
         </div>
     )
 } 
