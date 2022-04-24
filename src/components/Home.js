@@ -106,29 +106,16 @@ export default function Home(props) {
   return (
     <home>
       <SearchBar placeholder="Search items..." currentList={itemList}/> 
-      <ListGroup variant="flush">
-      <h1>Products</h1>
-      <DropdownButton variant="outline-dark" title="Sort">
-        <Dropdown.Item variant="dark" onClick={() => sortQuantity()}>Sort by Availability</Dropdown.Item>
-        <Dropdown.Item variant="dark" onClick={() => sortHighToLow()}>Sort from $$$ to $</Dropdown.Item>
-        <Dropdown.Item variant="dark" onClick={() => sortLowToHigh()}>Sort from to $$$ $</Dropdown.Item>
-      </DropdownButton>
-      {/* <label>Item Name</label>
-
-          <input type="text" name="itemName" onChange={(e)=> {
-            setItemName(e.target.value)
-          }}/>
-          <label>Item Description</label>
-          <input type="text" name="description" onChange={(e)=> {
-            setItemDescription(e.target.value)
-          }}/>
-
-
-
-          <button onClick={submitItem}>Submit</button>
-
-          <button onClick={submitItem}>Submit</button> */}
-
+      <Row>
+        <h1>Products</h1>
+        <Col>
+        <DropdownButton variant="light" title="Sort">
+          <Dropdown.Item variant="dark" onClick={() => sortQuantity()}>Sort by Availability</Dropdown.Item>
+          <Dropdown.Item variant="dark" onClick={() => sortHighToLow()}>Sort from $$$ to $</Dropdown.Item>
+          <Dropdown.Item variant="dark" onClick={() => sortLowToHigh()}>Sort from to $$$ $</Dropdown.Item>
+        </DropdownButton>
+        </Col>
+      </Row>
 
       <main>
         <div className="products">
@@ -153,13 +140,7 @@ export default function Home(props) {
           })}
         </div>
         <p>{stockErrMsg}</p>
-
       </main>
-
-      {/* <div className="upload test">
-            
-          </div> */}
-      </ListGroup>
     </home>
   )
 }

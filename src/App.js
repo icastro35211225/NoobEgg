@@ -65,7 +65,9 @@ function App() {
       <div className="d-flex flex-column site-container">
       <Navbar className="Navbar" variant="light" >
         <Container>
+          <Nav.Item>
           <Navbar.Brand href="/"><big>UThriftSA</big></Navbar.Brand>
+          </Nav.Item>
           <Navbar.Toggle id="basic-navbar-nav"/>
           {/* <Form className="d-flex">
           {/* <SearchBar placeholder="Search items..." currentList={itemList}/>  */}
@@ -91,7 +93,6 @@ function App() {
                   :
                   <Nav>
                     <Nav.Item><p className="text-center mt-2" >{greeting}</p></Nav.Item>
-
                     <Nav.Item>
                       <Nav.Link to="/cart">{cart}</Nav.Link>
                     </Nav.Item>
