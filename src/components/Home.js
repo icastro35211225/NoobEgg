@@ -111,9 +111,11 @@ export default function Home(props) {
       </div>
       <h1>Products</h1>
       <h2>{greeting}</h2>
-      <Button onClick={() => sortQuantity()}>Sort by Availability</Button>
-      <Button onClick={() => sortHighToLow()}>Sort $$$</Button>
-      <Button onClick={() => sortLowToHigh()}>Sort $</Button>
+      <Row>
+      <Col><Button variant="dark" onClick={() => sortQuantity()}>Sort by Availability</Button></Col>
+      <Col><Button variant="dark" onClick={() => sortHighToLow()}>Sort $$$</Button></Col>
+      <Col><Button variant="dark" onClick={() => sortLowToHigh()}>Sort $</Button></Col>
+      </Row>
       {/* <label>Item Name</label>
 
           <input type="text" name="itemName" onChange={(e)=> {

@@ -102,8 +102,8 @@ export default function ProductScreen(props) {
                     {/* <h1>Product Name: {product.ProductName}</h1> */}
 
                     <Row>
-                        <Col md={6}><img className="img-large"
-                            src="https://i.pinimg.com/originals/c4/96/9a/c4969aaedbc096c09b35e31abd11e2ec.png"></img></Col>
+                        <Col md={4}><img className="img-large"
+                            src={product.ProductImage}></img></Col>
                         <Col md={3}>
                             <ListGroup variant="flush">
                                 <ListGroup.Item>
@@ -116,7 +116,7 @@ export default function ProductScreen(props) {
                                 </ListGroup.Item>
                             </ListGroup>
                         </Col>
-                        <Col md={3}>
+                        <Col md={4}>
                             <Card>
                                 <Card.Body>
                                     <ListGroup variant="flush">

@@ -51,14 +51,17 @@ function App() {
     <div className="App">
       <style type="text/css">
     {`
-    .Navbar-yeah {
+    .Navbar, .navbar-nav {
       background-color: #ffdef2;
-      color: white;
+      color: black;
+      &:hover {
+        color: white;
+      }
     }
     `}
   </style>
       <div className="d-flex flex-column site-container">
-      <Navbar className="Navbar-yeah" variant="light">
+      <Navbar className="Navbar" variant="light">
         <Container>
           <Navbar.Brand href="/"><strong>UthrifTSA</strong></Navbar.Brand>
           <Navbar.Toggle id="basic-navbar-nav"/>

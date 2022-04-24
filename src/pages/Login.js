@@ -4,6 +4,7 @@ import Axios from "axios";
 import { Navigate, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye,faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { Button } from "react-bootstrap";
 const visible = <FontAwesomeIcon icon={faEye} />;
 const notVisible = <FontAwesomeIcon icon={faEyeSlash} />
 
@@ -61,7 +62,7 @@ export default function Login(setToken) {
                     <input type={passwordShown ? "text" : "password"} placeholder="Enter Password" onChange={(e)=> {setPassword(e.target.value);}}/>
                     <i onClick={togglePasswordVisiblity}>{passwordShown ? notVisible : visible}</i>{" "}
                 </div>
-                    <button type="submit" onClick={login}>Submit</button>
+                    <Button variant="dark" type="submit" onClick={login}>Submit</Button>
             </div>
             <h1> {loginStatus}</h1>
         </login>

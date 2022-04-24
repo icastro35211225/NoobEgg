@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button, Col, Row, Table } from "react-bootstrap";
+import { Card, Button, Col, Row, Table } from "react-bootstrap";
 import OrderSummary from "../components/OrderSummary";
 import Axios from 'axios';
 import '../App.css';
@@ -104,6 +104,7 @@ export default function Dashboard(props) {
 
     return (
         <dashboard>
+            <Card>
             {viewingOrder ?
                 <div>
                     <button onClick={goBack}>Back to Dashboard</button>
@@ -122,19 +123,19 @@ export default function Dashboard(props) {
                                     <input type="text" placeholder="First Name" value={fName} onChange={(e) => {
                                         setFirstName(e.target.value)
                                     }}></input>
-                                    <label><b>Last Name</b></label>
+                                    <Col><b>Last Name</b></Col>
                                     <input type="text" placeholder="Last Name" value={lName} onChange={(e) => {
                                         setLastName(e.target.value)
                                     }}></input>
-                                    <label><b>Email</b></label>
+                                    <Col><b>Email</b></Col>
                                     <input type="text" placeholder="Email" value={email} onChange={(e) => {
                                         setEmail(e.target.value)
                                     }}></input>
-                                    <label><b>Password</b></label>
+                                    <Col><b>Password</b></Col>
                                     <input type="password" placeholder="Password" value={user.Pass} onChange={(e) => {
                                         setPassword(e.target.value)
                                     }}></input>
-                                    <label><b>Shipping Address</b></label>
+                                    <Col><b>Shipping Address</b></Col>
                                     <input type="text" placeholder="Shipping Address" value={address} onChange={(e) => {
                                         setAddress(e.target.value)
                                     }}></input>
@@ -150,11 +151,14 @@ export default function Dashboard(props) {
                             }
                         </div>
                         : null}
-                        <Row>
+                        
                     <h3>My Orders</h3>
-                    <Button onClick={() => sortHighToLow()}>Sort $$$</Button>
-                    <Button onClick={() => sortLowToHigh()}>Sort $</Button>
-                    <Button onClick={() => sortByDate()}>Sort By Date</Button>
+                    <Row>
+                    <Col><Button onClick={() => sortHighToLow()}>Sort $$$</Button></Col>
+                    <Col><Button onClick={() => sortLowToHigh()}>Sort $</Button></Col>
+                    <Col><Button onClick={() => sortByDate()}>Sort By Date</Button></Col>
+                    </Row>
+                    
                     {orders === null ?
                         <p>No orders</p>
                         :
@@ -181,9 +185,10 @@ export default function Dashboard(props) {
                         </Table>
                         </Col>
                     }
-                    </Row>
+                   
                 </div>
             }
+            </Card>
         </dashboard>
     )
 }
