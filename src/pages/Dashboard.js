@@ -135,6 +135,7 @@ export default function Dashboard(props) {
                                     <input type="password" placeholder="Password" value={user.Pass} onChange={(e) => {
                                         setPassword(e.target.value)
                                     }}></input>
+                                    
                                     <Col><b>Shipping Address</b></Col>
                                     <input type="text" placeholder="Shipping Address" value={address} onChange={(e) => {
                                         setAddress(e.target.value)

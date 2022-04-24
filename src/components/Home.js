@@ -109,10 +109,10 @@ export default function Home(props) {
       <ListGroup variant="flush">
       <ListGroup.Item><h2>{greeting}</h2></ListGroup.Item>
       <h1>Products</h1>
-      <DropdownButton variant="dark" title="Sort">
+      <DropdownButton variant="outline-dark" title="Sort">
         <Dropdown.Item variant="dark" onClick={() => sortQuantity()}>Sort by Availability</Dropdown.Item>
-        <Dropdown.Item variant="dark" onClick={() => sortHighToLow()}>Sort $$$</Dropdown.Item>
-        <Dropdown.Item variant="dark" onClick={() => sortLowToHigh()}>Sort $</Dropdown.Item>
+        <Dropdown.Item variant="dark" onClick={() => sortHighToLow()}>Sort from $$$ to $</Dropdown.Item>
+        <Dropdown.Item variant="dark" onClick={() => sortLowToHigh()}>Sort from to $$$ $</Dropdown.Item>
       </DropdownButton>
       {/* <label>Item Name</label>
 

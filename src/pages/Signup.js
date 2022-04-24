@@ -57,44 +57,45 @@ export default function Signup(props) {
     return (
         <signup>
             <div className="login-wrapper">
-            <Card>
-                <h2>CREATE AN ACCOUNT</h2>
-                <h6 >This website was made for a class project. Do not use your login credentials from any other platforms.</h6>
+                <h2>SIGN UP</h2>
                 <div className="form-group">
-                    <Col for="fName"><b>First Name</b></Col>
+                    <p>First Name</p>
                     <input type="text" placeholder="First Name" name="fName" required onChange={(e)=> {
-                        setFirstName(e.target.value)
+                    setFirstName(e.target.value)
                     }}></input>
                 </div>
 
                 <div className="form-group">
-                <Col for="lName"><b>Last Name</b></Col>
+               <p>Last Name</p>
                 <input type="text" placeholder="Last Name" name="lName" required onChange={(e)=> {
                     setLastName(e.target.value)
                 }}></input>
                 </div>
 
-
-                <Col for="email"><b>Email</b></Col>
+                <div className="form-group">
+                <p>Email</p>
                 <input type="text" placeholder="Enter Email" name="email" required onChange={(e)=> {
                     setEmail(e.target.value)
                 }}></input>
+                <p>Password</p>
+                </div>
                 
-                <Col for="psw"><b>Password</b></Col>
                 <div className="pass-wrapper">
                     <input type={passwordShown ? "text" : "password"} placeholder="Enter Password" name="psw" required onChange={(e)=> {
-                        setPassword(e.target.value)
+                    setPassword(e.target.value)
                     }}></input>
                     <i onClick={togglePasswordVisiblity}>{passwordShown ? notVisible : visible}</i>{" "}
                 </div>
 
-                <Col for="psw"><b>Shipping Address</b></Col>
+                <div className="form-group">
+                <p>Shipping Address</p>
                 <input type="text" placeholder="Street, City, State, Zip Code" required onChange={(e)=> {
                     setAddress(e.target.value)
                 }}></input>
-                
+                </div>
+                <h6><u>This website was made for a class project. Do not use your login credentials from any other platforms.</u></h6>
                 <Col><Button variant="dark" onClick={submitInfo}>Create Account</Button></Col>
-            </Card>
+                <p> </p>
             </div>
         </signup>
     )

@@ -4,7 +4,7 @@ import Axios from 'axios';
 import '../App.css';
 import OrderSummary from "../components/OrderSummary";
 import { click } from "@testing-library/user-event/dist/click";
-import { Button, Table, Col, Card, ListGroup } from "react-bootstrap";
+import { Button, Table, Col, Card, ListGroup, DropdownButton, Dropdown } from "react-bootstrap";
 
 
 
@@ -207,14 +207,18 @@ export default function AdminDashboard(props) {
                             </ListGroup.Item>
                         </div>
                         : null}
-                    
+                    <h3>Add Item</h3>
                     <ListGroup.Item><Button href="/admin/additem">Add Item</Button></ListGroup.Item>
-                    <ListGroup.Item>
+                    
                     <h3>Orders</h3>
-                    <Button onClick={() => sortHighToLow()}>Sort $$$</Button>
-                    <Button onClick={() => sortLowToHigh()}>Sort $</Button>
-                    <Button onClick={() => sortByDate()}>Sort By Date</Button>
-                    <Button onClick={() => sortByCustomer()}>Sort by Customer</Button>
+                    <ListGroup.Item>
+                    <DropdownButton variant="outline-dark" title="Sort">
+                    <Dropdown.Item onClick={() => sortHighToLow()}>Sort from $$$ to $</Dropdown.Item>
+                    <Dropdown.Item onClick={() => sortLowToHigh()}>Sort from $ to $$$</Dropdown.Item>
+                    <Dropdown.Item onClick={() => sortByDate()}>Sort by Date</Dropdown.Item>
+                    <Dropdown.Item onClick={() => sortByCustomer()}>Sort by Customer</Dropdown.Item>
+                    </DropdownButton>
+                    </ListGroup.Item>
                     {orders === null ?
                         <p>No orders</p>
                         :
@@ -243,7 +247,7 @@ export default function AdminDashboard(props) {
                         </Table>
                         </Col>
                     }
-                    </ListGroup.Item>
+                    
                     <ListGroup.Item>
                     <div >
                         <h3>Discount Codes</h3>
