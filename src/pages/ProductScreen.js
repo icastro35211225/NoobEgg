@@ -31,13 +31,11 @@ export default function ProductScreen(props) {
 
     const getUser = async () => {
         const userInfo = JSON.parse(await localStorage.getItem("userInfo"));
-        //console.log(userInfo)
         if (userInfo) {
             setIsAdmin(userInfo.isAdmin);
             setUser(userInfo);
             setLoginStatus(true);
         }
-        //console.log(user);
     }
 
     const getProduct = async (ID) => {
@@ -60,6 +58,10 @@ export default function ProductScreen(props) {
                 stock: quantity
             });
         getProduct(location.state.id)
+    }
+
+    const deleteProduct = async () => {
+        let response = await Axios.delete(`http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/deleteProduct/${product.ProductID}`);
     }
 
     useEffect(() => {
@@ -95,6 +97,17 @@ export default function ProductScreen(props) {
     const clickedApply = () => {
         (async () => await updateProduct())();
         setEditingProduct(false);
+    }
+
+    const clickedDelete = () => {
+        let answer = window.confirm("Are you sure you want to delete this item?")
+        console.log(answer)
+        if (answer) {
+            (async () => await deleteProduct())();
+            navigate("/");
+        }
+        else {
+        }
     }
 
     const handleSubOne = () => {
@@ -242,6 +255,7 @@ export default function ProductScreen(props) {
                         setQuantity(e.target.value)
                     }}></input>
 
+                    <Button onClick={() => { clickedDelete() }} variant="danger">Delete Product</Button>
                     <Button onClick={() => { setEditingProduct(false) }}>Cancel</Button>
                     <Button onClick={() => { clickedApply() }}>Apply Changes</Button>
                 </div>
