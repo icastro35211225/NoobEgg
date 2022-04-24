@@ -78,19 +78,29 @@ function App() {
               <div>
                 {isAdmin ?
                   <div>
-                    <p className="text-center mt-3" >{greeting}</p>
-                    <Link to="/admindashboard">Admin Dashboard</Link>
-                    {/* <Link to="/upload">Image Upload</Link> */}
-                    <Link to="/login" onClick={logout}>Log Out</Link>
+                    <Nav>
+                    <Nav.Item><p className="text-center mt-2" >{greeting}</p></Nav.Item>
+                    <Nav.Item>
+                    <Nav.Link href="/admindashboard">Admin Dashboard</Nav.Link>
+                    {/* <Link to="/upload">Image Upload</Link> */}</Nav.Item>
+                    <Nav.Item>
+                    <Nav.Link href="/login" onClick={logout}>Log Out</Nav.Link>
+                    </Nav.Item>
+                    </Nav>
                   </div>
                   :
                   <Nav>
-                    <p className="text-center mt-3" >{greeting}</p>
-                    <Link to="/cart">{cart}</Link>
+                    <Nav.Item><p className="text-center mt-2" >{greeting}</p></Nav.Item>
+
+                    <Nav.Item>
+                      <Nav.Link to="/cart">{cart}</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
                     <NavDropdown title={user} id="basic-nav-dropdown">
                       <NavDropdown.Item href="/dashboard">User Dashboard</NavDropdown.Item>
                       <NavDropdown.Item href="/login" onClick={logout}>Log Out</NavDropdown.Item>
                     </NavDropdown>
+                    </Nav.Item>
                   </Nav>
                 }
               </div>
