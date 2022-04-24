@@ -32,12 +32,14 @@ function App() {
   let navigate = useNavigate();
   const [loggedIn, setLoggedIn] = useState(false);
   const [isAdmin, setIsAdmin] = useState('');
+  const [greeting, setGreeting] = useState('');
 
   useEffect(() => {
     if (localStorage.getItem("userInfo") != null) {
       setLoggedIn(true);
       const userInfo = JSON.parse(localStorage.getItem("userInfo"));
       setIsAdmin(userInfo.isAdmin);
+      setGreeting("Hello, " + userInfo.FirstName);
     }
   }, []);
 
@@ -61,7 +63,7 @@ function App() {
     `}
   </style>
       <div className="d-flex flex-column site-container">
-      <Navbar className="Navbar" variant="light">
+      <Navbar className="Navbar" variant="light" >
         <Container>
           <Navbar.Brand href="/"><big>UThriftSA</big></Navbar.Brand>
           <Navbar.Toggle id="basic-navbar-nav"/>
@@ -76,12 +78,14 @@ function App() {
               <div>
                 {isAdmin ?
                   <div>
+                    <p className="text-center mt-3" >{greeting}</p>
                     <Link to="/admindashboard">Admin Dashboard</Link>
                     {/* <Link to="/upload">Image Upload</Link> */}
                     <Link to="/login" onClick={logout}>Log Out</Link>
                   </div>
                   :
                   <Nav>
+                    <p className="text-center mt-3" >{greeting}</p>
                     <Link to="/cart">{cart}</Link>
                     <NavDropdown title={user} id="basic-nav-dropdown">
                       <NavDropdown.Item href="/dashboard">User Dashboard</NavDropdown.Item>

@@ -30,7 +30,7 @@ export default function Home(props) {
     })
     const userInfo = JSON.parse(localStorage.getItem("userInfo"));
     if (userInfo) {
-      setGreeting("Hello, " + userInfo.FirstName);
+
       setIsAdmin(userInfo.isAdmin);
       setLoginStatus(true);
       setUser(userInfo);
@@ -107,7 +107,6 @@ export default function Home(props) {
     <home>
       <SearchBar placeholder="Search items..." currentList={itemList}/> 
       <ListGroup variant="flush">
-      <ListGroup.Item><h2>{greeting}</h2></ListGroup.Item>
       <h1>Products</h1>
       <DropdownButton variant="outline-dark" title="Sort">
         <Dropdown.Item variant="dark" onClick={() => sortQuantity()}>Sort by Availability</Dropdown.Item>
