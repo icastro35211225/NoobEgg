@@ -3,7 +3,7 @@ import Axios from 'axios';
 import '../App.css';
 import { useNavigate, Redirect, Navigate } from "react-router-dom";
 import OrderSummary from "../components/OrderSummary";
-import { Button, Card, Col, ListGroup, Row } from "react-bootstrap";
+import { Button, Card, Col, Row, Badge, Toast, ToastContainer } from "react-bootstrap";
 
 export default function ShoppingCart(props) {
 
@@ -18,6 +18,13 @@ export default function ShoppingCart(props) {
     const [order, setOrder] = useState(null);
     var pStr = "";
     let navigate = useNavigate();
+    //Discount codes
+    const [userCode, setUserCode] = useState();
+    const [validCode, setValidCode] = useState(false);
+    const [codes, setCodes] = useState(null);
+    const [errShow, setErrShow] = useState(false);
+
+
 
     const postOrder = async () => {
         let tempOrder = await Axios.post('http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/addToOrders',
@@ -45,7 +52,7 @@ export default function ShoppingCart(props) {
     }
 
     const getCart = async () => {
-        let tempCart = await Axios.post('http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/getCart',{ userID: user.UserID });
+        let tempCart = await Axios.post('http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/getCart', { userID: user.UserID });
         console.log(tempCart.data);
         if (tempCart.data.message != null) {
             //console.log(response.data.message);
@@ -83,7 +90,12 @@ export default function ShoppingCart(props) {
         await setOrder(orders.data[orders.data.length - 1]);
     }
 
-    const deleteItem = async (itemID) =>{
+    const getCodes = async () => {
+        let tempCodes = await Axios.get('http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/getCodes');
+        await setCodes(tempCodes.data);
+    }
+
+    const deleteItem = async (itemID) => {
         console.log(itemID)
         let message = await Axios.delete(`http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/deleteItem/${itemID}/${user.UserID}`);
         console.log(message.data.message)
@@ -102,46 +114,7 @@ export default function ShoppingCart(props) {
 
     useEffect(() => {
         getUser();
-        // const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-        // if (userInfo) {
-        //     //console.log(userInfo)
-        //     setUser(userInfo);
-        // }
-        
-        // Axios.post('http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/getCart',
-        //     { userID: userInfo.UserID }
-        // ).then((response) => {
-        //     //console.log(response.data.message);
-        //     if (response.data.message != null) {
-        //         //console.log(response.data.message);
-
-        //     }
-        //     else {
-        //         //console.log(response.data);
-        //         var subt = 0;
-        //         for (let i = 0; i < response.data.length; i++) {
-        //             subt += (response.data[i].ProductPrice * response.data[i].qty);
-        //             //console.log(i)
-        //             if (i < (response.data.length - 1)) {
-        //                 pStr += response.data[i].ProductID + ":" + response.data[i].qty + ",";
-        //                 //console.log(pStr)
-        //                 setpS(pStr);
-        //             }
-        //             else {
-        //                 pStr += response.data[i].ProductID + ":" + response.data[i].qty;
-        //                 // console.log("In else")
-        //                 // console.log(pStr)
-        //                 setpS(pStr);
-        //             }
-        //         }
-        //         setItemlist(response.data);
-        //         setSubtotal(parseFloat((subt).toFixed(2)));
-        //         var ttax = (subt * 0.0825).toFixed(2);
-        //         setTax(parseFloat(ttax));
-        //         var ttotal = parseFloat(subt) + parseFloat(ttax);
-        //         setTotal(parseFloat(ttotal.toFixed(2)));
-        //     }
-        // })
+        getCodes();
     }, [])
 
     //Make remove from cart function
@@ -195,6 +168,27 @@ export default function ShoppingCart(props) {
         //return navigate('/');
     }
 
+    const applyCode = (code) => {
+        let newSubtotal = subtotal - (subtotal * code.mul);
+        setSubtotal(parseFloat(newSubtotal.toFixed(2)));
+        var ttax = (newSubtotal * 0.0825).toFixed(2);
+        setTax(parseFloat(ttax));
+        var ttotal = parseFloat(newSubtotal) + parseFloat(ttax);
+        setTotal(parseFloat(ttotal.toFixed(2)));
+        setValidCode(true);
+    }
+
+    const checkCode = () => {
+        for (let i = 0; i < codes.length; i++) {
+            if (userCode === codes[i].dCode) {
+                console.log("code " + userCode + " in disCodes with " + codes[i].mul);
+                applyCode(codes[i]);
+                return;
+            }
+        }
+        setErrShow(true);
+    }
+
     useEffect(() => {
         if (order === null) return;
         setCheckout(true);
@@ -204,55 +198,77 @@ export default function ShoppingCart(props) {
     }, [itemList])
 
     useEffect(() => {
-        if(!user) return; 
+        if (!user) return;
         (async () => await getCart())();
     }, [user])
 
     return (
         <shoppingcart>
+            <ToastContainer className="p-3" position={'bottom-start'} >
+                <Toast show={errShow} onClose={() => setErrShow(false)} bg={'danger'} delay={5000} autohide>
+                    <Toast.Header >
+                        <strong className="me-auto">Error</strong>
+                    </Toast.Header>
+                    <Toast.Body className="text-white">The code typed in is not valid.</Toast.Body>
+                </Toast>
+            </ToastContainer>
             <Row>
-            {checkoutComplete ?
-                <div>
-                    <Button variant="success" onClick={goBack}>Back to Cart</Button>
-                    <OrderSummary orderID={order.OrderID} />
-                </div>
-                :
-                <div>
-                    {/* <Button variant="outline-secondary" onClick={goBack}>Back to Cart</Button> */}
-                    <h2>Shopping Cart</h2>
-                    <p>{stockErrMsg}</p>
-                    {itemList !== null ?
-                        <div>
-                            {itemList.map((product) => {
-                                return (
-                                    <Card key={product.productID}>
+                {checkoutComplete ?
+                    <div>
+                        <Button variant="success" onClick={goBack}>Back to Cart</Button>
+                        <OrderSummary orderID={order.OrderID} />
+                    </div>
+                    :
+                    <div>
+                        {/* <Button variant="outline-secondary" onClick={goBack}>Back to Cart</Button> */}
+                        <h2>Shopping Cart</h2>
+                        <p>{stockErrMsg}</p>
+                        {itemList !== null ?
+                            <div>
+                                {itemList.map((product) => {
+                                    return (
+                                        <Card key={product.productID}>
+                                            <Card.Body>
+                                                <Col><img id="proImg" src={product.ProductImage}></img></Col>
+                                                <Col><h2>{product.ProductName}</h2></Col>
+                                                <Col>${product.ProductPrice}</Col>
+                                                <Col>Amount: {product.qty}</Col>
+                                                <Col><Button variant="danger" onClick={() => { clickedDelete(product.ProductID) }}>Delete Item</Button></Col>
+                                            </Card.Body>
+                                        </Card>
+                                    )
+                                }
+                                )}
+                                <Col>
+                                    <Card>
                                         <Card.Body>
-                                            <Col><img id="proImg" src={product.ProductImage}></img></Col>
-                                            <Col><h2>{product.ProductName}</h2></Col>
-                                            <Col>${product.ProductPrice}</Col>
-                                            <Col>Amount: {product.qty}</Col>
-                                            <Col><Button variant="danger" onClick={() =>{clickedDelete(product.ProductID)}}>Delete Item</Button></Col>
+                                            <Col><h2>Discount Code</h2></Col>
+                                            {validCode ?
+                                                <Col><Badge bg="success">Code {userCode} applied.</Badge></Col>
+                                                :
+                                                <div>
+                                                    <Col><input onChange={(e) => { setUserCode(e.target.value) }} placeholder="Code"></input></Col>
+                                                    <Col><Button variant="secondary" onClick={() => { checkCode() }}>Apply Code</Button></Col>
+                                                </div>
+                                            }
+
                                         </Card.Body>
                                     </Card>
-                                )
-                            }
-                            )}
-                            <Col>
-                            <Card>
-                                <Col><h2>Summary</h2></Col>
-                                <Col><p>Subtotal: ${subtotal}</p></Col>
-                                <Col><p>Tax: ${tax}</p></Col>
-                                <Col><p>Order Total: ${total}</p></Col>
-                                <Col><Button variant="success" onClick={checkout}>Complete purchase</Button></Col>
-                            </Card>
-                            </Col>
-                        </div>
-                        :
-                        <h3>Your cart is empty!</h3>
-                    }
-                </div>
-            }
-            </Row>
-        </shoppingcart>
+                                    <Card>
+                                        <Col><h2>Summary</h2></Col>
+                                        <Col><p>Subtotal: ${subtotal}</p></Col>
+                                        <Col><p>Tax: ${tax}</p></Col>
+                                        <Col><p>Order Total: ${total}</p></Col>
+                                        <Col><Button variant="success" onClick={() => { checkout() }}>Complete purchase</Button></Col>
+                                    </Card>
+                                </Col>
+                            </div>
+                            :
+                            <h3>Your cart is empty!</h3>
+                        }
+                    </div>
+                }
+            </Row >
+        </shoppingcart >
     )
 }
