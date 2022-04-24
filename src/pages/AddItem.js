@@ -68,7 +68,6 @@ export default function AddItem(props) {
                 document.getElementById('message').hidden = false;
                 console.log(res);
             });
-    }
         }
 
     return (
