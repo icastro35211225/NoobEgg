@@ -4,8 +4,8 @@ import Axios from 'axios';
 import '../App.css';
 import OrderSummary from "../components/OrderSummary";
 import { click } from "@testing-library/user-event/dist/click";
-import { Table, Col } from "react-bootstrap";
-import { Button } from "bootstrap";
+import { Button, Table, Col, Card, ListGroup } from "react-bootstrap";
+
 
 
 export default function AdminDashboard(props) {
@@ -157,6 +157,7 @@ export default function AdminDashboard(props) {
 
     return (
         <admindashboard>
+            <Card>
             {viewingOrder ?
                 <div>
                     <button onClick={goBack}>Back to Dashboard</button>
@@ -164,53 +165,56 @@ export default function AdminDashboard(props) {
                 </div>
                 :
                 <div>
+                    <ListGroup variant="flush">
                     <h2>Admin Dashboard</h2>
                     {user ?
                         <div>
+                            <ListGroup.Item>
                             <h3>Account Details</h3>
                             {editingAccount ?
                                 <div>
-                                    <button onClick={() => setEditingAccount(false)}>Cancel</button>
-                                    <label><b>First Name</b></label>
+                                    <Button onClick={() => setEditingAccount(false)}>Cancel</Button>
+                                    <Col><b>First Name</b></Col>
                                     <input type="text" placeholder="First Name" value={fName} onChange={(e) => {
                                         setFirstName(e.target.value)
                                     }}></input>
-                                    <label><b>Last Name</b></label>
+                                    <Col><b>Last Name</b></Col>
                                     <input type="text" placeholder="Last Name" value={lName} onChange={(e) => {
                                         setLastName(e.target.value)
                                     }}></input>
-                                    <label><b>Email</b></label>
+                                    <Col><b>Email</b></Col>
                                     <input type="text" placeholder="Email" value={email} onChange={(e) => {
                                         setEmail(e.target.value)
                                     }}></input>
-                                    <label><b>Password</b></label>
+                                    <Col><b>Password</b></Col>
                                     <input type="password" placeholder="Password" value={user.Pass} onChange={(e) => {
                                         setPassword(e.target.value)
                                     }}></input>
-                                    <label><b>Shipping Address</b></label>
+                                    <Col><b>Shipping Address</b></Col>
                                     <input type="text" placeholder="Shipping Address" value={address} onChange={(e) => {
                                         setAddress(e.target.value)
                                     }}></input>
-                                    <button onClick={() => clickedApply()}>Apply Changes</button>
+                                    <Button onClick={() => clickedApply()}>Apply Changes</Button>
                                 </div>
                                 :
                                 <div>
-                                    <button onClick={() => setEditingAccount(true)}>Edit Account</button>
-                                    <p>Name: {user.FirstName} {user.LastName}</p>
-                                    <p>Email: {user.Email}</p>
-                                    <p>Shipping Address: {user.shipAddress}</p>
+                                    <Col>Name: {user.FirstName} {user.LastName}</Col>
+                                    <Col>Email: {user.Email}</Col>
+                                    <Col>Shipping Address: {user.shipAddress}</Col>
+                                    <Button onClick={() => setEditingAccount(true)}>Edit Account</Button>
                                 </div>
                             }
+                            </ListGroup.Item>
                         </div>
                         : null}
-                    <p>____________________________________________________________</p>
-                    <Link to="/admin/additem">Add Item </Link>
-                    <p>____________________________________________________________</p>
+                    
+                    <ListGroup.Item><Button href="/admin/additem">Add Item</Button></ListGroup.Item>
+                    <ListGroup.Item>
                     <h3>Orders</h3>
-                    <button onClick={() => sortHighToLow()}>Sort $$$</button>
-                    <button onClick={() => sortLowToHigh()}>Sort $</button>
-                    <button onClick={() => sortByDate()}>Sort By Date</button>
-                    <button onClick={() => sortByCustomer()}>Sort by Customer</button>
+                    <Button onClick={() => sortHighToLow()}>Sort $$$</Button>
+                    <Button onClick={() => sortLowToHigh()}>Sort $</Button>
+                    <Button onClick={() => sortByDate()}>Sort By Date</Button>
+                    <Button onClick={() => sortByCustomer()}>Sort by Customer</Button>
                     {orders === null ?
                         <p>No orders</p>
                         :
@@ -239,7 +243,8 @@ export default function AdminDashboard(props) {
                         </Table>
                         </Col>
                     }
-                    <p>____________________________________________________________</p>
+                    </ListGroup.Item>
+                    <ListGroup.Item>
                     <div >
                         <h3>Discount Codes</h3>
                     </div>
@@ -249,7 +254,7 @@ export default function AdminDashboard(props) {
                                 <input placeholder="Code" onChange={(e) => { setDisCode(e.target.value) }}></input>
                                 <input placeholder="Multiplier" onChange={(e) => { setMult(e.target.value) }}></input>
                             </div>
-                            <button onClick={addCode}>Add Code</button>
+                            <Button onClick={addCode}>Add Code</Button>
                         </div>
                         :
                         <div>
@@ -270,18 +275,21 @@ export default function AdminDashboard(props) {
                                                 <tr key={code.dCode}>
                                                     <td>{code.dCode}</td>
                                                     <td>{code.mul}</td>
-                                                    <td><button onClick={() => clickedDelete(code.dCode)}>Delete</button></td>
+                                                    <td><Button variant="danger" onClick={() => clickedDelete(code.dCode)}>Delete</Button></td>
                                                 </tr>
                                             );
                                         })}
                                     </tbody>
                                 </Table>
                             }
-                            <button onClick={function () { setAddingCode(true); }}>Add discount code</button>
+                            <Button onClick={function () { setAddingCode(true); }}>Add discount code</Button>
                         </div>
                     }
+                    </ListGroup.Item>
+                    </ListGroup>
                 </div>
             }
+        </Card>
         </admindashboard>
     )
 }

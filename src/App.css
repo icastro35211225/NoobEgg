@@ -24,6 +24,7 @@ header{
   border-radius: 10px;
 }
 
+
 main{
   grid-area: main;
   padding: 1rem;
@@ -51,7 +52,7 @@ a{
   text-decoration: none;
 }
 a:hover{
-  color:#f7022a;
+  color: #ffdef2;
 }
 
 .form {
@@ -92,6 +93,15 @@ a:hover{
 .product-info{
   padding: 1rem;
 }
+.img-large{
+  max-width: 100%;
+}
+.img-thumbnail {
+  height: 80px;
+}
+.small-container {
+  max-width: 600px;
+}
 
 .cart_card {
   width: 500px;
@@ -116,19 +126,13 @@ a {
 }
 
 .row {
-  display: flex;
   justify-content: space-between;
   align-items: center;
 }
 .row.center{
   justify-content: center;
 }
-.col-1 {
-  flex: 1;
-}
-.col-2 {
-  flex: 1;
-}
+
 .block {
   background-color: #e0e0e0;
   padding: 1rem;
@@ -226,10 +230,12 @@ a {
   color: black;
   padding: 14px 16px;
   background-color: inherit;
-  font-family: inherit; /* Important for vertical align on mobile phones */
+  font-family: inherit; 
   margin: 0; 
  }
 
+
+ 
 /* Add a red background color to navbar links on hover */
 /* .navbar a:hover, .dropdown:hover .dropbtn {
   background-color: white;
