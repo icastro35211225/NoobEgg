@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import '../App.css';
+import './Login.css';
 import Axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -56,9 +56,9 @@ export default function Signup(props) {
     
     return (
         <signup>
-            <div className="form-group">
+            <div className="login-wrapper">
             <Card>
-                <h2>Create an account</h2>
+                <h2>CREATE AN ACCOUNT</h2>
                 <h6 >This website was made for a class project. Do not use your login credentials from any other platforms.</h6>
                 <div className="form-group">
                     <Col for="fName"><b>First Name</b></Col>

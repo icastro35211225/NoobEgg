@@ -3,7 +3,7 @@ import Axios from 'axios';
 import Product from "./Product";
 import SearchBar from "./SearchBar";
 import { Link, useNavigate } from "react-router-dom";
-import { Col, Row, Button } from "react-bootstrap";
+import { Col, Row, Button, ListGroup, DropdownButton, Dropdown } from "react-bootstrap";
 
 export default function Home(props) {
   const [itemID, setItemID] = useState('');
@@ -106,13 +106,14 @@ export default function Home(props) {
   return (
     <home>
       <SearchBar placeholder="Search items..." currentList={itemList}/> 
+      <ListGroup variant="flush">
+      <ListGroup.Item><h2>{greeting}</h2></ListGroup.Item>
       <h1>Products</h1>
-      <h2>{greeting}</h2>
-      <Row>
-      <Col><Button variant="dark" onClick={() => sortQuantity()}>Sort by Availability</Button></Col>
-      <Col><Button variant="dark" onClick={() => sortHighToLow()}>Sort $$$</Button></Col>
-      <Col><Button variant="dark" onClick={() => sortLowToHigh()}>Sort $</Button></Col>
-      </Row>
+      <DropdownButton variant="dark" title="Sort">
+        <Dropdown.Item variant="dark" onClick={() => sortQuantity()}>Sort by Availability</Dropdown.Item>
+        <Dropdown.Item variant="dark" onClick={() => sortHighToLow()}>Sort $$$</Dropdown.Item>
+        <Dropdown.Item variant="dark" onClick={() => sortLowToHigh()}>Sort $</Dropdown.Item>
+      </DropdownButton>
       {/* <label>Item Name</label>
 
           <input type="text" name="itemName" onChange={(e)=> {
@@ -132,44 +133,26 @@ export default function Home(props) {
 
       <main>
         <div className="products">
-          {/* {itemList.filter((product) => {
-          if (searchWord == "") {
-            return product
-          } else if (product.ProductName.toUpperCase().includes(searchWord.toUpperCase())) {
-            return product
-          }
-        }.map((product) => { */}
+            {/* {itemList.filter((product) => {
+            if (searchWord == "") {
+              return product
+            } else if (product.ProductName.toUpperCase().includes(searchWord.toUpperCase())) {
+              return product
+            }
+            }.map((product) => { */}
           {itemList.map((product) => {
             <Product key={product.ProductID} product={product}></Product>
             return (
               <div className="card">
                 <div className="product-info">
                   <img id="proImg" src={product.ProductImage}></img>
-                  <button className="productButton" onClick={() => navigate("/productscreen", { state: { id: product.ProductID } })}><h1>{product.ProductName}</h1></button>
-                  {/* <Link to={`/product/${product._id}`}>
-                      <img src={product.image} alt={product.name} />
-                      <h1>{product.ProductName}</h1>
-                    </Link> */}
-                  <p>{product.ProductDesc}</p>
-                  <p><strong>${product.ProductPrice}</strong> </p>
-                  <p>Stock: {product.ProductStock}</p>
-                  {/* <button onClick={()=> {deleteReview(product.ProductName)}}>Delete</button>
-              <input type="text" id="updateInput" onChange={(e)=> {
-                setNewDescription(e.target.value)
-              }}></input>
-              <button onClick={()=> {updateItem(product.ProductName)}}>Update</button> */}
+                  <button className="productButton" onClick={() => navigate("/productscreen", { state: { id: product.ProductID } })}><h2>{product.ProductName}</h2></button>
+                  <h4>${product.ProductPrice}</h4>
                 </div>
               </div>
             );
-
           })}
         </div>
-
-        {/* <button onClick={()=> {deleteReview(val.name)}}>Delete</button>
-          <input type="text" id="updateInput" onChange={(e)=> {
-            setNewDescription(e.target.value)
-          }}></input>
-          <button onClick={()=> {updateItem(val.desc)}}>Update</button> */}
         <p>{stockErrMsg}</p>
 
       </main>
@@ -177,6 +160,7 @@ export default function Home(props) {
       {/* <div className="upload test">
             
           </div> */}
+      </ListGroup>
     </home>
   )
 }

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { Card, Col, ListGroup, ListGroupItem } from "react-bootstrap";
 
 export default function OrderSummary(props) {
 
@@ -77,11 +78,12 @@ export default function OrderSummary(props) {
     return (
         <ordersummary>
             <div>
+                <Card>
+                <ListGroup variant="flush">
                 <h1>Order Summary</h1>
-                <p>____________________________________________________________</p>
                 { orderUser ?
                     <div>
-                        <p>Order Number: {orderID}</p>
+                        <Col><p>Order Number: {orderID}</p></Col>
                         <div>
                             <p>Name: {orderUser.FirstName} {orderUser.LastName}</p>
                             <p>Shipping Address: {orderUser.shipAddress}</p>
@@ -90,7 +92,7 @@ export default function OrderSummary(props) {
                         <div>
                         {orderProducts ? 
                             <div>
-                                <h4>Products Ordered</h4>
+                                <Col><h4>Products Ordered</h4></Col>
                                 <div>
                                     {orderProducts.map((product) => { 
                                         return(
@@ -98,14 +100,13 @@ export default function OrderSummary(props) {
                                                 <p>Product Name: {product.ProductName}</p>
                                                 <p>IMAGE</p>
                                                 <p>Price: ${product.ProductPrice}</p>
-                                                <h6>____________________________________________________________________________________</h6>
                                             </div>
                                         );
                                     })}
                                 </div>
                                 <p>Subtotal: ${order.OrderSubtotal}</p>
                                 <p>Tax: ${order.OrderTax}</p>
-                                <p>Total: ${order.OrderTotal}</p>
+                                <p><strong>Total: ${order.OrderTotal}</strong></p>
                             </div>
                             : 
                             <h5>Loading Products...</h5>
@@ -116,6 +117,8 @@ export default function OrderSummary(props) {
                     <h1>Loading Order Summary...</h1>
                 }
                 {/* <img src="https://www.seekpng.com/png/detail/6-60874_grey-t-shirt-png-vector-royalty-free-length.png"></img> */}
+                </ListGroup>
+                </Card>
             </div>
         </ordersummary>
     )

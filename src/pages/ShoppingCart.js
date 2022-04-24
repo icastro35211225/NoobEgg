@@ -3,7 +3,7 @@ import Axios from 'axios';
 import '../App.css';
 import { useNavigate, Redirect, Navigate } from "react-router-dom";
 import OrderSummary from "../components/OrderSummary";
-import { Button, Card, Row } from "react-bootstrap";
+import { Button, Card, Col, ListGroup, Row } from "react-bootstrap";
 
 export default function ShoppingCart(props) {
 
@@ -210,9 +210,10 @@ export default function ShoppingCart(props) {
 
     return (
         <shoppingcart>
+            <Row>
             {checkoutComplete ?
                 <div>
-                    <button onClick={goBack}>Back to Cart</button>
+                    <Button variant="success" onClick={goBack}>Back to Cart</Button>
                     <OrderSummary orderID={order.OrderID} />
                 </div>
                 :
@@ -226,30 +227,32 @@ export default function ShoppingCart(props) {
                                 return (
                                     <Card key={product.productID}>
                                         <Card.Body>
-                                        <h2>{product.ProductName}</h2>
-                                        <p>IMAGE {product.ProductImage}</p>
-                                        <p>${product.ProductPrice}</p>
-                                        <p>Amount: {product.qty}</p>
-                                        <Button variant="danger" onClick={() =>{clickedDelete(product.ProductID)}}>Delete Item</Button>
+                                            <Col>IMAGE {product.ProductImage}</Col>
+                                            <Col><h2>{product.ProductName}</h2></Col>
+                                            <Col>${product.ProductPrice}</Col>
+                                            <Col>Amount: {product.qty}</Col>
+                                            <Col><Button variant="danger" onClick={() =>{clickedDelete(product.ProductID)}}>Delete Item</Button></Col>
                                         </Card.Body>
                                     </Card>
                                 )
                             }
                             )}
+                            <Col>
                             <Card>
-                            <Card.Header><h2>Summary</h2></Card.Header>
-                            <p>Subtotal: ${subtotal}</p>
-                            <p>Tax: ${tax}</p>
-                            <p>Order Total: ${total}</p>
-                            <Button variant="success" onClick={checkout}>Complete purchase</Button>
+                                <Col><h2>Summary</h2></Col>
+                                <Col><p>Subtotal: ${subtotal}</p></Col>
+                                <Col><p>Tax: ${tax}</p></Col>
+                                <Col><p>Order Total: ${total}</p></Col>
+                                <Col><Button variant="success" onClick={checkout}>Complete purchase</Button></Col>
                             </Card>
+                            </Col>
                         </div>
                         :
                         <h3>Your cart is empty!</h3>
                     }
                 </div>
             }
-            
+            </Row>
         </shoppingcart>
     )
 }

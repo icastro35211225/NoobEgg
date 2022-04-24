@@ -18,7 +18,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import ProductScreen from "./pages/ProductScreen";
-import { Navbar, Container, Dropdown, DropdownButton, Nav, NavDropdown, Card } from "react-bootstrap";
+import { Navbar, Container, Dropdown, DropdownButton, Nav, NavDropdown, Card, Form, FormControl } from "react-bootstrap";
 import DropdownMenu from "react-bootstrap/esm/DropdownMenu";
 import NavbarToggle from "react-bootstrap/esm/NavbarToggle";
 const user = <FontAwesomeIcon icon={faUser} />;
@@ -65,7 +65,10 @@ function App() {
         <Container>
           <Navbar.Brand href="/"><strong>UthrifTSA</strong></Navbar.Brand>
           <Navbar.Toggle id="basic-navbar-nav"/>
-        
+          {/* <Form className="d-flex">
+          {/* <SearchBar placeholder="Search items..." currentList={itemList}/>  */}
+          {/* <FormControl type="search" placeholder="Search" className="me-2" aria-label="Search"/>
+          </Form> */} 
         <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ms-auto">
           {loggedIn ?
@@ -117,7 +120,7 @@ function App() {
           <Route path="/admindashboard" element={<AdminDashboard />} />
         </Routes>
       </Container>
-      <Card.Footer className="row center">ALL RIGHTS RESERVED (LMAAO)</Card.Footer>
+      <Card.Footer className="row center">ALL RIGHTS RESERVED</Card.Footer>
     </div>
   );
 }

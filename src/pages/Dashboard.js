@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Card, Button, Col, Row, Table } from "react-bootstrap";
+import { Card, Button, Col, Row, Table, DropdownButton, Dropdown } from "react-bootstrap";
 import OrderSummary from "../components/OrderSummary";
 import Axios from 'axios';
 import '../App.css';
@@ -118,7 +118,7 @@ export default function Dashboard(props) {
                             <h3>Account Details</h3>
                             {editingAccount ?
                                 <Row>
-                                    <Col><Button onClick={() => setEditingAccount(false)}>Cancel</Button></Col>
+                                    <Col><Button variant="dark" onClick={() => setEditingAccount(false)}>Cancel</Button></Col>
                                     <label><b>First Name</b></label>
                                     <input type="text" placeholder="First Name" value={fName} onChange={(e) => {
                                         setFirstName(e.target.value)
@@ -139,11 +139,11 @@ export default function Dashboard(props) {
                                     <input type="text" placeholder="Shipping Address" value={address} onChange={(e) => {
                                         setAddress(e.target.value)
                                     }}></input>
-                                    <Col><Button onClick={() => clickedApply()}>Apply Changes</Button></Col>
+                                    <Col><Button variant="dark" onClick={() => clickedApply()}>Apply Changes</Button></Col>
                                 </Row>
                                 :
                                 <div>
-                                    <Button onClick={() => setEditingAccount(true)}>Edit Account</Button>
+                                    <Button variant="dark" onClick={() => setEditingAccount(true)}>Edit Account</Button>
                                     <p>Name: {user.FirstName} {user.LastName}</p>
                                     <p>Email: {user.Email}</p>
                                     <p>Shipping Address: {user.shipAddress}</p>
@@ -153,11 +153,11 @@ export default function Dashboard(props) {
                         : null}
                         
                     <h3>My Orders</h3>
-                    <Row>
-                    <Col><Button onClick={() => sortHighToLow()}>Sort $$$</Button></Col>
-                    <Col><Button onClick={() => sortLowToHigh()}>Sort $</Button></Col>
-                    <Col><Button onClick={() => sortByDate()}>Sort By Date</Button></Col>
-                    </Row>
+                    <DropdownButton variant="dark" id="dropdown-basic-button" title="Sort">
+                    <Dropdown.Item onClick={() => sortHighToLow()}>Sort $$$</Dropdown.Item>
+                    <Dropdown.Item onClick={() => sortLowToHigh()}>Sort $</Dropdown.Item>
+                    <Dropdown.Item onClick={() => sortByDate()}>Sort By Date</Dropdown.Item>
+                    </DropdownButton>
                     
                     {orders === null ?
                         <p>No orders</p>

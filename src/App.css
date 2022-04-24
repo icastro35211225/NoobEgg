@@ -24,7 +24,6 @@ header{
   border-radius: 10px;
 }
 
-
 main{
   grid-area: main;
   padding: 1rem;
@@ -214,6 +213,14 @@ a {
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
+}
+
+.navbar-brand{
+  font-weight: bold;
+}
+
+.searchbar{
+  border: black;
 }
 
 /* The dropdown container */
