@@ -206,7 +206,7 @@ export default function AdminDashboard(props) {
                             }
                             </ListGroup.Item>
                         </div>
-                        : null}
+                        : null} 
                     <h3>Add Item</h3>
                     <ListGroup.Item><Button href="/admin/additem">Add Item</Button></ListGroup.Item>
                     

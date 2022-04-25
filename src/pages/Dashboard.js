@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Card, Button, Col, Row, Table, DropdownButton, Dropdown } from "react-bootstrap";
+import { Card, Button, Col, Row, Table, DropdownButton, Dropdown, ListGroup } from "react-bootstrap";
 import OrderSummary from "../components/OrderSummary";
 import Axios from 'axios';
 import '../App.css';
@@ -112,13 +112,15 @@ export default function Dashboard(props) {
                 </div>
                 :
                 <div>
+                    <ListGroup variant="flush">
                     <h2>Account Dashboard</h2>
                     {user ?
                         <div>
+                            <ListGroup.Item>
                             <h3>Account Details</h3>
                             {editingAccount ?
-                                <Row>
-                                    <Col><Button variant="dark" onClick={() => setEditingAccount(false)}>Cancel</Button></Col>
+                                <div>
+                                    <Col><Button onClick={() => setEditingAccount(false)}>Cancel</Button></Col>
                                     <label><b>First Name</b></label>
                                     <input type="text" placeholder="First Name" value={fName} onChange={(e) => {
                                         setFirstName(e.target.value)
@@ -140,21 +142,22 @@ export default function Dashboard(props) {
                                     <input type="text" placeholder="Shipping Address" value={address} onChange={(e) => {
                                         setAddress(e.target.value)
                                     }}></input>
-                                    <Col><Button variant="dark" onClick={() => clickedApply()}>Apply Changes</Button></Col>
-                                </Row>
+                                    <Col><Button onClick={() => clickedApply()}>Apply Changes</Button></Col>
+                                </div>
                                 :
                                 <div>
-                                    <Button variant="dark" onClick={() => setEditingAccount(true)}>Edit Account</Button>
+                                    <Button onClick={() => setEditingAccount(true)}>Edit Account</Button>
                                     <p>Name: {user.FirstName} {user.LastName}</p>
                                     <p>Email: {user.Email}</p>
                                     <p>Shipping Address: {user.shipAddress}</p>
                                 </div>
                             }
+                            </ListGroup.Item>
                         </div>
                         : null}
                         
                     <h3>My Orders</h3>
-                    <DropdownButton variant="dark" id="dropdown-basic-button" title="Sort">
+                    <DropdownButton id="dropdown-basic-button" title="Sort">
                     <Dropdown.Item onClick={() => sortHighToLow()}>Sort $$$</Dropdown.Item>
                     <Dropdown.Item onClick={() => sortLowToHigh()}>Sort $</Dropdown.Item>
                     <Dropdown.Item onClick={() => sortByDate()}>Sort By Date</Dropdown.Item>
@@ -186,7 +189,7 @@ export default function Dashboard(props) {
                         </Table>
                         </Col>
                     }
-                   
+                </ListGroup>
                 </div>
             }
             </Card>
