@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import '../App.css'; 
+import { Card, Col } from "react-bootstrap";
 
 function SearchBar({placeholder}) { 
 
@@ -48,9 +49,9 @@ function SearchBar({placeholder}) {
                 <div className="output">
                     {filteredList.slice(0, 10).map((product) => { 
                         return ( 
-                            <a className="product" target="_blank" onClick={() => navigate("/productscreen", { state: { id: product.ProductID } })}> 
-                                <p>{product.ProductName}</p> 
-                            </a> 
+                            <Card className="product" target="_blank"> 
+                                <Col><button className="productButton" onClick={() => navigate("/productscreen", { state: { id: product.ProductID } })}><h5>{product.ProductName}</h5></button></Col> 
+                            </Card> 
                         ); 
                     })}
                 </div> 
