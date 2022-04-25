@@ -97,7 +97,7 @@ function App() {
                       <Nav.Link href="/cart">{cart}</Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
-                    <NavDropdown title={user} id="basic-nav-dropdown">
+                    <NavDropdown align="end" title={user} id="basic-nav-dropdown">
                       <NavDropdown.Item href="/dashboard">User Dashboard</NavDropdown.Item>
                       <NavDropdown.Item href="/login" onClick={logout}>Log Out</NavDropdown.Item>
                     </NavDropdown>
