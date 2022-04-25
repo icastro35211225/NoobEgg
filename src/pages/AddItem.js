@@ -97,7 +97,7 @@ export default function AddItem(props) {
                 setPrice(e.target.value)
             }}></input>
 
-            <label for="quantity"><b>Item Quanity</b></label>
+            <label for="quantity"><b>Item Quantity</b></label>
             <input type="text" placeholder="Item Quantity" name="quantity" required onChange={(e)=> {
                 setQuantity(e.target.value)
             }}></input>
