@@ -92,6 +92,7 @@ a:hover{
 .product-info{
   padding: 1rem;
 }
+
 .product-info-proImg{
   height: auto;
   max-height: 250px;
@@ -176,7 +177,10 @@ a {
 	margin-top: 20px; 
 	height: 40px; 
 	font-size: 20px; 
+  border-style: solid;
+  color: #ffdef2;
 } 
+
 
 .input { 
   display: flex; 
@@ -311,5 +315,5 @@ td, th {
 }
 
 .productButton:hover {
-  color: grey;
+  color: #e292c2;
 }
