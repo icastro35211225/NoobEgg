@@ -193,22 +193,30 @@ a {
 .output { 
   background-color: white; 
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; 
-  overflow: hidden; 
+  overflow: auto; 
   overflow-y: auto; 
-  position: fixed;
+  position: absolute;
   z-index: 10;
   width: 50%;
+  border-style: solid;
+  border-color: #ffdef2;
+  top: 11%;
 }
 
 .output .product { 
   display: flex; 
   align-items: center; 
   color: black; 
+  border-style: solid;
+  border-color: #ffdef2;
+  height: auto;
+  width: auto;
 }
 
 .output a:hover { 
-  background-color: lightgrey; 
+  background-color: #ffdef2; 
 }
+
 /* Navbar container */
 /* .navbar {
   overflow: hidden;
