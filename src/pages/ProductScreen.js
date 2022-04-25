@@ -225,12 +225,12 @@ export default function ProductScreen(props) {
                                                     <ListGroup.Item>
                                                         <div className="d-grid" ref={ref}>
                                                             {loginStatus ?
-                                                            <div>
-                                                            {isAdmin ?
-                                                                <Button size="sm" onClick={() => { setEditingProduct(true) }}>Edit Product</Button>
-                                                                :
-                                                                <Button variant="primary" onClick={() => { addToCart() }}>Add to Cart</Button>
-                                                                }
+                                                                <div>
+                                                                    {isAdmin ?
+                                                                        <Button size="sm" onClick={() => { setEditingProduct(true) }}>Edit Product</Button>
+                                                                        :
+                                                                        <Button variant="primary" onClick={() => { addToCart() }}>Add to Cart</Button>
+                                                                    }
                                                                 </div>
                                                                 :
                                                                 <Button variant="primary" onClick={() => { addToCart() }} disabled>

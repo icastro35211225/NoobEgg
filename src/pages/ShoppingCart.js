@@ -24,8 +24,6 @@ export default function ShoppingCart(props) {
     const [codes, setCodes] = useState(null);
     const [errShow, setErrShow] = useState(false);
 
-
-
     const postOrder = async () => {
         let tempOrder = await Axios.post('http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/addToOrders',
             {
@@ -38,27 +36,26 @@ export default function ShoppingCart(props) {
             }
         );
         //console.log(tempOrder.data);
-        (async () => await getUserOrders(user.UserID))()
+        (async () => await getUserOrders(user.UserID))();
         //await setOrder(tempOrder.data[tempOrder.data.length - 1]);
     }
 
     const getUser = async () => {
         const userInfo = JSON.parse(await localStorage.getItem("userInfo"));
-        console.log(userInfo)
+        //console.log(userInfo)
         if (userInfo) {
-            //console.log(userInfo) 
             await setUser(userInfo);
         }
     }
 
     const getCart = async () => {
         let tempCart = await Axios.post('http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/getCart', { userID: user.UserID });
-        console.log(tempCart.data);
+        //console.log(tempCart.data);
         if (tempCart.data.message != null) {
             //console.log(response.data.message);
         }
         else {
-            console.log(tempCart.data);
+            //console.log(tempCart.data);
             var subt = 0;
             for (let i = 0; i < tempCart.data.length; i++) {
                 subt += (tempCart.data[i].ProductPrice * tempCart.data[i].qty);
@@ -121,17 +118,17 @@ export default function ShoppingCart(props) {
 
     const checkout = async () => {
         //For debugging: checking if info beign send to database is correct
-        console.log(itemList.length)
-        console.log(user.UserID);
-        console.log(user.shipAddress);
-        console.log("Items: " + pS);
-        console.log(subtotal);
-        console.log(tax);
-        console.log(total);
+        // console.log(itemList.length)
+        // console.log(user.UserID);
+        // console.log(user.shipAddress);
+        // console.log("Items: " + pS);
+        // console.log(subtotal);
+        // console.log(tax);
+        // console.log(total);
 
         //Recheck stock of items to make sure they are still in stock
         for (let i = 0; i < itemList.length; i++) {
-            console.log(itemList[i].ProductName);
+            //console.log(itemList[i].ProductName);
             Axios.post('http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/getProduct',
                 { id: itemList[i].ProductID }
             ).then((response) => {
@@ -147,7 +144,7 @@ export default function ShoppingCart(props) {
         }
 
         //Post to orders table WORKS-------
-        (async () => await postOrder())()
+        (async () => await postOrder())();
 
         //Update product stock
         for (let i = 0; i < itemList.length; i++) {
