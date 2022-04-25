@@ -63,7 +63,7 @@ export default function ProductScreen(props) {
     const deleteProduct = async () => {
         let response = await Axios.delete(`http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/deleteProduct/${product.ProductID}`);
     }
-    
+
     const deleteInstanceCart = async () => {
         let res = await Axios.delete(`http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/delinstscart/${product.ProductID}`)
     }
@@ -151,11 +151,6 @@ export default function ProductScreen(props) {
                         <h1>Loading Product...</h1>
                         :
                         <div>
-                            {isAdmin ?
-                                <Button size="sm" onClick={() => { setEditingProduct(true) }}>Edit Product</Button>
-                                :
-                                null
-                            }
                             <Row>
                                 <Col md={4}><img className="img-large"
                                     src={product.ProductImage}></img></Col>
@@ -199,20 +194,26 @@ export default function ProductScreen(props) {
                                                 {loginStatus ?
                                                     <div>
                                                         {product.ProductStock > 0 ?
-                                                            <ListGroup.Item>
-                                                                <Row>
-                                                                    <Col>Quantity:</Col>
-                                                                    <Col>
-                                                                        <ButtonGroup aria-label="Basic example">
-                                                                            <Button variant="secondary" onClick={() => { handleSubOne() }}>-</Button>
-                                                                            <InputGroup>
-                                                                                <InputGroup.Text id="btnGroupAddon">{count}</InputGroup.Text>
-                                                                            </InputGroup>
-                                                                            <Button variant="secondary" onClick={() => { handleAddOne() }}>+</Button>
-                                                                        </ButtonGroup>
-                                                                    </Col>
-                                                                </Row>
-                                                            </ListGroup.Item>
+                                                            <div>
+                                                                {isAdmin ?
+                                                                    null
+                                                                    :
+                                                                    <ListGroup.Item>
+                                                                        <Row>
+                                                                            <Col>Quantity:</Col>
+                                                                            <Col>
+                                                                                <ButtonGroup aria-label="Basic example">
+                                                                                    <Button variant="secondary" onClick={() => { handleSubOne() }}>-</Button>
+                                                                                    <InputGroup>
+                                                                                        <InputGroup.Text id="btnGroupAddon">{count}</InputGroup.Text>
+                                                                                    </InputGroup>
+                                                                                    <Button variant="secondary" onClick={() => { handleAddOne() }}>+</Button>
+                                                                                </ButtonGroup>
+                                                                            </Col>
+                                                                        </Row>
+                                                                    </ListGroup.Item>
+                                                                }
+                                                            </div>
                                                             :
                                                             null
                                                         }
@@ -224,9 +225,13 @@ export default function ProductScreen(props) {
                                                     <ListGroup.Item>
                                                         <div className="d-grid" ref={ref}>
                                                             {loginStatus ?
-                                                                <Button variant="primary" onClick={() => { addToCart() }}>
-                                                                    Add to Cart
-                                                                </Button>
+                                                            <div>
+                                                            {isAdmin ?
+                                                                <Button size="sm" onClick={() => { setEditingProduct(true) }}>Edit Product</Button>
+                                                                :
+                                                                <Button variant="primary" onClick={() => { addToCart() }}>Add to Cart</Button>
+                                                                }
+                                                                </div>
                                                                 :
                                                                 <Button variant="primary" onClick={() => { addToCart() }} disabled>
                                                                     Log In to Add to Cart

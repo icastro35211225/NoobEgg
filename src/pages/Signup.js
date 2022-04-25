@@ -24,8 +24,7 @@ export default function Signup(props) {
         setPasswordShown(passwordShown ? false : true);
     };
 
-    //FIXME: SHOULD ADD EMAIL VALIDATION (is email in right format?)
-    //FIXME: CHECK IF EMAIL IS ALREADY USED WHEN CLICKING CREATE ACCOUNT
+    //TODO: SHOULD ADD EMAIL VALIDATION? (is email in right format?)
     const getAccounts = async () => {
         let tempAccounts = await Axios.get('http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/getAllAccounts');
         setAccounts(tempAccounts.data);
