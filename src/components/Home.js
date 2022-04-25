@@ -112,7 +112,7 @@ export default function Home(props) {
         <DropdownButton variant="light" title="Sort">
           <Dropdown.Item variant="dark" onClick={() => sortQuantity()}>Sort by Availability</Dropdown.Item>
           <Dropdown.Item variant="dark" onClick={() => sortHighToLow()}>Sort from $$$ to $</Dropdown.Item>
-          <Dropdown.Item variant="dark" onClick={() => sortLowToHigh()}>Sort from to $$$ $</Dropdown.Item>
+          <Dropdown.Item variant="dark" onClick={() => sortLowToHigh()}>Sort from $ to $$$</Dropdown.Item>
         </DropdownButton>
         </Col>
       </Row>

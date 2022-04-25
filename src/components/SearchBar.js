@@ -4,6 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import '../App.css'; 
 
 function SearchBar({placeholder}) { 
+
+    let navigate = useNavigate();
     const [allItems, setAllItems] = useState([]);
     const [filteredList, setFilteredList] = useState([]); 
 
@@ -46,7 +48,7 @@ function SearchBar({placeholder}) {
                 <div className="output">
                     {filteredList.slice(0, 10).map((product) => { 
                         return ( 
-                            <a className="product" target="_blank"> 
+                            <a className="product" target="_blank" onClick={() => navigate("/productscreen", { state: { id: product.ProductID } })}> 
                                 <p>{product.ProductName}</p> 
                             </a> 
                         ); 
