@@ -29,9 +29,11 @@ export default function AddItem(props) {
 
         //HAVE TO CHECK INPUT HERE BC SQL DEFAUTS WRONG VALUES
         async function addProduct() {
-            await uploadFiles();
             const file = document.querySelector('input[type=file]').files[0];
-            await setImgPath("http://ec2-3-93-234-9.compute-1.amazonaws.com:8888/" + file.name);
+            if(file){
+                await uploadFiles();
+            }
+            //await setImgPath("http://ec2-3-93-234-9.compute-1.amazonaws.com:8888/" + file.name);
             console.log(imgPath); 
             Axios.post('http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/additem', {
                 name: name,
@@ -45,8 +47,9 @@ export default function AddItem(props) {
                     //     setErrMsg(response.data.err);
                     // }
                 });
-                //navigate('/');    
-                console.log("DONE");            
+                navigate('/');    
+                console.log("DONE");
+            
         }
     
     async function show(){

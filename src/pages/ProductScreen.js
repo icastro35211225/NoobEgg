@@ -191,20 +191,26 @@ export default function ProductScreen(props) {
                                                     </Row>
                                                 </ListGroup.Item>
                                                 {loginStatus ?
-                                                    <ListGroup.Item>
-                                                        <Row>
-                                                            <Col>Quantity:</Col>
-                                                            <Col>
-                                                                <ButtonGroup aria-label="Basic example">
-                                                                    <Button variant="secondary" onClick={() => { handleSubOne() }}>-</Button>
-                                                                    <InputGroup>
-                                                                        <InputGroup.Text id="btnGroupAddon">{count}</InputGroup.Text>
-                                                                    </InputGroup>
-                                                                    <Button variant="secondary" onClick={() => { handleAddOne() }}>+</Button>
-                                                                </ButtonGroup>
-                                                            </Col>
-                                                        </Row>
-                                                    </ListGroup.Item>
+                                                    <div>
+                                                        {product.ProductStock > 0 ?
+                                                            <ListGroup.Item>
+                                                                <Row>
+                                                                    <Col>Quantity:</Col>
+                                                                    <Col>
+                                                                        <ButtonGroup aria-label="Basic example">
+                                                                            <Button variant="secondary" onClick={() => { handleSubOne() }}>-</Button>
+                                                                            <InputGroup>
+                                                                                <InputGroup.Text id="btnGroupAddon">{count}</InputGroup.Text>
+                                                                            </InputGroup>
+                                                                            <Button variant="secondary" onClick={() => { handleAddOne() }}>+</Button>
+                                                                        </ButtonGroup>
+                                                                    </Col>
+                                                                </Row>
+                                                            </ListGroup.Item>
+                                                            :
+                                                            null
+                                                        }
+                                                    </div>
                                                     :
                                                     null
                                                 }

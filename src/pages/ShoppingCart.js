@@ -98,7 +98,7 @@ export default function ShoppingCart(props) {
     const deleteItem = async (itemID) => {
         console.log(itemID)
         let message = await Axios.delete(`http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/deleteItem/${itemID}/${user.UserID}`);
-        console.log(message.data.message)
+        console.log(message.data.message);
         setItemlist(null);
         await getCart();
     }
