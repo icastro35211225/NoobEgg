@@ -131,7 +131,7 @@ export default function Home(props) {
             return (
               <div className="card">
                 <div className="product-info">
-                  <img id="proImg" src={product.ProductImage}></img>
+                  <img id="proImg" src={product.ProductImage} className="product-info-proImg"></img>
                   <button className="productButton" onClick={() => navigate("/productscreen", { state: { id: product.ProductID } })}><h2>{product.ProductName}</h2></button>
                   <h4>${product.ProductPrice}</h4>
                 </div>
