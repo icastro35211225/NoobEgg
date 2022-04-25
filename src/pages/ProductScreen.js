@@ -63,6 +63,10 @@ export default function ProductScreen(props) {
     const deleteProduct = async () => {
         let response = await Axios.delete(`http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/deleteProduct/${product.ProductID}`);
     }
+    
+    const deleteInstanceCart = async () => {
+        let res = await Axios.delete(`http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/delinstscart/${product.ProductID}`)
+    }
 
     useEffect(() => {
         getUser();
@@ -103,7 +107,9 @@ export default function ProductScreen(props) {
         let answer = window.confirm("Are you sure you want to delete this item?")
         console.log(answer)
         if (answer) {
+            (async () => await deleteInstanceCart())();
             (async () => await deleteProduct())();
+            // delete all instances of product
             navigate("/");
         }
         else {
