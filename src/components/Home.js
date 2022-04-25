@@ -105,7 +105,7 @@ export default function Home(props) {
 
   return (
     <home>
-      <SearchBar placeholder="Search items..." currentList={itemList}/> 
+      <SearchBar placeholder="Search items..."/> 
       <Row>
         <h1>Products</h1>
         <Col>
