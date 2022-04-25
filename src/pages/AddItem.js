@@ -29,6 +29,10 @@ export default function AddItem(props) {
 
         //HAVE TO CHECK INPUT HERE BC SQL DEFAUTS WRONG VALUES
         async function addProduct() {
+            await uploadFiles();
+            const file = document.querySelector('input[type=file]').files[0];
+            await setImgPath("http://ec2-3-93-234-9.compute-1.amazonaws.com:8888/" + file.name);
+            console.log(imgPath); 
             Axios.post('http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/additem', {
                 name: name,
                 desc: desc, 
@@ -46,7 +50,8 @@ export default function AddItem(props) {
         }
     
     async function show(){
-        const file = document.querySelector('input[type=file]').files;  
+        const file = document.querySelector('input[type=file]').files;
+        await setImgPath("http://ec2-3-93-234-9.compute-1.amazonaws.com:8888/" + file[0].name);  
         const url = URL.createObjectURL(new Blob(file));
         setPreviewFile(url);
     }
@@ -100,8 +105,7 @@ export default function AddItem(props) {
             }}></input> */}
             <div>
                 <input name="files" type="file" onChange={show}/>
-                        <button type="submit" onClick={() => uploadFiles()}>Upload</button>
-                        <p>Make sure to upload image first before adding item. (someone PLZ center this or some message like this) Also that the file should be less than equal to 100KB</p>
+                        <p></p>
                         <div>
                             <img id="preview" src={previewFile}></img>
                             <p id="message" hidden>{message}</p>
