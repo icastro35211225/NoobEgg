@@ -94,7 +94,7 @@ function App() {
                   <Nav>
                     <Nav.Item><p className="text-center mt-2" >{greeting}</p></Nav.Item>
                     <Nav.Item>
-                      <Nav.Link to="/cart">{cart}</Nav.Link>
+                      <Nav.Link href="/cart">{cart}</Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
                     <NavDropdown title={user} id="basic-nav-dropdown">

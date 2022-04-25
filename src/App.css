@@ -21,7 +21,7 @@
 header{
   grid-area: header;
   border-width: 1.3pt;
-  border-radius: 10px;
+  /* border-radius: 10px; */
 }
 
 main{
@@ -31,7 +31,7 @@ main{
 footer{
   grid-area: footer; 
   border-width: 1.3pt;
-  border-radius: 5px;
+  /* border-radius: 5px; */
   /* position: absolute; bottom: 0; */
 }
 

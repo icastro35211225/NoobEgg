@@ -229,7 +229,7 @@ export default function ShoppingCart(props) {
                                     return (
                                         <Card key={product.productID}>
                                             <Card.Body>
-                                                <Col><img id="proImg" src={product.ProductImage}></img></Col>
+                                                <Col><img id="proImg" className="product-info-proImg" src={product.ProductImage}></img></Col>
                                                 <Col><h2>{product.ProductName}</h2></Col>
                                                 <Col>${product.ProductPrice}</Col>
                                                 <Col>Amount: {product.qty}</Col>
