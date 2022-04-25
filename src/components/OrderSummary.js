@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { Card, Col, ListGroup, ListGroupItem } from "react-bootstrap";
+import { Card, Col, ListGroup} from "react-bootstrap";
 
 export default function OrderSummary(props) {
 
@@ -79,16 +79,21 @@ export default function OrderSummary(props) {
         <ordersummary>
             <div>
                 <Card>
-                <ListGroup variant="flush">
+                
+                
                 <h1>Order Summary</h1>
                 { orderUser ?
                     <div>
-                        <Col><p>Order Number: {orderID}</p></Col>
-                        <div>
+                        <Card.Body>
+                        <ListGroup variant="flush">
+                            <ListGroup.Item><Col><p>Order Number: {orderID}</p></Col></ListGroup.Item>
+                        
+                        <ListGroup.Item>
                             <p>Name: {orderUser.FirstName} {orderUser.LastName}</p>
                             <p>Shipping Address: {orderUser.shipAddress}</p>
                             <p>Order Date: {order.OrderDate}</p>
-                        </div>
+                        </ListGroup.Item>
+                        
                         <div>
                         {orderProducts ? 
                             <div>
@@ -96,28 +101,35 @@ export default function OrderSummary(props) {
                                 <div>
                                     {orderProducts.map((product) => { 
                                         return(
+                                            <ListGroup.Item>
                                             <div key={product}>
+                                                
                                                 <h5>Product Name: {product.ProductName}</h5>
-                                                <img id="proImg" src={product.ProductImage}></img>
+                                                <img id="proImg" src={product.ProductImage} className="product-info-proImg"></img>
                                                 <p>Price: ${product.ProductPrice}</p>
                                             </div>
+                                            </ListGroup.Item>
                                         );
                                     })}
                                 </div>
-                                <p>Subtotal: ${order.OrderSubtotal}</p>
-                                <p>Tax: ${order.OrderTax}</p>
-                                <p><strong>Total: ${order.OrderTotal}</strong></p>
-                            </div>
+                                
+                                <h6>Subtotal: ${order.OrderSubtotal}</h6>
+                                <h6>Tax: ${order.OrderTax}</h6>
+                                <ListGroup.Item><h5><strong>Total: ${order.OrderTotal}</strong></h5>
+                               </ListGroup.Item>
+                                </div>
                             : 
                             <h5>Loading Products...</h5>
+                            
                         }
                         </div>
+                        </ListGroup></Card.Body>
                     </div>
                     :
                     <h1>Loading Order Summary...</h1>
                 }
                 {/* <img src="https://www.seekpng.com/png/detail/6-60874_grey-t-shirt-png-vector-royalty-free-length.png"></img> */}
-                </ListGroup>
+                
                 </Card>
             </div>
         </ordersummary>

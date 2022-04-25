@@ -160,7 +160,7 @@ export default function AdminDashboard(props) {
             <Card>
             {viewingOrder ?
                 <div>
-                    <button onClick={goBack}>Back to Dashboard</button>
+                    <Button onClick={goBack}>Back to Dashboard</Button>
                     <OrderSummary orderID={orderID} />
                 </div>
                 :
