@@ -69,10 +69,6 @@ function App() {
           <Navbar.Brand href="/"><big>UThriftSA</big></Navbar.Brand>
           </Nav.Item>
           <Navbar.Toggle id="basic-navbar-nav"/>
-          {/* <Form className="d-flex">
-          {/* <SearchBar placeholder="Search items..." currentList={itemList}/>  */}
-          {/* <FormControl type="search" placeholder="Search" className="me-2" aria-label="Search"/>
-          </Form> */} 
         <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ms-auto">
           {loggedIn ?

@@ -26,7 +26,7 @@ export default function Signup(props) {
 
     //TODO: SHOULD ADD EMAIL VALIDATION? (is email in right format?)
     const getAccounts = async () => {
-        let tempAccounts = await Axios.get('http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/getAllAccounts');
+        let tempAccounts = await Axios.get('http://ec2-3-82-174-68.compute-1.amazonaws.com:3000/api/getAllAccounts');
         setAccounts(tempAccounts.data);
     }
 
@@ -44,7 +44,7 @@ export default function Signup(props) {
             }
         }
 
-        Axios.post('http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/signup', {
+        Axios.post('http://ec2-3-82-174-68.compute-1.amazonaws.com:3000/api/signup', {
           fName: fName,
           lName: lName,
           email: email,

@@ -25,7 +25,7 @@ export default function ShoppingCart(props) {
     const [errShow, setErrShow] = useState(false);
 
     const postOrder = async () => {
-        let tempOrder = await Axios.post('http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/addToOrders',
+        let tempOrder = await Axios.post('http://ec2-3-82-174-68.compute-1.amazonaws.com:3000/api/addToOrders',
             {
                 userID: user.UserID,
                 shipping: user.shipAddress,
@@ -49,7 +49,7 @@ export default function ShoppingCart(props) {
     }
 
     const getCart = async () => {
-        let tempCart = await Axios.post('http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/getCart', { userID: user.UserID });
+        let tempCart = await Axios.post('http://ec2-3-82-174-68.compute-1.amazonaws.com:3000/api/getCart', { userID: user.UserID });
         //console.log(tempCart.data);
         if (tempCart.data.message != null) {
             //console.log(response.data.message);
@@ -82,19 +82,19 @@ export default function ShoppingCart(props) {
     }
 
     const getUserOrders = async (uID) => {
-        let orders = await Axios.get(`http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/getUserOrders/${uID}`);
+        let orders = await Axios.get(`http://ec2-3-82-174-68.compute-1.amazonaws.com:3000/api/getUserOrders/${uID}`);
         console.log(orders.data)
         await setOrder(orders.data[orders.data.length - 1]);
     }
 
     const getCodes = async () => {
-        let tempCodes = await Axios.get('http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/getCodes');
+        let tempCodes = await Axios.get('http://ec2-3-82-174-68.compute-1.amazonaws.com:3000/api/getCodes');
         await setCodes(tempCodes.data);
     }
 
     const deleteItem = async (itemID) => {
         console.log(itemID)
-        let message = await Axios.delete(`http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/deleteItem/${itemID}/${user.UserID}`);
+        let message = await Axios.delete(`http://ec2-3-82-174-68.compute-1.amazonaws.com:3000/api/deleteItem/${itemID}/${user.UserID}`);
         console.log(message.data.message);
         setItemlist(null);
         await getCart();
@@ -129,7 +129,7 @@ export default function ShoppingCart(props) {
         //Recheck stock of items to make sure they are still in stock
         for (let i = 0; i < itemList.length; i++) {
             //console.log(itemList[i].ProductName);
-            Axios.post('http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/getProduct',
+            Axios.post('http://ec2-3-82-174-68.compute-1.amazonaws.com:3000/api/getProduct',
                 { id: itemList[i].ProductID }
             ).then((response) => {
                 //console.log(response);
@@ -148,7 +148,7 @@ export default function ShoppingCart(props) {
 
         //Update product stock
         for (let i = 0; i < itemList.length; i++) {
-            Axios.put("http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/updateProductStock",
+            Axios.put("http://ec2-3-82-174-68.compute-1.amazonaws.com:3000/api/updateProductStock",
                 {
                     productID: itemList[i].ProductID,
                     newStock: itemList[i].qty
@@ -157,7 +157,7 @@ export default function ShoppingCart(props) {
         }
 
         //Clear cart WORKS
-        Axios.delete(`http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/clearCart/${user.UserID}`);
+        Axios.delete(`http://ec2-3-82-174-68.compute-1.amazonaws.com:3000/api/clearCart/${user.UserID}`);
 
         //Send them to order summary page w/ order id, ONLY RELOADING PAGE NOW
         //navigate('/');

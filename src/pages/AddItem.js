@@ -35,7 +35,7 @@ export default function AddItem(props) {
             }
             //await setImgPath("http://ec2-3-93-234-9.compute-1.amazonaws.com:8888/" + file.name);
             console.log(imgPath); 
-            Axios.post('http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/additem', {
+            Axios.post('http://ec2-3-82-174-68.compute-1.amazonaws.com:3000/api/additem', {
                 name: name,
                 desc: desc, 
                 price: price,
@@ -54,7 +54,7 @@ export default function AddItem(props) {
     
     async function show(){
         const file = document.querySelector('input[type=file]').files;
-        await setImgPath("http://ec2-3-93-234-9.compute-1.amazonaws.com:8888/" + file[0].name);  
+        await setImgPath("http://ec2-3-82-174-68.compute-1.amazonaws.com:8888/" + file[0].name);  
         const url = URL.createObjectURL(new Blob(file));
         setPreviewFile(url);
     }
@@ -63,7 +63,7 @@ export default function AddItem(props) {
         const data = new FormData();
         const file = document.querySelector('input[type=file]').files[0];
         data.append("file", file);
-        await Axios.post('http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/upload', data)
+        await Axios.post('http://ec2-3-82-174-68.compute-1.amazonaws.com:3000/api/upload', data)
             .then((res) => {
                 if(res.statusText == "OK"){
                     setMessage("Yay! Image Uploaded!");
@@ -72,7 +72,7 @@ export default function AddItem(props) {
                 setMessage("OOF! Something went wrong");
                 return res;
                 }
-                setImgPath("http://ec2-3-93-234-9.compute-1.amazonaws.com:8888/" + file.name);
+                setImgPath("http://ec2-3-82-174-68.compute-1.amazonaws.com:8888/" + file.name);
                 document.getElementById('message').hidden = false;
                 console.log(res);
             });

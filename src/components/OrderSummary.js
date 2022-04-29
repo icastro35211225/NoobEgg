@@ -18,13 +18,13 @@ export default function OrderSummary(props) {
     let orderProds = [];
 
     const getOrderUser = async (uID) => {
-        let oUser = await Axios.get(`http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/getUser/${uID}`);
+        let oUser = await Axios.get(`http://ec2-3-82-174-68.compute-1.amazonaws.com:3000/api/getUser/${uID}`);
         //console.log(oUser.data[0]);
         await setOrderUser(oUser.data[0]);
     }
 
     const getOrder = async() =>{
-        let ord = await Axios.get(`http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/getOrder/${orderID}`);
+        let ord = await Axios.get(`http://ec2-3-82-174-68.compute-1.amazonaws.com:3000/api/getOrder/${orderID}`);
         //console.log(ord.data[0]);
         await setOrder(ord.data[0]);
     }
@@ -35,7 +35,7 @@ export default function OrderSummary(props) {
         for(let i = 0; i < prodArr.length; i++){
             let currProd = prodArr[i].split(":");
             //console.log("Product ID: " + currProd[0] + " Product Amount: " + currProd[1]);
-            let currProdObj = await Axios.post('http://ec2-3-93-234-9.compute-1.amazonaws.com:3000/api/getProduct', {id: currProd[0]});
+            let currProdObj = await Axios.post('http://ec2-3-82-174-68.compute-1.amazonaws.com:3000/api/getProduct', {id: currProd[0]});
             //console.log(response.data[0]);
             orderProds.push(currProdObj.data[0]);
             
@@ -103,7 +103,6 @@ export default function OrderSummary(props) {
                                         return(
                                             <ListGroup.Item>
                                             <div key={product}>
-                                                
                                                 <h5>Product Name: {product.ProductName}</h5>
                                                 <img id="proImg" src={product.ProductImage} className="product-info-proImg"></img>
                                                 <p>Price: ${product.ProductPrice}</p>
