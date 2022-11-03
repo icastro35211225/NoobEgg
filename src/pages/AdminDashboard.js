@@ -48,12 +48,12 @@ export default function AdminDashboard(props) {
     }
 
     const getCodes = async () => {
-        let tempCodes = await Axios.get('http://ec2-3-82-174-68.compute-1.amazonaws.com:3000/api/getCodes');
+        let tempCodes = await Axios.get('http://ec2-54-159-102-47.compute-1.amazonaws.com:3001/api/getCodes');
         await setCodes(tempCodes.data);
     }
 
     const postCodes = async () => {
-        await Axios.post('http://ec2-3-82-174-68.compute-1.amazonaws.com:3000/api/addCode',
+        await Axios.post('http://ec2-54-159-102-47.compute-1.amazonaws.com:3001/api/addCode',
             {
                 code: disCode,
                 mult: mult
@@ -63,12 +63,12 @@ export default function AdminDashboard(props) {
     }
 
     const deleteCode = async (codeID) => {
-        await Axios.delete(`http://ec2-3-82-174-68.compute-1.amazonaws.com:3000/api/deleteCode/${codeID}`);
+        await Axios.delete(`http://ec2-54-159-102-47.compute-1.amazonaws.com:3001/api/deleteCode/${codeID}`);
         //await setCodes(null);
     }
 
     const updateAccount = async () => {
-        let response = await Axios.put('http://ec2-3-82-174-68.compute-1.amazonaws.com:3000/api/updateAccount',
+        let response = await Axios.put('http://ec2-54-159-102-47.compute-1.amazonaws.com:3001/api/updateAccount',
             {
                 userID: user.UserID,
                 fName: fName,
@@ -78,7 +78,7 @@ export default function AdminDashboard(props) {
                 address: address
             });
         //get user from database w userID
-        let tempUser = await Axios.get(`http://ec2-3-82-174-68.compute-1.amazonaws.com:3000/api/getUser/${user.UserID}`);
+        let tempUser = await Axios.get(`http://ec2-54-159-102-47.compute-1.amazonaws.com:3001/api/getUser/${user.UserID}`);
         //upload that user to local storage
         localStorage.setItem("userInfo", JSON.stringify(tempUser.data[0]));
         getUser()
@@ -137,7 +137,7 @@ export default function AdminDashboard(props) {
     }
 
     const getOrders = async () => {
-        let tempOrders = await Axios.get('http://ec2-3-82-174-68.compute-1.amazonaws.com:3000/api/getAllOrders');
+        let tempOrders = await Axios.get('http://ec2-54-159-102-47.compute-1.amazonaws.com:3000/api/getAllOrders');
         await setOrders(tempOrders.data);
     }
 

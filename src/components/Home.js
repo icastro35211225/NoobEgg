@@ -23,7 +23,7 @@ export default function Home(props) {
 
 
   useEffect(() => {
-    Axios.get('http://ec2-3-82-174-68.compute-1.amazonaws.com:3000/api/get').then((response) => {
+    Axios.get('http://ec2-54-159-102-47.compute-1.amazonaws.com:3001/api/get').then((response) => {
       setItemlist(response.data);
       setFilteredList(response.data);
       //console.log(itemList);
@@ -56,7 +56,7 @@ export default function Home(props) {
     }; 
 
   const submitItem = () => {
-    Axios.post('http://ec2-3-82-174-68.compute-1.amazonaws.com:3000/api/insert', {
+    Axios.post('http://ec2-54-159-102-47.compute-1.amazonaws.com:3001/api/insert', {
       itemName: itemName,
       itemDescription: itemDescription,
       itemID: itemID
@@ -70,11 +70,11 @@ export default function Home(props) {
   };
 
   const deleteReview = (item) => {
-    Axios.delete(`http://ec2-3-82-174-68.compute-1.amazonaws.com:3000/api/delete/${item}`);
+    Axios.delete(`http://ec2-54-159-102-47.compute-1.amazonaws.com:3001/api/delete/${item}`);
   }
 
   const updateItem = (item) => {
-    Axios.put("http://ec2-3-82-174-68.compute-1.amazonaws.com:3000/api/update", {
+    Axios.put("http://ec2-54-159-102-47.compute-1.amazonaws.com:3001/api/update", {
       itemName: item,
       itemDescription: newDescription
     });
