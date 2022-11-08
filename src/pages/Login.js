@@ -36,7 +36,7 @@ export default function Login(setToken) {
             console.log("Please enter correct information");
             return;
         }
-        Axios.post("ec2-52-23-224-166.compute-1.amazonaws.com:3001/api/login", {
+        Axios.post("https://ec2-52-23-224-166.compute-1.amazonaws.com:3001/api/login", {
             email: email,
             password: password,
         }).then((response) => {
