@@ -66,7 +66,7 @@ function App() {
       <Navbar className="Navbar" variant="light" >
         <Container>
           <Nav.Item>
-          <Navbar.Brand href="/"><big>UThriftSA</big></Navbar.Brand>
+          <Navbar.Brand href="/"><big>NoobEgg</big></Navbar.Brand>
           </Nav.Item>
           <Navbar.Toggle id="basic-navbar-nav"/>
         <Navbar.Collapse id="basic-navbar-nav">

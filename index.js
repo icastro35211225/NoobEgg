@@ -7,10 +7,10 @@
     const { Axios } = require('axios');
 
     const db = mysql.createPool({
-        host: 'database-2.cnlcd2wsscz0.us-east-1.rds.amazonaws.com',
+        host: 'database-2.cfjbivvdnqqy.us-east-1.rds.amazonaws.com',
         user: 'admin',
-        password: 'swemaster',
-        database: 'crud',
+        password: 'uiMasterPass',
+        database: 'main',
     });
 
     app.use(cors());
@@ -124,6 +124,6 @@
         res.send(products);
     });
 
-    app.listen(3000, () => {
+    app.listen(3001, () => {
         console.log("Running on port 3000");
     });

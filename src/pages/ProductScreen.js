@@ -39,7 +39,7 @@ export default function ProductScreen(props) {
     }
 
     const getProduct = async (ID) => {
-        let tempProd = await Axios.post('http://ec2-54-159-102-47.compute-1.amazonaws.com:3001/api/getProduct', { id: ID });
+        let tempProd = await Axios.post('ec2-52-23-224-166.compute-1.amazonaws.com:3001/api/getProduct', { id: ID });
         //console.log(oUser.data[0]);
         setProduct(tempProd.data[0]);
         setName(tempProd.data[0].ProductName);
@@ -49,7 +49,7 @@ export default function ProductScreen(props) {
     }
 
     const updateProduct = async () => {
-        let response = await Axios.put('http://ec2-54-159-102-47.compute-1.amazonaws.com:3001/api/updateProduct',
+        let response = await Axios.put('ec2-52-23-224-166.compute-1.amazonaws.com:3001/api/updateProduct',
             {
                 id: product.ProductID,
                 name: name,
@@ -61,11 +61,11 @@ export default function ProductScreen(props) {
     }
 
     const deleteProduct = async () => {
-        let response = await Axios.delete(`http://ec2-54-159-102-47.compute-1.amazonaws.com:3001/api/deleteProduct/${product.ProductID}`);
+        let response = await Axios.delete(`ec2-52-23-224-166.compute-1.amazonaws.com:3001/api/deleteProduct/${product.ProductID}`);
     }
 
     const deleteInstanceCart = async () => {
-        let res = await Axios.delete(`http://ec2-54-159-102-47.compute-1.amazonaws.com:3001/api/delinstscart/${product.ProductID}`)
+        let res = await Axios.delete(`ec2-52-23-224-166.compute-1.amazonaws.com:3001/api/delinstscart/${product.ProductID}`)
     }
 
     useEffect(() => {
@@ -74,7 +74,7 @@ export default function ProductScreen(props) {
     }, [])
 
     const postProd = async () => {
-        let res = await Axios.post('http://ec2-54-159-102-47.compute-1.amazonaws.com:3001/api/addToCart',
+        let res = await Axios.post('ec2-52-23-224-166.compute-1.amazonaws.com:3001/api/addToCart',
             {
                 userID: user.UserID,
                 productID: product.ProductID,
