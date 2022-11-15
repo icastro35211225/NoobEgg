@@ -23,7 +23,7 @@ export default function Home(props) {
 
 
   useEffect(() => {
-    Axios.get('http://ec2-54-159-102-47.compute-1.amazonaws.com:3001/api/get').then((response) => {
+    Axios.get('http://ec2-52-23-224-166.compute-1.amazonaws.com:3001/api/get').then((response) => {
       setItemlist(response.data);
       setFilteredList(response.data);
       //console.log(itemList);
@@ -127,13 +127,13 @@ export default function Home(props) {
             }
             }.map((product) => { */}
           {itemList.map((product) => {
-            <Product key={product.ProductID} product={product}></Product>
+            <Product key={product.productID} product={product}></Product>
             return (
               <div className="card">
                 <div className="product-info">
-                  <img id="proImg" src={product.ProductImage} className="product-info-proImg"></img>
-                  <button className="productButton" onClick={() => navigate("/productscreen", { state: { id: product.ProductID } })}><h2>{product.ProductName}</h2></button>
-                  <h4>${product.ProductPrice}</h4>
+                  <img id="proImg" src={'images/null.png'} className="product-info-proImg"></img>
+                  <button className="productButton" onClick={() => navigate("/productscreen", { state: { id: product.productID } })}><h2>{product.name}</h2></button>
+                  <h4>${product.price}</h4>
                 </div>
               </div>
             );

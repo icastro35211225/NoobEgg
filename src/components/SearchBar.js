@@ -11,7 +11,7 @@ function SearchBar({placeholder}) {
     const [filteredList, setFilteredList] = useState([]); 
 
     useEffect(()=> {
-        Axios.get('http://ec2-54-159-102-47.compute-1.amazonaws.com:3001/api/get').then((response)=> {
+        Axios.get('http://ec2-52-23-224-166.compute-1.amazonaws.com:3001/api/get').then((response)=> {
           setAllItems(response.data);
         }) 
     }, []) 
@@ -50,7 +50,7 @@ function SearchBar({placeholder}) {
                     {filteredList.slice(0, 10).map((product) => { 
                         return ( 
                             <Card className="product" target="_blank"> 
-                                <Col><button className="productButton" onClick={() => navigate("/productscreen", { state: { id: product.ProductID } })}><h5>{product.ProductName}</h5></button></Col> 
+                                <Col><button className="productButton" onClick={() => navigate("/productscreen", { state: { id: product.productID } })}><h5>{product.name}</h5></button></Col> 
                             </Card> 
                         ); 
                     })}

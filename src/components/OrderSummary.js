@@ -18,13 +18,13 @@ export default function OrderSummary(props) {
     let orderProds = [];
 
     const getOrderUser = async (uID) => {
-        let oUser = await Axios.get(`http://ec2-54-159-102-47.compute-1.amazonaws.com:3001/api/getUser/${uID}`);
+        let oUser = await Axios.get(`http://ec2-52-23-224-166.compute-1.amazonaws.com:3001/api/getUser/${uID}`);
         //console.log(oUser.data[0]);
         await setOrderUser(oUser.data[0]);
     }
 
     const getOrder = async() =>{
-        let ord = await Axios.get(`http://ec2-54-159-102-47.compute-1.amazonaws.com:3001/api/getOrder/${orderID}`);
+        let ord = await Axios.get(`http://ec2-52-23-224-166.compute-1.amazonaws.com:3001/api/getOrder/${orderID}`);
         //console.log(ord.data[0]);
         await setOrder(ord.data[0]);
     }
@@ -35,7 +35,7 @@ export default function OrderSummary(props) {
         for(let i = 0; i < prodArr.length; i++){
             let currProd = prodArr[i].split(":");
             //console.log("Product ID: " + currProd[0] + " Product Amount: " + currProd[1]);
-            let currProdObj = await Axios.post('http://ec2-54-159-102-47.compute-1.amazonaws.com:3001/api/getProduct', {id: currProd[0]});
+            let currProdObj = await Axios.post('http://ec2-52-23-224-166.compute-1.amazonaws.com:3001/api/getProduct', {id: currProd[0]});
             //console.log(response.data[0]);
             orderProds.push(currProdObj.data[0]);
             
