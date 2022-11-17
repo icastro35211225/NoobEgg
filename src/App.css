@@ -93,11 +93,19 @@ a:hover{
   padding: 1rem;
 }
 
+.imageDiv {
+  min-height: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .product-info-proImg{
   height: auto;
   max-height: 250px;
   width: auto;
   max-width: 250px;
+  
 }
 .img-large{
   max-width: 100%;
@@ -320,6 +328,7 @@ td, th {
   border: none;
   background-color: white;
   width: 100%;
+  margin-top: auto;
 }
 
 .productButton:hover {

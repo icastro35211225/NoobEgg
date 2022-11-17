@@ -127,13 +127,15 @@ export default function Home(props) {
             }
             }.map((product) => { */}
           {itemList.map((product) => {
-            <Product key={product.productID} product={product}></Product>
+            <Product key={product.ProductID} product={product}></Product>
             return (
               <div className="card">
                 <div className="product-info">
-                  <img id="proImg" src={product.image} className="product-info-proImg"></img>
-                  <button className="productButton" onClick={() => navigate("/productscreen", { state: { id: product.productID } })}><h2>{product.name}</h2></button>
-                  <h4>${product.price}</h4>
+                  <div className="imageDiv">
+                  <img id="proImg" src={product.ProductImage} className="product-info-proImg"></img>
+                  </div>
+                  <button className="productButton align-self-end" onClick={() => navigate("/productscreen", { state: { id: product.ProductID } })}><h2>{product.ProductName}</h2></button>
+                  <h4>${product.ProductPrice}</h4>
                 </div>
               </div>
             );

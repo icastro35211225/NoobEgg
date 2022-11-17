@@ -39,7 +39,7 @@ function App() {
       setLoggedIn(true);
       const userInfo = JSON.parse(localStorage.getItem("userInfo"));
       setIsAdmin(userInfo.isAdmin);
-      setGreeting("Hello, " + userInfo.firstName);
+      setGreeting("Hello, " + userInfo.FirstName);
     }
   }, []);
 

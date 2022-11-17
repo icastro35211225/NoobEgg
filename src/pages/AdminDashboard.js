@@ -68,6 +68,11 @@ export default function AdminDashboard(props) {
     }
 
     const updateAccount = async () => {
+        // Find a way to auto populate the empty fields
+        // Maybe do a get request to store all the current info
+        // Have if statements, where if the textboxes are empty,
+        // set their values to pass to the info currently in DB
+
         let response = await Axios.put('http://ec2-52-23-224-166.compute-1.amazonaws.com:3001/api/updateAccount',
             {
                 userID: user.UserID,
