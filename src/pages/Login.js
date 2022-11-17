@@ -37,6 +37,9 @@ export default function Login(setToken) {
             return;
         }
         Axios.post("http://ec2-52-23-224-166.compute-1.amazonaws.com:3001/api/login", {
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+            },
             email: email,
             password: password,
         }).then((response) => {
