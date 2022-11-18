@@ -26,7 +26,6 @@ export default function Home(props) {
     Axios.get('api-noobegg.up.railway.app/api/get').then((response) => {
       setItemlist(response.data);
       setFilteredList(response.data);
-      //console.log(itemList);
     })
     const userInfo = JSON.parse(localStorage.getItem("userInfo"));
     if (userInfo) {
