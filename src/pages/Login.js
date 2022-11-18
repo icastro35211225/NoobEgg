@@ -36,7 +36,7 @@ export default function Login(setToken) {
             console.log("Please enter correct information");
             return;
         }
-        Axios.post("api-noobegg.up.railway.app/api/login", {
+        Axios.post("https://api-noobegg.up.railway.app/api/login", {
             headers: {
                 'Access-Control-Allow-Origin': '*',
             },

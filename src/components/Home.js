@@ -23,7 +23,7 @@ export default function Home(props) {
 
 
   useEffect(() => {
-    Axios.get('https://api-noobegg.up.railway.app/api/get').then((response) => {
+    Axios.get('https://https://api-noobegg.up.railway.app/api/get').then((response) => {
       setItemlist(response.data);
       setFilteredList(response.data);
     })
@@ -55,7 +55,7 @@ export default function Home(props) {
     }; 
 
   const submitItem = () => {
-    Axios.post('api-noobegg.up.railway.app/api/insert', {
+    Axios.post('https://api-noobegg.up.railway.app/api/insert', {
       itemName: itemName,
       itemDescription: itemDescription,
       itemID: itemID
@@ -69,11 +69,11 @@ export default function Home(props) {
   };
 
   const deleteReview = (item) => {
-    Axios.delete(`api-noobegg.up.railway.app/api/delete/${item}`);
+    Axios.delete(`https://api-noobegg.up.railway.app/api/delete/${item}`);
   }
 
   const updateItem = (item) => {
-    Axios.put("api-noobegg.up.railway.app/api/update", {
+    Axios.put("https://api-noobegg.up.railway.app/api/update", {
       itemName: item,
       itemDescription: newDescription
     });

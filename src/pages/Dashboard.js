@@ -34,7 +34,7 @@ export default function Dashboard(props) {
     }
 
     const updateAccount = async () => {
-        let response = await Axios.put('api-noobegg.up.railway.app/api/updateAccount',
+        let response = await Axios.put('https://api-noobegg.up.railway.app/api/updateAccount',
             {
                 userID: user.UserID,
                 fName: fName,
@@ -44,14 +44,14 @@ export default function Dashboard(props) {
                 address: address
             });
         //get user from database w userID
-        let tempUser = await Axios.get(`api-noobegg.up.railway.app/api/getUser/${user.UserID}`);
+        let tempUser = await Axios.get(`https://api-noobegg.up.railway.app/api/getUser/${user.UserID}`);
         //upload that user to local storage
         localStorage.setItem("userInfo", JSON.stringify(tempUser.data[0]));
         getUser()
     }
 
     const getUserOrders = async () => {
-        let tempOrders = await Axios.get(`api-noobegg.up.railway.app/api/getUserOrders/${user.UserID}`);
+        let tempOrders = await Axios.get(`https://api-noobegg.up.railway.app/api/getUserOrders/${user.UserID}`);
         await setOrders(tempOrders.data);
     }
 

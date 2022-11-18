@@ -15,7 +15,7 @@ export default function Product(props) {
 
 
   const getProduct = async (ID) => {
-    let tempProd = await Axios.post('api-noobegg.up.railway.app/api/getProduct', { id: ID });
+    let tempProd = await Axios.post('https://api-noobegg.up.railway.app/api/getProduct', { id: ID });
     //console.log(oUser.data[0]);
     await setProduct(tempProd.data[0]);
   }

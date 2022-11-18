@@ -11,7 +11,7 @@ function SearchBar({placeholder}) {
     const [filteredList, setFilteredList] = useState([]); 
 
     useEffect(()=> {
-        Axios.get('api-noobegg.up.railway.app/api/get').then((response)=> {
+        Axios.get('https://api-noobegg.up.railway.app/api/get').then((response)=> {
           setAllItems(response.data);
         }) 
     }, []) 

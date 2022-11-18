@@ -56,7 +56,7 @@ export default function AddItem(props) {
             
             //await setImgPath("http://ec2-3-93-234-9.compute-1.amazonaws.com:8888/" + file.name);
             console.log(imgPath); 
-            Axios.post('api-noobegg.up.railway.app/api/additem', {
+            Axios.post('https://api-noobegg.up.railway.app/api/additem', {
                 name: name,
                 desc: desc, 
                 price: price,
@@ -84,7 +84,7 @@ export default function AddItem(props) {
     //     const data = new FormData();
     //     const file = document.querySelector('input[type=file]').files[0];
     //     data.append("file", file);
-    //     await Axios.post('api-noobegg.up.railway.app/api/upload', data)
+    //     await Axios.post('https://api-noobegg.up.railway.app/api/upload', data)
     //         .then((res) => {
     //             if(res.statusText == "OK"){
     //                 setMessage("Yay! Image Uploaded!");

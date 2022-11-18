@@ -26,7 +26,7 @@ export default function Signup(props) {
 
     //TODO: SHOULD ADD EMAIL VALIDATION? (is email in right format?)
     const getAccounts = async () => {
-        let tempAccounts = await Axios.get('api-noobegg.up.railway.app/api/getAllAccounts');
+        let tempAccounts = await Axios.get('https://api-noobegg.up.railway.app/api/getAllAccounts');
         setAccounts(tempAccounts.data);
     }
 
@@ -44,7 +44,7 @@ export default function Signup(props) {
             }
         }
 
-        Axios.post('api-noobegg.up.railway.app/api/signup', {
+        Axios.post('https://api-noobegg.up.railway.app/api/signup', {
           fName: fName,
           lName: lName,
           email: email,
