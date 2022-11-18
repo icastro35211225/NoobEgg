@@ -44,7 +44,7 @@ export default function ProductScreen(props) {
         setProduct(tempProd.data[0]);
         setName(tempProd.data[0].ProductName);
         setDesc(tempProd.data[0].ProductDesc);
-        setPrice(tempProd.data[0].ProductPrice);
+        setPrice(tempProd.data[0].ProductPrice.toFixed(2));
         setQuantity(tempProd.data[0].ProductStock);
     }
 
@@ -176,7 +176,7 @@ export default function ProductScreen(props) {
                                                 <ListGroup.Item>
                                                     <Row>
                                                         <Col>Price:</Col>
-                                                        <Col>${product.ProductPrice}</Col>
+                                                        <Col>${product.ProductPrice.toFixed(2)}</Col>
                                                     </Row>
                                                 </ListGroup.Item>
                                                 <ListGroup.Item>

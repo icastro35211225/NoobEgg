@@ -41,16 +41,35 @@ export default function AddItem(props) {
         // console.log(imgPath);
 
         //HAVE TO CHECK INPUT HERE BC SQL DEFAUTS WRONG VALUES
+
+        async function changePrice(price){
+            return price.toFixed(2);
+        }
+
         async function addProduct() {
             
-            // const image = 'images/null.png';
-            // const sqlInsertItem = "INSERT INTO products (ProductName, ProductDesc, ProductPrice, ProductStock, ProductImage) VALUES (?, ?, ?, ?, ?);";
-            // con.query(sqlInsertItem, [name, desc, price, quantity, imgPath], (err, result) => {
-            //     if (err) throw err;
-            //     if (result.length > 0) {
-            //         console.log(result);
-            //     }
-            // });
+            const file = document.querySelector('input[type=file]').files[0];
+            if(file){
+                await uploadFiles();
+            }
+
+            
+            //await setImgPath("http://ec2-3-93-234-9.compute-1.amazonaws.com:8888/" + file.name);
+            console.log(imgPath); 
+            Axios.post('http://ec2-52-23-224-166.compute-1.amazonaws.com:3001/api/additem', {
+                name: name,
+                desc: desc, 
+                price: price,
+                quantity: quantity,
+                imgPath: imgPath
+                }).then((response) => {
+                    //never returs error message for input, only for syntax. This breaks page 
+                    // if(response.data.statusText != "OK"){
+                    //     setErrMsg(response.data.err);
+                    // }
+                });
+                navigate('/');    
+                console.log("DONE");
             
         }
     
@@ -96,7 +115,7 @@ export default function AddItem(props) {
 
             <label for="price"><b>Price</b></label>
             <input type="text" placeholder="00.00" name="price" required onChange={(e)=> {
-                setPrice(e.target.value)
+                setPrice(changePrice(e.target.value))
             }}></input>
 
             <label for="quantity"><b>Item Quantity</b></label>
