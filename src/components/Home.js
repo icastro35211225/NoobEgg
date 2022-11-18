@@ -23,7 +23,7 @@ export default function Home(props) {
 
 
   useEffect(() => {
-    Axios.get('https://https://api-noobegg.up.railway.app/api/get').then((response) => {
+    Axios.get('https://api-noobegg.up.railway.app/api/get').then((response) => {
       setItemlist(response.data);
       setFilteredList(response.data);
     })
