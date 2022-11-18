@@ -23,7 +23,7 @@ export default function Home(props) {
 
 
   useEffect(() => {
-    Axios.get('http://ec2-52-23-224-166.compute-1.amazonaws.com:3001/api/get').then((response) => {
+    Axios.get('https://noobeggserver-production.up.railway.app/api/get').then((response) => {
       setItemlist(response.data);
       setFilteredList(response.data);
       //console.log(itemList);
