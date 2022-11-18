@@ -11,7 +11,7 @@ function SearchBar({placeholder}) {
     const [filteredList, setFilteredList] = useState([]); 
 
     useEffect(()=> {
-        Axios.get('http://ec2-52-23-224-166.compute-1.amazonaws.com:3001/api/get').then((response)=> {
+        Axios.get('api-noobegg.up.railway.app/api/get').then((response)=> {
           setAllItems(response.data);
         }) 
     }, []) 

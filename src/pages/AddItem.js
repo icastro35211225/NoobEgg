@@ -56,7 +56,7 @@ export default function AddItem(props) {
             
             //await setImgPath("http://ec2-3-93-234-9.compute-1.amazonaws.com:8888/" + file.name);
             console.log(imgPath); 
-            Axios.post('http://ec2-52-23-224-166.compute-1.amazonaws.com:3001/api/additem', {
+            Axios.post('api-noobegg.up.railway.app/api/additem', {
                 name: name,
                 desc: desc, 
                 price: price,
@@ -73,31 +73,31 @@ export default function AddItem(props) {
             
         }
     
-    async function show(){
-        const file = document.querySelector('input[type=file]').files;
-        await setImgPath("http://ec2-52-23-224-166.compute-1.amazonaws.com:8888/" + file[0].name);  
-        const url = URL.createObjectURL(new Blob(file));
-        setPreviewFile(url);
-    }
+    // async function show(){
+    //     const file = document.querySelector('input[type=file]').files;
+    //     await setImgPath("http://ec2-52-23-224-166.compute-1.amazonaws.com:8888/" + file[0].name);  
+    //     const url = URL.createObjectURL(new Blob(file));
+    //     setPreviewFile(url);
+    // }
 
-    async function uploadFiles(){
-        const data = new FormData();
-        const file = document.querySelector('input[type=file]').files[0];
-        data.append("file", file);
-        await Axios.post('http://ec2-52-23-224-166.compute-1.amazonaws.com:3001/api/upload', data)
-            .then((res) => {
-                if(res.statusText == "OK"){
-                    setMessage("Yay! Image Uploaded!");
-                    //console.log("mssg: " + message);
-                } else if (res.status == 500) {
-                setMessage("OOF! Something went wrong");
-                return res;
-                }
-                setImgPath("http://ec2-52-23-224-166.compute-1.amazonaws.com:8888/" + file.name);
-                document.getElementById('message').hidden = false;
-                console.log(res);
-            });
-        }
+    // async function uploadFiles(){
+    //     const data = new FormData();
+    //     const file = document.querySelector('input[type=file]').files[0];
+    //     data.append("file", file);
+    //     await Axios.post('api-noobegg.up.railway.app/api/upload', data)
+    //         .then((res) => {
+    //             if(res.statusText == "OK"){
+    //                 setMessage("Yay! Image Uploaded!");
+    //                 //console.log("mssg: " + message);
+    //             } else if (res.status == 500) {
+    //             setMessage("OOF! Something went wrong");
+    //             return res;
+    //             }
+    //             setImgPath("http://ec2-52-23-224-166.compute-1.amazonaws.com:8888/" + file.name);
+    //             document.getElementById('message').hidden = false;
+    //             console.log(res);
+    //         });
+    //     }
 
     return (
         <additem>
@@ -123,7 +123,7 @@ export default function AddItem(props) {
                 setQuantity(e.target.value)
             }}></input>
 
-            <label for="imgPath"><b>Image</b></label>
+            {/* <label for="imgPath"><b>Image</b></label> */}
             {/* <input type="text" placeholder="Image Path" name="imgPath" required onChange={(e)=> {
                 setImgPath(e.target.value)
             }}></input> */}

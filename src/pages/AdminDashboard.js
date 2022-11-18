@@ -48,12 +48,12 @@ export default function AdminDashboard(props) {
     }
 
     const getCodes = async () => {
-        let tempCodes = await Axios.get('http://ec2-52-23-224-166.compute-1.amazonaws.com:3001/api/getCodes');
+        let tempCodes = await Axios.get('api-noobegg.up.railway.app/api/getCodes');
         await setCodes(tempCodes.data);
     }
 
     const postCodes = async () => {
-        await Axios.post('http://ec2-52-23-224-166.compute-1.amazonaws.com:3001/api/addCode',
+        await Axios.post('api-noobegg.up.railway.app/api/addCode',
             {
                 code: disCode,
                 mult: mult
@@ -63,7 +63,7 @@ export default function AdminDashboard(props) {
     }
 
     const deleteCode = async (codeID) => {
-        await Axios.delete(`http://ec2-52-23-224-166.compute-1.amazonaws.com:3001/api/deleteCode/${codeID}`);
+        await Axios.delete(`api-noobegg.up.railway.app/api/deleteCode/${codeID}`);
         //await setCodes(null);
     }
 
@@ -73,7 +73,7 @@ export default function AdminDashboard(props) {
         // Have if statements, where if the textboxes are empty,
         // set their values to pass to the info currently in DB
 
-        let response = await Axios.put('http://ec2-52-23-224-166.compute-1.amazonaws.com:3001/api/updateAccount',
+        let response = await Axios.put('api-noobegg.up.railway.app/api/updateAccount',
             {
                 userID: user.UserID,
                 fName: fName,
@@ -83,7 +83,7 @@ export default function AdminDashboard(props) {
                 address: address
             });
         //get user from database w userID
-        let tempUser = await Axios.get(`http://ec2-52-23-224-166.compute-1.amazonaws.com:3001/api/getUser/${user.UserID}`);
+        let tempUser = await Axios.get(`api-noobegg.up.railway.app/api/getUser/${user.UserID}`);
         //upload that user to local storage
         localStorage.setItem("userInfo", JSON.stringify(tempUser.data[0]));
         getUser()

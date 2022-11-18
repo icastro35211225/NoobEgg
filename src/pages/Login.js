@@ -36,7 +36,7 @@ export default function Login(setToken) {
             console.log("Please enter correct information");
             return;
         }
-        Axios.post("http://ec2-52-23-224-166.compute-1.amazonaws.com:80/api/login", {
+        Axios.post("api-noobegg.up.railway.app/api/login", {
             headers: {
                 'Access-Control-Allow-Origin': '*',
             },
