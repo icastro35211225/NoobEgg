@@ -55,7 +55,7 @@ function SearchBar({ placeholder }) {
                     className="productButton"
                     onClick={() =>
                       navigate("/productscreen", {
-                        state: { id: product.productID },
+                        state: { id: product.ProductID },
                       })
                     }
                   >
