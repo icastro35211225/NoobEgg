@@ -40,18 +40,6 @@ export default function Home(props) {
       const targetVal = event.target.value; 
 
       setSearchWord(targetVal); 
-  
-      /* if (targetVal === "") { 
-        setFilteredList(itemList); 
-      } 
-  
-      else { 
-        const filterNew = itemList.filter((product) => { 
-          return product.ProductName.toUpperCase().includes(targetVal.toUpperCase()); 
-        }); 
-  
-        setFilteredList(filterNew); 
-      } */ 
     }; 
 
   const submitItem = () => {
@@ -65,7 +53,6 @@ export default function Home(props) {
     setItemlist([...itemList,
     { ProductName: itemName, itemDescription: itemDescription, itemID: itemID },
     ])
-    //window.location.reload(false);
   };
 
   const deleteReview = (item) => {

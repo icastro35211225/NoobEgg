@@ -37,9 +37,6 @@ export default function Login(setToken) {
             return;
         }
         Axios.post("https://api-noobegg.up.railway.app/api/login", {
-            headers: {
-                'Access-Control-Allow-Origin': '*',
-            },
             email: email,
             password: password,
         }).then((response) => {
