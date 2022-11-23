@@ -47,6 +47,7 @@ export default function ShoppingCart(props) {
             await setUser(userInfo);
         }
     }
+    
 
     const getCart = async () => {
         let tempCart = await Axios.post('https://api-noobegg.up.railway.app/api/getCart', { userID: user.UserID });
