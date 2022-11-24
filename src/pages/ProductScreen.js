@@ -91,6 +91,7 @@ export default function ProductScreen(props) {
   }, []);
 
   const postProd = async () => {
+    console.log("userid: " + user.UserID);
     let res = await Axios.post(
       "https://api-noobegg.up.railway.app/api/addToCart",
       {
