@@ -167,7 +167,7 @@ export default function AdminDashboard(props) {
   }, []);
 
   useEffect(() => {
-    // if (codes === null) return;
+    if (codes === null) return;
     (async () => await getCodes())();
   }, [codes]);
 

@@ -3,6 +3,7 @@ import "../App.css";
 import Axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./upload.css";
+import { Button } from "react-bootstrap";
 
 // var mysql = require('mysql');
 // var con = mysql.createConnection({
@@ -120,7 +121,7 @@ export default function AddItem(props) {
         }}
       ></input>
 
-      <button onClick={() => addProduct()}>Add Item</button>
+      <Button onClick={() => addProduct()}>Add Item</Button>
       <h3>{errMsg}</h3>
     </additem>
   );
