@@ -30,8 +30,14 @@ export default function ShoppingCart(props) {
   const [validCode, setValidCode] = useState(false);
   const [codes, setCodes] = useState(null);
   const [errShow, setErrShow] = useState(false);
+  const [errCartShow, setCartErrShow] = useState(false);
 
   const postOrder = async () => {
+    if (pS == "" || total == 0) {
+      setCartErrShow(true);
+      console.log("ERROR! Cart is Empty!");
+      return;
+    }
     let tempOrder = await Axios.post(
       "https://api-noobegg.up.railway.app/api/addToOrders",
       {
@@ -221,6 +227,20 @@ export default function ShoppingCart(props) {
 
   return (
     <shoppingcart>
+      <ToastContainer className="p-3" position={"top-end"}>
+        <Toast
+          show={errCartShow}
+          onClose={() => setCartErrShow(false)}
+          bg={"danger"}
+          delay={5000}
+          autohide
+        >
+          <Toast.Header>
+            <strong className="me-auto">Error</strong>
+          </Toast.Header>
+          <Toast.Body className="text-white">Cart is empty!</Toast.Body>
+        </Toast>
+      </ToastContainer>
       <ToastContainer className="p-3" position={"bottom-start"}>
         <Toast
           show={errShow}
