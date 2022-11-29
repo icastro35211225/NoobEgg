@@ -98,7 +98,7 @@ export default function OrderSummary(props) {
                     <p>
                       Name: {orderUser.FirstName} {orderUser.LastName}
                     </p>
-                    <p>Shipping Address: {orderUser.shipAddress}</p>
+                    <p>Shipping Address: {order.shipAddress}</p>
                     <p>Order Date: {order.OrderDate}</p>
                   </ListGroup.Item>
 
@@ -126,8 +126,8 @@ export default function OrderSummary(props) {
                           })}
                         </div>
 
-                        <h6>Subtotal: ${order.OrderSubtotal}</h6>
-                        <h6>Tax: ${order.OrderTax}</h6>
+                        <h6>Subtotal: ${order.subtotal}</h6>
+                        <h6>Tax: ${order.tax}</h6>
                         <ListGroup.Item>
                           <h5>
                             <strong>Total: ${order.OrderTotal}</strong>
