@@ -155,7 +155,7 @@ export default function AdminDashboard(props) {
 
   const getOrders = async () => {
     let tempOrders = await Axios.get(
-      "https://ec2-52-23-224-166.compute-1.amazonaws.com:3000/api/getAllOrders"
+      "https://api-noobegg.up.railway.app/api/getAllOrders"
     );
     await setOrders(tempOrders.data);
   };
