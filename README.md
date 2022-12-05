@@ -1,70 +1,73 @@
-# Getting Started with Create React App
+# NoobEgg Ecommerce Site
+Site was repopused from another group project linked [here](https://github.com/jvliov/SWE-Project-Client). This group project focused mainly on the UI, so it is not all functional. The ecommerce site allowed users to create accounts, sign in, view items, add items to their cart, delete items from cart, and chckout. The actual functionality of checking out is not made, since this was a school project for educational purposes. Functionality for admins were added as well, allowing for creation, deletion, and modifying of products, viewing of all orders, etc.
+## Notes
+The backend API was and Database schemas were not saved, so they had to be made from scratch.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+#  Homepage
+![homepage](https://iili.io/HCvh16J.md.png)
 
-## Available Scripts
+# Log In Page
+![login page](https://iili.io/HCvhLMu.md.png)
 
-In the project directory, you can run:
+# Account Dashboard
+![account dashboard](https://iili.io/HCvjKKJ.md.png)
 
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+# Database
+We vhose a MySQL database that was hosted on AWS RDS. We had 5 tables: Users, Products, Orders, Codes, and Cart.
+## Users
++-------------+--------------+------+-----+---------+----------------+
+| Field       | Type         | Null | Key | Default | Extra          |
++-------------+--------------+------+-----+---------+----------------+
+| UserID      | int          | NO   | PRI | NULL    | auto_increment |
+| FirstName   | varchar(32)  | YES  |     | NULL    |                |
+| LastName    | varchar(32)  | YES  |     | NULL    |                |
+| Email       | varchar(128) | YES  |     | NULL    |                |
+| Pass        | varchar(32)  | YES  |     | NULL    |                |
+| shipAddress | varchar(128) | YES  | MUL | NULL    |                |
+| isAdmin     | tinyint(1)   | YES  |     | 0       |                |
+| Username    | varchar(32)  | YES  |     | NULL    |                |
++-------------+--------------+------+-----+---------+----------------+
+## Products
++--------------+--------------+------+-----+---------+----------------+
+| Field        | Type         | Null | Key | Default | Extra          |
++--------------+--------------+------+-----+---------+----------------+
+| ProductID    | int          | NO   | PRI | NULL    | auto_increment |
+| ProductName  | varchar(64)  | YES  | MUL | NULL    |                |
+| ProductDesc  | varchar(128) | YES  |     | NULL    |                |
+| ProductPrice | float        | YES  | MUL | NULL    |                |
+| ProductStock | int          | YES  |     | NULL    |                |
+| ProductImage | varchar(128) | YES  | MUL | NULL    |                |
++--------------+--------------+------+-----+---------+----------------+
+## Orders
++-------------+--------------+------+-----+-------------------+-----------------------------------------------+
+| Field       | Type         | Null | Key | Default           | Extra                                         |
++-------------+--------------+------+-----+-------------------+-----------------------------------------------+
+| OrderID     | int          | NO   | PRI | NULL              | auto_increment                                |
+| OrderUserID | int          | YES  | MUL | NULL              |                                               |
+| shipAddress | varchar(128) | YES  | MUL | NULL              |                                               |
+| Products    | varchar(256) | YES  |     | NULL              |                                               |
+| subtotal    | float        | YES  |     | NULL              |                                               |
+| tax         | float        | YES  |     | NULL              |                                               |
+| OrderTotal  | float        | YES  |     | NULL              |                                               |
+| OrderDate   | timestamp    | YES  |     | CURRENT_TIMESTAMP | DEFAULT_GENERATED on update CURRENT_TIMESTAMP |
++-------------+--------------+------+-----+-------------------+-----------------------------------------------+
+## Discount Codes
++--------+-------------+------+-----+---------+----------------+
+| Field  | Type        | Null | Key | Default | Extra          |
++--------+-------------+------+-----+---------+----------------+
+| codeID | int         | NO   | PRI | NULL    | auto_increment |
+| dCode  | varchar(32) | YES  |     | NULL    |                |
+| mul    | float       | YES  |     | NULL    |                |
++--------+-------------+------+-----+---------+----------------+
+## Cart
++--------------+--------------+------+-----+---------+----------------+
+| Field        | Type         | Null | Key | Default | Extra          |
++--------------+--------------+------+-----+---------+----------------+
+| cartID       | int          | NO   | PRI | NULL    | auto_increment |
+| UserID       | int          | NO   | MUL | NULL    |                |
+| ProductID    | int          | YES  | MUL | NULL    |                |
+| ProductName  | varchar(128) | YES  | MUL | NULL    |                |
+| ProductPrice | float        | YES  | MUL | NULL    |                |
+| ProductImage | varchar(128) | YES  | MUL | NULL    |                |
+| quantity     | int          | YES  |     | NULL    |                |
++--------------+--------------+------+-----+---------+----------------+
