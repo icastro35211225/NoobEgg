@@ -15,59 +15,12 @@ The backend API was and Database schemas were not saved, so they had to be made 
 # Database
 We vhose a MySQL database that was hosted on AWS RDS. We had 5 tables: Users, Products, Orders, Codes, and Cart.
 ## Users
-+-------------+--------------+------+-----+---------+----------------+
-| Field       | Type         | Null | Key | Default | Extra          |
-+-------------+--------------+------+-----+---------+----------------+
-| UserID      | int          | NO   | PRI | NULL    | auto_increment |
-| FirstName   | varchar(32)  | YES  |     | NULL    |                |
-| LastName    | varchar(32)  | YES  |     | NULL    |                |
-| Email       | varchar(128) | YES  |     | NULL    |                |
-| Pass        | varchar(32)  | YES  |     | NULL    |                |
-| shipAddress | varchar(128) | YES  | MUL | NULL    |                |
-| isAdmin     | tinyint(1)   | YES  |     | 0       |                |
-| Username    | varchar(32)  | YES  |     | NULL    |                |
-+-------------+--------------+------+-----+---------+----------------+
+![users table](https://iili.io/HCvjEx9.png)
 ## Products
-+--------------+--------------+------+-----+---------+----------------+
-| Field        | Type         | Null | Key | Default | Extra          |
-+--------------+--------------+------+-----+---------+----------------+
-| ProductID    | int          | NO   | PRI | NULL    | auto_increment |
-| ProductName  | varchar(64)  | YES  | MUL | NULL    |                |
-| ProductDesc  | varchar(128) | YES  |     | NULL    |                |
-| ProductPrice | float        | YES  | MUL | NULL    |                |
-| ProductStock | int          | YES  |     | NULL    |                |
-| ProductImage | varchar(128) | YES  | MUL | NULL    |                |
-+--------------+--------------+------+-----+---------+----------------+
+![products table](https://iili.io/HCvwKX9.png)
 ## Orders
-+-------------+--------------+------+-----+-------------------+-----------------------------------------------+
-| Field       | Type         | Null | Key | Default           | Extra                                         |
-+-------------+--------------+------+-----+-------------------+-----------------------------------------------+
-| OrderID     | int          | NO   | PRI | NULL              | auto_increment                                |
-| OrderUserID | int          | YES  | MUL | NULL              |                                               |
-| shipAddress | varchar(128) | YES  | MUL | NULL              |                                               |
-| Products    | varchar(256) | YES  |     | NULL              |                                               |
-| subtotal    | float        | YES  |     | NULL              |                                               |
-| tax         | float        | YES  |     | NULL              |                                               |
-| OrderTotal  | float        | YES  |     | NULL              |                                               |
-| OrderDate   | timestamp    | YES  |     | CURRENT_TIMESTAMP | DEFAULT_GENERATED on update CURRENT_TIMESTAMP |
-+-------------+--------------+------+-----+-------------------+-----------------------------------------------+
+![orders table](https://iili.io/HCvwfse.md.png)
 ## Discount Codes
-+--------+-------------+------+-----+---------+----------------+
-| Field  | Type        | Null | Key | Default | Extra          |
-+--------+-------------+------+-----+---------+----------------+
-| codeID | int         | NO   | PRI | NULL    | auto_increment |
-| dCode  | varchar(32) | YES  |     | NULL    |                |
-| mul    | float       | YES  |     | NULL    |                |
-+--------+-------------+------+-----+---------+----------------+
+![discoutn codes table](https://iili.io/HCvwxdx.png)
 ## Cart
-+--------------+--------------+------+-----+---------+----------------+
-| Field        | Type         | Null | Key | Default | Extra          |
-+--------------+--------------+------+-----+---------+----------------+
-| cartID       | int          | NO   | PRI | NULL    | auto_increment |
-| UserID       | int          | NO   | MUL | NULL    |                |
-| ProductID    | int          | YES  | MUL | NULL    |                |
-| ProductName  | varchar(128) | YES  | MUL | NULL    |                |
-| ProductPrice | float        | YES  | MUL | NULL    |                |
-| ProductImage | varchar(128) | YES  | MUL | NULL    |                |
-| quantity     | int          | YES  |     | NULL    |                |
-+--------------+--------------+------+-----+---------+----------------+
+![cart table](https://iili.io/HCvwa1a.png)
