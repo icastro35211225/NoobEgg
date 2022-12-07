@@ -1,5 +1,5 @@
 # NoobEgg Ecommerce Site
-Site was repopused from another group project linked [here](https://github.com/jvliov/SWE-Project-Client). This group project focused mainly on the UI, so it is not all functional. The ecommerce site allowed users to create accounts, sign in, view items, add items to their cart, delete items from cart, and chckout. The actual functionality of checking out is not made, since this was a school project for educational purposes. Functionality for admins were added as well, allowing for creation, deletion, and modifying of products, viewing of all orders, etc. Site was hosted on Railway.
+
 ## Notes
 The backend [API](https://github.com/icastro35211225/NoobEggServer) and Database schemas were not saved, so they had to be made from scratch.
 
